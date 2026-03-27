@@ -1,6 +1,7 @@
 import { promises as fs } from 'fs'
 import path from 'path'
 
+import { courseDetailsBySlug } from '@/data/course-details'
 import type { CourseCatalogEntry, CourseUpdatePayload } from '@/lib/course-types'
 
 const catalogFile = path.join(process.cwd(), 'data', 'course-catalog.json')
@@ -25,6 +26,13 @@ async function writeCatalog(courses: CourseCatalogEntry[]) {
     `${JSON.stringify(courses.sort(compareCourses), null, 2)}\n`,
     'utf8',
   )
+}
+
+function enrichCourse(course: CourseCatalogEntry) {
+  return {
+    ...course,
+    ...courseDetailsBySlug[course.slug],
+  }
 }
 
 function buildPlaceholderDataUrl(label: string) {
@@ -77,7 +85,7 @@ export async function getAllCourses(options?: { includeDrafts?: boolean }) {
     ? courses
     : courses.filter((course) => course.published)
 
-  return filtered.sort(compareCourses)
+  return filtered.sort(compareCourses).map(enrichCourse)
 }
 
 export async function getPublishedCourses() {
@@ -90,12 +98,11 @@ export async function getCourseBySlug(
 ) {
   const includeDrafts = options?.includeDrafts ?? false
   const courses = await readCatalog()
-
-  return (
-    courses.find(
-      (course) => course.slug === slug && (includeDrafts || course.published),
-    ) ?? null
+  const course = courses.find(
+    (entry) => entry.slug === slug && (includeDrafts || entry.published),
   )
+
+  return course ? enrichCourse(course) : null
 }
 
 export async function getCoursePreviewHtml(course: CourseCatalogEntry) {
@@ -128,6 +135,5 @@ export async function updateCourse(
   courses[courseIndex] = updatedCourse
   await writeCatalog(courses)
 
-  return updatedCourse
+  return enrichCourse(updatedCourse)
 }
-

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Noto_Sans_SC, Noto_Serif_SC, Space_Mono } from 'next/font/google'
+import { WechatFloat } from '@/components/wechat-float'
 import './globals.css'
 
 const notoSans = Noto_Sans_SC({ 
@@ -52,6 +53,7 @@ export default function RootLayout({
     <html lang="zh-CN">
       <body className={`${notoSans.variable} ${notoSerif.variable} ${spaceMono.variable} font-sans antialiased grid-overlay`}>
         {children}
+        <WechatFloat />
       </body>
     </html>
   )

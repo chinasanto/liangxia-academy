@@ -5,14 +5,14 @@ import { Shell, Github, Twitter, MessageCircle } from "lucide-react"
 
 const footerLinks = {
   服务: [
-    { name: "高端定制养虾", href: "#custom" },
-    { name: "成品龙虾服务", href: "#products" },
-    { name: "龙虾流通交易", href: "#exchange" },
-    { name: "量虾学院课程", href: "#academy" },
+    { name: "高端定制养虾", href: "/#custom" },
+    { name: "成品龙虾服务", href: "/#products" },
+    { name: "龙虾流通交易", href: "/exchange" },
+    { name: "量虾学院课程", href: "/academy" },
   ],
   资源: [
     { name: "课程中心", href: "/academy" },
-    { name: "课程后台", href: "/admin" },
+    { name: "返回首页", href: "/" },
     { name: "帮助中心", href: "#" },
     { name: "路线图", href: "#" },
   ],
@@ -47,7 +47,7 @@ export function Footer() {
                 <span className="text-xl font-bold neon-text">QClaw</span>
               </div>
               <p className="text-muted-foreground mb-6 max-w-sm">
-                量虾学院已经接入课程前台与后台管理能力，适合继续扩展成正式的量化课程平台。
+                量虾学院已经整合进主站，课程首页、详情页与联系方式都能在同一套站点里完成浏览。
               </p>
               <div className="flex items-center gap-4">
                 {socialLinks.map((social) => (
@@ -90,7 +90,7 @@ export function Footer() {
           </p>
           <div className="flex items-center gap-2">
             <span className="text-xs text-muted-foreground">核心保障：</span>
-            <span className="text-xs text-primary">课程、详情页和后台管理现在已经在同一个项目里打通。</span>
+            <span className="text-xs text-primary">课程首页、详情页与主站导航已经打通，可在不同页面间自由往返。</span>
           </div>
         </div>
       </div>

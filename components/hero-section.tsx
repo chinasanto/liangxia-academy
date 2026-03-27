@@ -64,7 +64,7 @@ export function HeroSection() {
           <Link href="#academy">进入量虾学院 →</Link>
         </Button>
         <Button asChild variant="outline" size="lg" className="font-mono text-[13px] px-8 py-6 border-white/15 bg-white/[0.04] text-foreground hover:bg-white/[0.08] hover:border-white/30 tracking-wider">
-          <Link href="/admin">打开课程后台</Link>
+          <Link href="/exchange">进入虾交所</Link>
         </Button>
       </div>
 
