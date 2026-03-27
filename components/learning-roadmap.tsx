@@ -3,7 +3,6 @@ import {
   ArrowDown,
   ArrowRight,
   GraduationCap,
-  Sparkles,
   Target,
 } from 'lucide-react'
 
@@ -78,24 +77,16 @@ const roadmapSteps: RoadmapStep[] = [
 
 export function LearningRoadmap() {
   return (
-    <section className="mb-14 rounded-[30px] border border-white/[0.08] bg-card/45 p-6 sm:p-8 lg:p-10">
+    <section className="rounded-[30px] border border-white/[0.08] bg-card/45 p-6 sm:p-8 lg:p-10">
       <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div className="max-w-3xl">
-          <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1.5 text-xs font-semibold text-primary">
-            <Sparkles className="h-3.5 w-3.5" />
-            学习路径建议
-          </div>
-          <h2 className="text-3xl font-bold text-foreground sm:text-4xl">
-            课程学习路径
-          </h2>
-          <p className="mt-3 text-sm leading-7 text-muted-foreground sm:text-base">
-            我把这块放在课程目录前面，先帮学习者判断“先学什么、后学什么”，
-            再往下看具体课程详情，会比直接面对所有课程卡片更清晰。
-          </p>
+          <h3 className="text-2xl font-bold text-foreground sm:text-3xl">
+            学习路径
+          </h3>
         </div>
 
         <div className="rounded-2xl border border-white/[0.08] bg-background/65 px-4 py-3 text-sm text-muted-foreground">
-          建议顺序：基础课 → 全流程高级班 → 因子工程 → 科学评估大乘班
+          基础课 → 全流程高级班 → 因子工程 → 科学评估大乘班
         </div>
       </div>
 
@@ -134,7 +125,12 @@ export function LearningRoadmap() {
                       >
                         {step.order}
                       </div>
-                      <div className={`text-xl font-bold ${step.text}`}>{step.title}</div>
+                      <Link
+                        href={`/academy/${step.slug}`}
+                        className={`text-xl font-bold transition hover:opacity-85 ${step.text}`}
+                      >
+                        {step.title}
+                      </Link>
                     </div>
                     <div className={`text-sm ${step.accent}`}>{step.subtitle}</div>
 
