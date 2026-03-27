@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import { ChevronUp, MessageCircle, X } from 'lucide-react'
+import { MessageCircle, X } from 'lucide-react'
 
 export function WechatFloat() {
   const [open, setOpen] = useState(false)
@@ -15,33 +15,24 @@ export function WechatFloat() {
             <div className="text-sm font-semibold text-foreground">微信咨询</div>
             <div className="text-xs text-muted-foreground">添加微信：446860105</div>
           </div>
-          <button
-            type="button"
-            onClick={() => setOpen((value) => !value)}
-            className="rounded-full border border-white/[0.08] p-2 text-muted-foreground transition hover:text-foreground"
-            aria-label={open ? '收起微信二维码' : '展开微信二维码'}
-          >
-            {open ? <X className="h-4 w-4" /> : <ChevronUp className="h-4 w-4" />}
-          </button>
+          <div className="rounded-full border border-white/[0.08] px-3 py-1 text-xs text-primary">
+            微信扫码
+          </div>
         </div>
 
-        <div className={`grid transition-[grid-template-rows] duration-300 ${open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
-          <div className="overflow-hidden">
-            <div className="space-y-3 p-4">
-              <div className="overflow-hidden rounded-2xl bg-white p-2">
-                <Image
-                  src="/contact/wechat.jpg"
-                  alt="微信二维码"
-                  width={240}
-                  height={240}
-                  className="h-auto w-full rounded-xl"
-                />
-              </div>
-              <p className="text-center text-xs leading-5 text-muted-foreground">
-                扫码添加微信，咨询课程与报名安排。
-              </p>
-            </div>
+        <div className="space-y-3 p-4">
+          <div className="overflow-hidden rounded-2xl bg-white p-2">
+            <Image
+              src="/contact/wechat.jpg"
+              alt="微信二维码"
+              width={240}
+              height={240}
+              className="h-auto w-full rounded-xl"
+            />
           </div>
+          <p className="text-center text-xs leading-5 text-muted-foreground">
+            扫码添加微信，咨询课程与报名安排。
+          </p>
         </div>
       </div>
 

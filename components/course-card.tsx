@@ -12,7 +12,7 @@ type CourseCardProps = {
 export function CourseCard({ course }: CourseCardProps) {
   return (
     <article className="group overflow-hidden rounded-[26px] border border-white/[0.08] bg-card/65 shadow-[0_18px_50px_rgba(3,10,18,0.28)] transition duration-300 hover:-translate-y-1 hover:border-primary/30">
-      <div className="relative aspect-[16/9] overflow-hidden border-b border-white/[0.08]">
+      <div className="relative aspect-[4/3] overflow-hidden border-b border-white/[0.08]">
         <Image
           src={course.coverImage ?? '/placeholder.jpg'}
           alt={course.coverAlt ?? course.shortTitle}
