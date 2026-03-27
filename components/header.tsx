@@ -9,7 +9,7 @@ const navLinks = [
   { name: "领虾营", href: "/#adoption", sub: "ShrimpSeed" },
   { name: "造虾局", href: "/#custom", sub: "AlphaForge" },
   { name: "量虾铺", href: "/#products", sub: "LobsterOS" },
-  { name: "量虾学院", href: "/academy", sub: "QClaw Academy" },
+  { name: "AI量化学院", href: "/academy", sub: "AI Quant Academy" },
   { name: "虾交所", href: "/exchange", sub: "CrayfishEx" },
 ]
 

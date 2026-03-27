@@ -117,7 +117,7 @@ export default function AdminPage() {
                 // ADMIN · COURSE MANAGEMENT
               </p>
               <h1 className="mb-4 font-serif text-4xl font-black text-foreground sm:text-5xl">
-                量虾学院后台
+                AI量化学院后台
               </h1>
               <p className="text-sm leading-7 text-muted-foreground sm:text-base">
                 这里可以直接管理课程标题、摘要、展示顺序和上架状态。当前实现是本地文件型后台，
@@ -383,4 +383,3 @@ export default function AdminPage() {
     </main>
   )
 }
-

@@ -209,7 +209,7 @@ export function AdoptionSection() {
           {[
             { icon: Sprout, title: "为什么叫「领养」？", desc: "我们希望用户与龙虾建立情感连接。龙虾不是冷冰冰的工具，而是你的量化伙伴。通过「领养」这个动作，你开始了一段养成之旅，龙虾会随着你的技能提升而成长。" },
             { icon: Cloud, title: "QClaw 云服务", desc: "QClaw 是量虾星球的底层技术基础设施，提供智能体托管服务。你无需购买服务器，无需配置环境，只需要专注于策略本身。所有套餐的 tokens 费用根据使用的大模型另计。" },
-            { icon: ArrowRight, title: "升级路径", desc: "领虾营是入门的第一步。当你掌握了基础技能，可以进入量虾学院深造；想要更强大的龙虾，可以去虾货铺购买成品或造虾局定制；龙虾增值后，还能去虾链场交易获利。" },
+            { icon: ArrowRight, title: "升级路径", desc: "领虾营是入门的第一步。当你掌握了基础技能，可以进入AI量化学院深造；想要更强大的龙虾，可以去虾货铺购买成品或造虾局定制；龙虾增值后，还能去虾链场交易获利。" },
           ].map((item) => (
             <div key={item.title} className="bg-background/50 border border-white/[0.06] rounded-lg p-6">
               <item.icon className="w-6 h-6 text-[#4D9EFF] mb-4" />

@@ -8,7 +8,7 @@ const steps = [
   },
   {
     num: "02",
-    title: "量虾学院 · 技能升级",
+    title: "AI量化学院 · 技能升级",
     desc: "系统学习 AI 刀法、量化因子工程，硅基五星主厨认证，让你的虾更值钱。"
   },
   {
@@ -25,7 +25,7 @@ const steps = [
 
 const funnel = [
   { cn: "领虾营", en: "ShrimpSeed · ¥999/yr", color: "#4D9EFF" },
-  { cn: "量虾学院", en: "QClaw Academy", color: "#F5A623" },
+  { cn: "AI量化学院", en: "AI Quant Academy", color: "#F5A623" },
   { cn: "虾货铺", en: "LobsterOS · Ready", color: "#FF4D6A" },
   { cn: "造虾局", en: "AlphaForge · VIP", color: "#9B7EFF" },
   { cn: "虾链场", en: "CrayfishEx · Profit", color: "#00E5B0" },

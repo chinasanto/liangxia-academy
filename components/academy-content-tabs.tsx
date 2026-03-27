@@ -1,6 +1,6 @@
 'use client'
 
-import { GraduationCap, House, Map, PanelsTopLeft, Target } from 'lucide-react'
+import { GraduationCap, House, Map, Target } from 'lucide-react'
 
 import { CourseCard } from '@/components/course-card'
 import { LearningRoadmap } from '@/components/learning-roadmap'
@@ -20,7 +20,7 @@ export function AcademyContentTabs({
     <Tabs defaultValue="home" className="mb-12">
       <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-foreground">量虾学院</h2>
+          <h2 className="text-2xl font-bold text-foreground">AI量化学院</h2>
         </div>
 
         <TabsList className="h-auto rounded-full border border-white/[0.08] bg-card/60 p-1">
@@ -30,13 +30,6 @@ export function AcademyContentTabs({
           >
             <House className="h-4 w-4" />
             主页
-          </TabsTrigger>
-          <TabsTrigger
-            value="catalog"
-            className="rounded-full px-4 py-2 text-sm data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
-          >
-            <PanelsTopLeft className="h-4 w-4" />
-            课程目录
           </TabsTrigger>
           <TabsTrigger
             value="roadmap"
@@ -58,7 +51,7 @@ export function AcademyContentTabs({
                 打造完整量化交易知识图谱
               </h1>
               <p className="max-w-2xl text-sm leading-7 text-foreground/78 sm:text-base">
-                量虾学院集中承载 AI 量化课程体系，覆盖基础入门、因子工程、全流程实战与高级评估架构。
+                AI量化学院集中承载 AI 量化课程体系，覆盖基础入门、因子工程、全流程实战与高级评估架构。
                 课程内容围绕机器学习、深度学习、因子生命周期管理和交易系统落地展开，
                 帮助学习者把知识、策略和实盘执行真正串起来。
               </p>
@@ -160,14 +153,21 @@ export function AcademyContentTabs({
               </div>
             </div>
           </div>
-        </section>
-      </TabsContent>
 
-      <TabsContent value="catalog" className="mt-0">
-        <section className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {courses.map((course) => (
-            <CourseCard key={course.slug} course={course} />
-          ))}
+          <section className="mt-10">
+            <div className="mb-6">
+              <h3 className="text-2xl font-bold text-foreground">课程目录</h3>
+              <p className="mt-2 text-sm text-muted-foreground">
+                封面图、价格展示和课程详情都已统一整理。
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
+              {courses.map((course) => (
+                <CourseCard key={course.slug} course={course} />
+              ))}
+            </div>
+          </section>
         </section>
       </TabsContent>
 

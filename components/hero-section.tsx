@@ -54,14 +54,14 @@ export function HeroSection() {
       {/* Description */}
       <p className="animate-fadeUp delay-300 max-w-lg text-[15px] font-light text-muted-foreground leading-relaxed mb-11 relative z-10">
         每只龙虾都是一笔 Alpha。<br />
-        现在课程体系也已经接入量虾学院，<br />
+        现在课程体系也已经接入 AI量化学院，<br />
         从课程上架到课程详情展示都能在同一个项目里完成。
       </p>
 
       {/* CTA Buttons */}
       <div className="animate-fadeUp delay-400 flex flex-col sm:flex-row gap-3 justify-center mb-20 relative z-10">
         <Button asChild size="lg" className="font-mono text-[13px] font-bold px-8 py-6 bg-primary text-primary-foreground hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(0,229,176,0.3)] transition-all tracking-wider">
-          <Link href="#academy">进入量虾学院 →</Link>
+          <Link href="#academy">进入AI量化学院 →</Link>
         </Button>
         <Button asChild variant="outline" size="lg" className="font-mono text-[13px] px-8 py-6 border-white/15 bg-white/[0.04] text-foreground hover:bg-white/[0.08] hover:border-white/30 tracking-wider">
           <Link href="/exchange">进入虾交所</Link>

@@ -29,8 +29,8 @@ const services = [
   {
     num: "03",
     icon: GraduationCap,
-    cn: "量虾学院",
-    en: "QCLAW ACADEMY",
+    cn: "AI量化学院",
+    en: "AI QUANT ACADEMY",
     type: "厨师培养",
     desc: "AI 刀法·激光火候·VR 全沉浸教学，毕业获硅基五星主厨认证。",
     color: "amber",
@@ -113,7 +113,7 @@ export function ServicesSection() {
           <h2 className="font-serif text-4xl md:text-5xl font-black leading-tight text-foreground">
             量虾星球的<span className="text-primary">完整版图</span>
           </h2>
-          <p className="mt-3 text-sm text-muted-foreground font-light leading-relaxed max-w-lg">
+          <p className="mt-3 text-sm text-muted-foreground leading-relaxed max-w-lg">
             从零基础入门到专业级Alpha工厂，五个服务覆盖量化交易全生命周期。
           </p>
         </div>
@@ -151,7 +151,7 @@ export function ServicesSection() {
                   {service.type}
                 </span>
 
-                <p className="text-[13px] text-muted-foreground leading-relaxed font-light">
+                <p className="text-[13px] text-muted-foreground leading-relaxed">
                   {service.desc}
                 </p>
 

@@ -27,10 +27,10 @@ export default async function AcademyPage() {
             <div className="hidden items-center gap-2 sm:flex">
               <BookOpenText className="h-5 w-5 text-primary" />
               <span className="font-mono text-sm font-bold tracking-wider text-primary">
-                量虾学院
+                AI量化学院
               </span>
               <span className="text-xs text-muted-foreground">/</span>
-              <span className="text-xs text-muted-foreground">QClaw Academy</span>
+              <span className="text-xs text-muted-foreground">AI Quant Academy</span>
             </div>
           </div>
 
@@ -53,7 +53,7 @@ export default async function AcademyPage() {
                     想继续回到主站看其他版块？
                   </div>
                   <div className="text-sm text-muted-foreground">
-                    现在量虾学院和主页已经打通，可以随时往返。
+                    现在 AI量化学院 和主页已经打通，可以随时往返。
                   </div>
                 </div>
               </div>

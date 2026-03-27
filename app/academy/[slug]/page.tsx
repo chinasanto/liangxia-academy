@@ -36,12 +36,12 @@ export async function generateMetadata({
 
   if (!course) {
     return {
-      title: '课程不存在 | 量虾学院',
+      title: '课程不存在 | AI量化学院',
     }
   }
 
   return {
-    title: `${course.shortTitle} | 量虾学院`,
+    title: `${course.shortTitle} | AI量化学院`,
     description: course.summary,
   }
 }
@@ -72,7 +72,7 @@ export default async function CourseDetailPage({
             </Link>
             <span>/</span>
             <Link href="/academy" className="hover:text-primary">
-              量虾学院
+              AI量化学院
             </Link>
             <span>/</span>
             <span className="text-foreground">{course.shortTitle}</span>

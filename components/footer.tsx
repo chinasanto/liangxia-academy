@@ -8,7 +8,7 @@ const footerLinks = {
     { name: "高端定制养虾", href: "/#custom" },
     { name: "成品龙虾服务", href: "/#products" },
     { name: "龙虾流通交易", href: "/exchange" },
-    { name: "量虾学院课程", href: "/academy" },
+    { name: "AI量化学院课程", href: "/academy" },
   ],
   资源: [
     { name: "课程中心", href: "/academy" },
@@ -47,7 +47,7 @@ export function Footer() {
                 <span className="text-xl font-bold neon-text">QClaw</span>
               </div>
               <p className="text-muted-foreground mb-6 max-w-sm">
-                量虾学院已经整合进主站，课程首页、详情页与联系方式都能在同一套站点里完成浏览。
+                AI量化学院已经整合进主站，课程首页、详情页与联系方式都能在同一套站点里完成浏览。
               </p>
               <div className="flex items-center gap-4">
                 {socialLinks.map((social) => (
@@ -86,7 +86,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="py-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
-            © 2026 QClaw Academy. 保留所有权利。
+            © 2026 AI Quant Academy. 保留所有权利。
           </p>
           <div className="flex items-center gap-2">
             <span className="text-xs text-muted-foreground">核心保障：</span>

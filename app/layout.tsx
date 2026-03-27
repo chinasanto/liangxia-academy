@@ -22,8 +22,8 @@ const spaceMono = Space_Mono({
 })
 
 export const metadata: Metadata = {
-  title: '量虾学院 | AI量化课程平台',
-  description: '量虾学院课程平台，支持课程展示、课程详情和本地文件型后台上架管理。',
+  title: 'AI量化学院 | AI量化课程平台',
+  description: 'AI量化学院课程平台，支持课程展示、课程详情和本地文件型后台上架管理。',
   generator: 'v0.app',
   icons: {
     icon: [

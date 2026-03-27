@@ -36,7 +36,7 @@ function enrichCourse(course: CourseCatalogEntry) {
 }
 
 function buildPlaceholderDataUrl(label: string) {
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="320" height="320" viewBox="0 0 320 320"><rect width="320" height="320" rx="32" fill="#181f2a"/><circle cx="160" cy="118" r="44" fill="#00E5B0" opacity="0.16"/><text x="160" y="150" text-anchor="middle" fill="#E8F0F7" font-size="24" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">量虾学院</text><text x="160" y="190" text-anchor="middle" fill="#6A8090" font-size="16" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">${label}</text></svg>`
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="320" height="320" viewBox="0 0 320 320"><rect width="320" height="320" rx="32" fill="#181f2a"/><circle cx="160" cy="118" r="44" fill="#00E5B0" opacity="0.16"/><text x="160" y="150" text-anchor="middle" fill="#E8F0F7" font-size="24" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">AI量化学院</text><text x="160" y="190" text-anchor="middle" fill="#8EA4B3" font-size="16" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">${label}</text></svg>`
 
   return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`
 }

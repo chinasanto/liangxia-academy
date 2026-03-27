@@ -2,7 +2,7 @@ export function Ticker() {
   const items = [
     { cn: "虾链场", en: "CrayfishEx" },
     { cn: "造虾局", en: "AlphaForge" },
-    { cn: "量虾学院", en: "QClaw Academy" },
+    { cn: "AI量化学院", en: "AI Quant Academy" },
     { cn: "虾货铺", en: "LobsterOS" },
     { cn: "领虾营", en: "ShrimpSeed" },
     { cn: "Web 4.0 量化新纪元", en: "▲" },
