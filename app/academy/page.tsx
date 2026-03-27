@@ -33,7 +33,7 @@ export default async function AcademyPage() {
             <span className="text-foreground">量虾学院</span>
           </nav>
 
-          <section className="mb-10 rounded-[28px] border border-primary/15 bg-[radial-gradient(circle_at_top,rgba(0,229,176,0.14),transparent_45%),linear-gradient(180deg,rgba(7,12,18,0.96),rgba(7,12,18,0.7))] p-7 sm:p-10">
+          <section className="mb-10 bg-[radial-gradient(circle_at_top,rgba(0,229,176,0.14),transparent_45%)] py-3">
               <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
                 <div className="max-w-3xl">
                   <h1 className="mb-4 font-serif text-4xl font-black leading-[0.95] text-foreground sm:text-5xl lg:text-6xl">
