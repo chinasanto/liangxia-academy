@@ -2,7 +2,6 @@ import Link from 'next/link'
 import { BookOpenText, ChevronLeft, Layers3 } from 'lucide-react'
 
 import { AcademyContentTabs } from '@/components/academy-content-tabs'
-import { Button } from '@/components/ui/button'
 import { Footer } from '@/components/footer'
 import { getPublishedCourses } from '@/lib/course-store'
 
@@ -35,23 +34,7 @@ export default async function AcademyPage() {
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
-            <Button
-              asChild
-              variant="outline"
-              size="sm"
-              className="hidden border-primary/30 text-primary sm:inline-flex"
-            >
-              <Link href="/academy/ai-quant-basic">查看课程</Link>
-            </Button>
-            <Button
-              asChild
-              size="sm"
-              className="bg-primary text-primary-foreground hover:bg-primary/90"
-            >
-              <Link href="/">返回主页</Link>
-            </Button>
-          </div>
+          <div />
         </div>
       </header>
 
