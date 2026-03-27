@@ -52,7 +52,7 @@ export function AcademyContentTabs({
         <section className="bg-[radial-gradient(circle_at_top,rgba(0,229,176,0.14),transparent_45%)] py-3">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-3xl">
-              <h1 className="mb-4 font-serif text-4xl font-black leading-[0.95] text-foreground sm:text-5xl lg:text-6xl">
+              <h1 className="mb-4 font-serif text-3xl font-black leading-[1.02] text-foreground sm:text-4xl lg:text-5xl">
                 从因子工程到实盘交易
                 <br />
                 打造完整量化交易知识图谱
