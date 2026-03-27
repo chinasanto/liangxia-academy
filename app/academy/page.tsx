@@ -1,11 +1,9 @@
 import Link from 'next/link'
 import {
-  BrainCircuit,
   ChevronRight,
   GraduationCap,
   Home,
   Layers3,
-  Sparkles,
   Target,
 } from 'lucide-react'
 
@@ -35,14 +33,9 @@ export default async function AcademyPage() {
             <span className="text-foreground">量虾学院</span>
           </nav>
 
-          <section className="mb-10 rounded-[32px] border border-white/[0.08] bg-card/60 p-8 lg:p-12">
-            <div className="rounded-[28px] border border-primary/15 bg-[radial-gradient(circle_at_top,rgba(0,229,176,0.14),transparent_45%),linear-gradient(180deg,rgba(7,12,18,0.96),rgba(7,12,18,0.7))] p-7 sm:p-10">
+          <section className="mb-10 rounded-[28px] border border-primary/15 bg-[radial-gradient(circle_at_top,rgba(0,229,176,0.14),transparent_45%),linear-gradient(180deg,rgba(7,12,18,0.96),rgba(7,12,18,0.7))] p-7 sm:p-10">
               <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
                 <div className="max-w-3xl">
-                  <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/10 px-4 py-2 font-mono text-[11px] tracking-[0.24em] text-primary">
-                    <span className="h-2 w-2 rounded-full bg-primary" />
-                    AI量化交易课程体系
-                  </div>
                   <h1 className="mb-4 font-serif text-4xl font-black leading-[0.95] text-foreground sm:text-5xl lg:text-6xl">
                     从因子工程到实盘交易
                     <br />
@@ -116,22 +109,18 @@ export default async function AcademyPage() {
                   </div>
                 </div>
 
-                <div className="grid gap-4">
-                  <div className="rounded-[24px] border border-white/[0.08] bg-background/72 p-5">
-                    <div className="mb-3 flex items-center gap-3 text-primary">
-                      <Target className="h-5 w-5" />
-                      <span className="text-sm font-semibold">课程体系特点</span>
-                    </div>
-                    <ul className="space-y-3 text-sm leading-6 text-foreground/76">
-                      <li>基础课到高级班按能力阶梯衔接，适合系统学习。</li>
-                      <li>每门课都已重构为 6 节 × 2 小时，结构更清晰。</li>
-                      <li>课程主页、详情页、主站导航已全部打通。</li>
-                    </ul>
+                <div className="rounded-[24px] border border-white/[0.08] bg-background/72 p-5">
+                  <div className="mb-5 flex items-center gap-3 text-primary">
+                    <Target className="h-5 w-5" />
+                    <span className="text-sm font-semibold">课程体系概览</span>
                   </div>
-
-                  <div className="rounded-[24px] border border-white/[0.08] bg-background/72 p-5">
+                  <ul className="mb-5 space-y-3 text-sm leading-6 text-foreground/76">
+                    <li>基础课到高级班按能力阶梯衔接，适合系统学习。</li>
+                    <li>每门课已统一重构为 6 节 × 2 小时，结构更清晰。</li>
+                    <li>课程主页、详情页、主站导航都已打通。</li>
+                  </ul>
+                  <div>
                     <div className="mb-3 flex items-center gap-3 text-primary">
-                      <BrainCircuit className="h-5 w-5" />
                       <span className="text-sm font-semibold">课程覆盖方向</span>
                     </div>
                     <div className="flex flex-wrap gap-2">
@@ -154,20 +143,14 @@ export default async function AcademyPage() {
                   </div>
                 </div>
               </div>
-            </div>
           </section>
 
           <section className="mb-8 flex items-center justify-between gap-4">
             <div>
               <h2 className="text-2xl font-bold text-foreground">课程目录</h2>
               <p className="mt-2 text-sm text-muted-foreground">
-                课程简介参考原始附件重组，封面图、价格展示和详情页数据都已打通。
+                封面图、价格展示和课程详情都已统一整理。
               </p>
-            </div>
-
-            <div className="hidden items-center gap-2 rounded-full border border-white/[0.08] bg-card/50 px-4 py-2 text-sm text-muted-foreground md:flex">
-              <Sparkles className="h-4 w-4 text-primary" />
-              <span>推荐先从基础课或因子工程开始</span>
             </div>
           </section>
 
