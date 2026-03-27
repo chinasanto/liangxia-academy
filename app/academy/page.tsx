@@ -10,6 +10,7 @@ import {
 import { CourseCard } from '@/components/course-card'
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
+import { LearningRoadmap } from '@/components/learning-roadmap'
 import { getPublishedCourses } from '@/lib/course-store'
 
 export const dynamic = 'force-dynamic'
@@ -144,6 +145,8 @@ export default async function AcademyPage() {
                 </div>
               </div>
           </section>
+
+          <LearningRoadmap />
 
           <section className="mb-8 flex items-center justify-between gap-4">
             <div>
