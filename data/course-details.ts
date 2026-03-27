@@ -396,7 +396,7 @@ export const courseDetailsBySlug: Record<string, CourseDetailConfig> = {
   'ai-llm-quant-coding': {
     coverImage: '/course-covers/ai-llm-quant-coding.jpg',
     coverAlt: 'AI大模型辅助量化编程课程封面',
-    originalPrice: '¥3999',
+    originalPrice: '',
     rating: '4.9',
     reviewCount: '186',
     studentCount: '186',

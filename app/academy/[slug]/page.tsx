@@ -7,15 +7,14 @@ import {
   BookOpen,
   CheckCircle2,
   Clock3,
-  Home,
   Layers3,
   Star,
   Users,
 } from 'lucide-react'
 
+import { AcademyShellHeader } from '@/components/academy-shell-header'
 import { CourseDetailContent } from '@/components/course-detail-content'
 import { Footer } from '@/components/footer'
-import { Header } from '@/components/header'
 import { Button } from '@/components/ui/button'
 import { getCourseBySlug } from '@/lib/course-store'
 
@@ -61,23 +60,10 @@ export default async function CourseDetailPage({
 
   return (
     <main className="min-h-screen bg-background">
-      <Header />
+      <AcademyShellHeader backHref="/academy" backLabel="返回课程列表" />
 
-      <div className="px-6 pb-20 pt-28 lg:px-12">
+      <div className="px-6 pb-20 pt-8 lg:px-12">
         <div className="mx-auto max-w-7xl">
-          <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
-            <Link href="/" className="inline-flex items-center gap-2 hover:text-primary">
-              <Home className="h-4 w-4" />
-              主页
-            </Link>
-            <span>/</span>
-            <Link href="/academy" className="hover:text-primary">
-              AI量化学院
-            </Link>
-            <span>/</span>
-            <span className="text-foreground">{course.shortTitle}</span>
-          </nav>
-
           <div className="mb-6">
             <Button asChild variant="ghost" className="pl-0 text-muted-foreground">
               <Link href="/academy">
