@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI量化交易课程体系 | 邹老师量化培训</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
+            min-height: 100vh;
+        }
+
+        /* 导航栏样式 */
+        .navbar {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 3px solid #6366f1;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+
+        .nav-logo {
+            font-size: 1.5em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 10px 20px;
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 0.95em;
+        }
+
+        .nav-link:hover {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+        }
+
+        /* 移动端菜单按钮 */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #6366f1;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 1024px) {
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 20px;
+                gap: 10px;
+                transition: left 0.3s ease;
+                overflow-y: auto;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-link {
+                width: 100%;
+                text-align: center;
+                padding: 15px;
+                font-size: 1.1em;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Logo区域 */
+        .logo-section {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
+        }
+
+        .logo-container {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+        
+        .logo-container img {
+            height: 30px;
+            width: auto;
+            display: block;
+        }
+
+        /* 头部样式 */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 80px 40px;
+            border-radius: 20px;
+            margin-bottom: 50px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 3.2em;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #d946ef);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .subtitle {
+            font-size: 1.5em;
+            color: #555;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .description {
+            max-width: 800px;
+            margin: 0 auto;
+            color: #666;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        /* 讲师介绍卡片 */
+        .instructor-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 60px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .instructor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
+        }
+
+        .instructor-header {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            padding: 40px;
+            text-align: center;
+            color: white;
+        }
+
+        .instructor-header h2 {
+            font-size: 2.2em;
+            margin-bottom: 8px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .instructor-header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+            letter-spacing: 0.5px;
+        }
+
+        .instructor-content {
+            padding: 50px 40px;
+        }
+
+        .instructor-section {
+            margin-bottom: 35px;
+            padding-bottom: 35px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .instructor-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .instructor-section h3 {
+            color: #6366f1;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .section-text {
+            color: #555;
+            font-size: 1.05em;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .instructor-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .instructor-tag {
+            display: inline-block;
+            background: #f0f0f0;
+            color: #6366f1;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 0.95em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .instructor-tag:hover {
+            background: #6366f1;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* 课程网格 */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        @media (max-width: 768px) {
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+            header {
+                padding: 40px 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .instructor-header {
+                padding: 30px 20px;
+            }
+            .instructor-header h2 {
+                font-size: 1.8em;
+            }
+            .instructor-content {
+                padding: 30px 20px;
+            }
+        }
+
+        .course-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: block;
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            border-color: #6366f1;
+        }
+
+        .course-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .course-card h3 {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .course-card p {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        /* 新增价格样式 */
+        .course-price {
+            font-size: 1.8em;
+            color: #e11d48; /* 价格红 */
+            font-weight: 800;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            font-family: 'DIN Alternate', 'Arial', sans-serif;
+        }
+
+        .course-price .currency {
+            font-size: 0.6em;
+            margin-right: 4px;
+            font-weight: 600;
+            align-self: flex-start;
+            margin-top: 8px;
+        }
+
+        .course-price .note {
+            font-size: 0.45em;
+            background: #fff1f2;
+            color: #e11d48;
+            padding: 4px 10px;
+            border-radius: 6px;
+            margin-left: 12px;
+            font-weight: 600;
+            border: 1px solid #fecdd3;
+            letter-spacing: 0.5px;
+        }
+
+        .course-tags {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: #f0fdf4;
+            color: #16a34a;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        .tag.pro {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        .tag.hot {
+            background: #fef2f2;
+            color: #dc2626;
+        }
+
+        .course-highlights {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .course-highlights h4 {
+            color: #6366f1;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .course-highlights ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .course-highlights li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .course-highlights li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #8b5cf6;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .view-details {
+            display: inline-block;
+            color: #6366f1;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+        }
+
+        .course-card:hover .view-details {
+            transform: translateX(10px);
+        }
+
+        /* 页脚 */
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            text-align: center;
+            border-radius: 20px;
+            color: #666;
+        }
+
+        /* --- 微信浮动窗优化 (开始) --- */
+        .contact-section {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            z-index: 100;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .contact-section:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-section h2 {
+            font-size: 1.2em;
+            color: #6366f1;
+            margin-bottom: 10px;
+        }
+
+        .qrcode-container img {
+            width: 120px;
+            height: 120px;
+            border-radius: 8px;
+            margin-bottom: 5px;
+        }
+
+        .wechat-id {
+            font-weight: bold;
+            color: #333;
+            font-size: 0.9em;
+        }
+
+        /* 移动端默认隐藏的元素 */
+        .contact-mobile-header { display: none; }
+        .copy-btn {
+            margin-top: 10px;
+            padding: 6px 15px;
+            background: #f3f4f6;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            font-size: 0.85em;
+            color: #555;
+            cursor: pointer;
+            width: 100%;
+        }
+        .copy-btn:active { background: #e5e7eb; }
+
+        /* 移动端适配 (小于768px) */
+        @media (max-width: 768px) {
+            .contact-section {
+                bottom: 20px;
+                right: 20px;
+                padding: 0; /* 移除默认内边距 */
+                width: auto;
+                max-width: 140px; /* 默认收起时的宽度 */
+                overflow: hidden;
+                cursor: pointer;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .contact-section:hover { transform: none; } /* 移动端移除悬浮位移 */
+
+            /* 移动端显示的按钮条 */
+            .contact-mobile-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 12px 20px;
+                background: linear-gradient(135deg, #6366f1, #8b5cf6);
+                color: white;
+                font-weight: bold;
+                font-size: 0.95em;
+                border-radius: 16px;
+            }
+
+            /* 默认隐藏详细内容 */
+            .contact-content {
+                display: none;
+                padding: 20px;
+                background: white;
+            }
+            
+            .contact-content h2 { display: none; } /* 移动端隐藏原来的标题 */
+
+            /* --- 激活(展开)状态 --- */
+            .contact-section.expanded {
+                max-width: 300px; /* 展开后的宽度 */
+                box-shadow: 0 0 0 100vh rgba(0,0,0,0.5); /* 增加背景遮罩效果 */
+                z-index: 2000;
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                right: auto;
+                bottom: auto;
+                transform: translate(-50%, -50%);
+                width: 85%;
+                border-radius: 16px;
+            }
+
+            .contact-section.expanded .contact-mobile-header {
+                border-radius: 16px 16px 0 0;
+            }
+            
+            .contact-section.expanded .toggle-icon {
+                transform: rotate(180deg);
+            }
+
+            .contact-section.expanded .contact-content {
+                display: block;
+                animation: fadeIn 0.3s ease;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* --- 微信浮动窗优化 (结束) --- */
+
+        /* 首页卡片 VIP 价格横向排版优化 */
+        .course-price-wrapper {
+            margin: 20px 0;
+            display: flex;
+            flex-direction: row;
+            align-items: baseline;
+            gap: 15px;
+            justify-content: flex-start;
+        }
+
+        .original-price {
+            font-size: 1.2em;
+            color: #9ca3af;
+            text-decoration: line-through;
+            font-weight: 500;
+            font-family: 'DIN Alternate', sans-serif;
+        }
+
+        .vip-price-tag {
+            font-size: 1.2em;
+            color: #ea580c;
+            font-weight: 700;
+            background: #fff7ed;
+            padding: 4px 12px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            border: 1px solid #ffedd5;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar" id="navMenu">
+        <div class="nav-container">
+            <div class="nav-logo" onclick="window.location.href='index.html'">
+                AI Quant Course
+            </div>
+            
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link active">🏠 首页</a>
+                </li>
+                <li class="nav-item">
+                    <a href="ai-quant-basic-course.html" class="nav-link">📖 基础课</a>
+                </li>
+                <li class="nav-item">
+                    <a href="factor-engineering-course.html" class="nav-link">💎 因子工程</a>
+                </li>
+                <li class="nav-item">
+                    <a href="ai-quant-fullprocess-course.html" class="nav-link">🚀 AI全流程</a>
+                </li>
+                <li class="nav-item">
+                    <a href="advanced-factor-engineering-course.html" class="nav-link">🏆 高级因子</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="logo-section">
+            <div class="logo-container">
+                <img src="pic/logo.jpg" alt="课程Logo">
+            </div>
+        </div>
+
+        <header>
+            <h1>🎯 AI量化交易课程体系</h1>
+            <p class="subtitle">从因子工程到实盘交易 | 打造完整量化交易知识图谱</p>
+            <p class="description">
+                涵盖基础入门、因子工程、全流程实战及高级架构设计的全方位量化交易培训，
+                整合机器学习、深度学习等前沿技术，助力您成为AI量化交易专家
+            </p>
+        </header>
+
+        <div class="instructor-card">
+            <div class="instructor-header">
+                <h2>👨‍🏫 讲师介绍</h2>
+                <p>资深数据科学家 · 量化投资专家</p>
+            </div>
+
+            <div class="instructor-content">
+                <div class="instructor-section">
+                    <h3>核心背景</h3>
+                    <p class="section-text">
+                        拥有20年+大数据算法及15年+商业化实战经验。曾任阿里巴巴P9数据决策总监（淘宝数据决策）、WorldQuant认证顾问、米宽数据CTA策略负责人、大型数据公司AI首席科学家及香港券商基金经理等核心职位，具备华为、阿里等顶尖平台算法决策与前沿投资管理的双重背景。
+                    </p>
+                
+                    <h3>专业专长</h3>
+                    <p class="section-text">
+                        自2016年起深耕AI量化研究， 精通因子工程架构设计与系统化策略开发方法论，擅长因子生命周期管理、复杂模型构建与实战转化，曾为多家大型企业建立海量因子工程体系，积累了丰富的算法智能商业化经验和深厚的技术积淀                  
+                    </p>
+                 
+                    <h3>教学理念</h3>
+                    <p class="section-text">
+                        立足实战、注重思维构建，致力于将前沿理论与核心方法论体系化输出，陪伴学员在量化金融领域扎实成长、赢得未来。
+                    </p>
+                </div>
+
+                <div class="instructor-tags">
+                    <span class="instructor-tag">大数据算法</span>
+                    <span class="instructor-tag">AI量化研究</span>
+                    <span class="instructor-tag">因子工程</span>
+                    <span class="instructor-tag">投资管理</span>
+                    <span class="instructor-tag">商业化变现</span>
+                    <span class="instructor-tag">实战教学</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="courses-grid">
+            
+            <a href="ai-quant-basic-course.html" class="course-card">
+                <span class="course-icon">🌊</span>
+                <div class="course-tags">
+                    <span class="tag">入门首选</span>
+                    <span class="tag hot">全链路闭环</span>
+                </div>
+                <h3>AI量化基础课</h3>
+                <p>从数据清洗到实盘交易，构建标准化的量化工程范式</p>
+                
+                <div class="course-price">
+                    <span class="currency">¥</span>请咨询
+                </div>
+                
+                <div class="course-highlights">
+                    <h4>6大核心模块：</h4> <ul>
+                        <li>数据清洗：Raw → Clean → EDA体检报告</li>
+                        <li>量化特化ML：Walk-forward验证与防未来函数</li>
+                        <li>24因子体系：8大基础+16大进阶因子库</li>
+                        <li>Alpha范式：从离散指标到系统化策略设计</li>
+                        <li>实战建模：基于XGBoost的策略回测体系</li>
+                        <li>实盘落地：CTA执行架构与期货商接口对接</li>
+                    </ul>
+                </div>
+                <span class="view-details">查看详情 →</span>
+            </a>
+
+            <a href="factor-engineering-course.html" class="course-card">
+                <span class="course-icon">💎</span>
+                <div class="course-tags">
+                    <span class="tag pro">核心技能</span>
+                    <span class="tag hot">高阶必修</span>
+                </div>
+                <h3>因子工程设计卓越班</h3>
+                <p>深耕量化核心，因子工程全景图：从投资直觉到可进化因子系统</p>
+                
+                <div class="course-price">
+                    <span class="currency">¥</span>请咨询
+                </div>
+                
+                <div class="course-highlights">
+                    <h4>6大核心模块：</h4>
+                    <ul>
+                        <li>因子基础：7大因子类型与信息量(IV)评价体系</li>
+                        <li>AI 衍生：突破线性限制，构建AI特征衍生工厂</li>
+                        <li>设计框架：独创5层因子设计框架与通用算子库</li>
+                        <li>另类市场：Crypto市场肥尾效应与抗风险策略</li>
+                        <li>CTA实战：从单品种到多空组合的自动化建模</li>
+                        <li>深度时序：Transformer模型在交易中的落地应用</li>
+                    </ul>
+                </div>
+                <span class="view-details">查看详情 →</span>
+            </a>
+
+            <a href="ai-quant-fullprocess-course.html" class="course-card">
+                <span class="course-icon">🚀</span>
+                <div class="course-tags">
+                    <span class="tag pro">实战进阶</span>
+                    <span class="tag hot">系统落地</span>
+                </div>
+                <h3>AI量化全流程高级班</h3>
+                <p>从模型调优到自动化交易，打造闭环的智能交易系统</p>
+                
+                <div class="course-price">
+                    <span class="currency">¥</span>请咨询
+                </div>
+                
+                <div class="course-highlights">
+                    <h4>6大核心模块：</h4>
+                    <ul>
+                        <li>目标设定：规避局部优化陷阱，构建多空对称目标</li>
+                        <li>模型调优：5折交叉验证与稳定性评估体系</li>
+                        <li>智能风控：带止盈止损策略的综合建模方法</li>
+                        <li>增量学习：每日数据自动导入与模型在线更新</li>
+                        <li>深度时序：Transformer模型在Crypto市场的应用</li>
+                        <li>策略增强：用AI改良动量与均值回归等传统策略</li>
+                    </ul>
+                </div>
+                <span class="view-details">查看详情 →</span>
+            </a>
+
+            <a href="advanced-factor-engineering-course.html" class="course-card">
+                <span class="course-icon">🏆</span>
+                <div class="course-tags">
+                    <span class="tag pro">专家级</span>
+                    <span class="tag">架构设计</span>
+                </div>
+                <h3>因子工程科学评估大乘班</h3>
+                <p>面向工业级场景的因子全生命周期管理与系统架构，高级因子工程科学评估体系：从“回测好看”到“预测未来”</p>
+                
+                <div class="course-price-wrapper">
+                    <span class="original-price">请咨询</span>
+                    <span class="vip-price-tag">👑 新年优惠 请咨询</span>
+                </div>
+                
+                <div class="course-highlights">
+                    <h4>6大核心模块：</h4>
+                    <ul>
+                        <li>架构设计：特征工程五层模型与模块化解耦</li>
+                        <li>高效执行：因子血缘追踪与生产环境部署方案</li>
+                        <li>生命周期：动态权重分配与因子衰退管理系统</li>
+                        <li>范式思维：从单一指标到工厂化生产的思维跃迁</li>
+                        <li>深度卷积：CNN网络在时序特征提取中的创新应用</li>
+                        <li>算子底座：核心算子库开发与Alpha101性能优化</li>
+                    </ul>
+                </div>
+                <span class="view-details">查看详情 →</span>
+            </a>
+
+            <a href="brain-quant-course.html" class="course-card">
+                <span class="course-icon">🧠</span>
+                <div class="course-tags">
+                    <span class="tag">WorldQuant</span>
+                    <span class="tag hot">求职必备</span>
+                </div>
+                <h3>WorldQuant Brain 实战与求职课</h3>
+                <p>专攻 WorldQuant 平台，掌握自动化挖掘与 Alpha 优化</p>
+                
+                <div class="course-price-wrapper">
+                    <span class="original-price">请咨询</span>
+                    <span class="vip-price-tag">请咨询</span>
+                </div>
+                
+                <div class="course-highlights">
+                    <h4>6大核心模块：</h4>
+                    <ul>
+                        <li>WQ体系：12大类数据源与Fitness/Turnover评估</li>
+                        <li>自动化挖掘：Brain程序系列与Alpha Machine工厂</li>
+                        <li>策略生成：三阶策略生成体系与质量筛选机制</li>
+                        <li>深度优化：11大Alpha优化方法与风险模型(APT)</li>
+                        <li>ML实战：90分钟掌握期货数据机器学习全流程</li>
+                        <li>求职指导：Web3/ML岗位面试题库与简历优化</li>
+                    </ul>
+                </div>
+                <span class="view-details">查看详情 →</span>
+            </a>
+            
+
+        </div>
+
+        <footer>
+            <p>© 2025 AI量化交易课程体系 | 邹老师量化培训 | 15年大厂经验倾囊相授</p>
+        </footer>
+    </div>
+
+    <div class="contact-section" id="contactCard">
+        <div class="contact-mobile-header" onclick="toggleContact()">
+            <span class="icon">📱</span> 微信咨询
+            <span class="toggle-icon">▼</span>
+        </div>
+
+        <div class="contact-content">
+            <h2>📱 微信咨询</h2>
+            <div class="qrcode-container">
+                <img src="pic/wechat.jpg" alt="微信二维码">
+            </div>
+            <div class="wechat-id">
+                微信号: 446860105
+            </div>
+            <button class="copy-btn" onclick="copyWechatId(event)">复制微信号</button>
+        </div>
+    </div>
+
+    <script>
+        // --- 导航栏交互 ---
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                const navMenu = document.getElementById('navMenu');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // --- 悬浮窗交互逻辑 ---
+        function toggleContact() {
+            // 仅在移动端屏幕下生效
+            if (window.innerWidth <= 768) {
+                const card = document.getElementById('contactCard');
+                card.classList.toggle('expanded');
+                
+                const icon = card.querySelector('.toggle-icon');
+                if (card.classList.contains('expanded')) {
+                    icon.textContent = '▲';
+                } else {
+                    icon.textContent = '▼';
+                }
+            }
+        }
+
+        // 复制微信号功能
+        function copyWechatId(e) {
+            e.stopPropagation();
+            navigator.clipboard.writeText("446860105").then(() => {
+                const btn = e.target;
+                const originalText = btn.innerText;
+                btn.innerText = "已复制！";
+                btn.style.background = "#d1fae5";
+                btn.style.color = "#065f46";
+                
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.style.background = "#f3f4f6";
+                    btn.style.color = "#555";
+                }, 2000);
+            }).catch(err => {
+                alert("复制失败，请手动选择复制");
+            });
+        }
+
+        // 点击页面其他地方关闭菜单或悬浮窗
+        document.addEventListener('click', (e) => {
+            const navMenu = document.getElementById('navMenu');
+            const menuToggle = document.querySelector('.menu-toggle');
+            const contactCard = document.getElementById('contactCard');
+            
+            // 关闭导航
+            if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+                navMenu.classList.remove('active');
+            }
+
+            // 关闭悬浮窗 (点击遮罩层)
+            if (contactCard && !contactCard.contains(e.target) && contactCard.classList.contains('expanded')) {
+                toggleContact();
+            }
+        });
+    </script>
+</body>
+</html>

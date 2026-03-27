@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>因子工程科学评估大乘班 | 邹老师量化培训</title>
+    <style>
+        /* --- 基础样式 --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
+            min-height: 100vh;
+        }
+
+        /* --- 导航栏 --- */
+        .navbar {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: sticky; top: 0; z-index: 1000;
+            border-bottom: 3px solid #6366f1;
+        }
+        .nav-container {
+            max-width: 1400px; margin: 0 auto; padding: 0 20px;
+            display: flex; align-items: center; justify-content: space-between; height: 70px;
+        }
+        .nav-logo {
+            font-size: 1.5em; font-weight: 700;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            cursor: pointer;
+        }
+        .nav-menu { display: flex; gap: 15px; list-style: none; align-items: center; }
+        .nav-link {
+            display: block; padding: 10px 20px; color: #333; text-decoration: none;
+            font-weight: 500; border-radius: 8px; transition: all 0.3s ease;
+        }
+        .nav-link:hover, .nav-link.active {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white;
+        }
+        .menu-toggle { display: none; flex-direction: column; gap: 4px; cursor: pointer; padding: 10px; }
+        .menu-toggle span { width: 25px; height: 3px; background: #6366f1; border-radius: 2px; }
+
+        /* 移动端菜单样式 */
+        @media (max-width: 1024px) {
+            .nav-menu {
+                position: fixed; top: 70px; left: -100%; width: 100%; height: calc(100vh - 70px);
+                background: rgba(255, 255, 255, 0.98); flex-direction: column; padding: 20px;
+                transition: left 0.3s ease;
+            }
+            .nav-menu.active { left: 0; }
+            .menu-toggle { display: flex; }
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+
+        /* --- 课程详情页特有样式 --- */
+        .course-header {
+            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);
+            padding: 60px 40px; border-radius: 20px; margin-bottom: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); text-align: center;
+        }
+        .course-header h1 {
+            font-size: 2.1em; background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 15px; font-weight: 800;
+        }
+        .course-subtitle { font-size: 1.4em; color: #555; margin-bottom: 25px; font-weight: 300; }
+        
+        /* --- 价格区域优化 --- */
+        .price-group {
+            display: flex; justify-content: center; align-items: center; gap: 20px; margin-bottom: 30px; flex-wrap: wrap;
+        }
+        .price-tag {
+            display: inline-flex; align-items: baseline; background: #f3f4f6; color: #666;
+            padding: 10px 25px; border-radius: 50px; border: 2px solid #e5e7eb;
+        }
+        .price-tag .price-label { font-size: 0.9em; margin-right: 5px; font-weight: 500; }
+        .price-symbol { font-size: 1.2em; font-weight: 600; margin-right: 5px; }
+        .price-value { font-size: 2.2em; font-weight: 800; font-family: 'DIN Alternate', sans-serif; }
+
+        /* 老客户价格样式 */
+        .price-tag.vip {
+            background: #fff7ed; color: #c2410c; border-color: #fdba74;
+            box-shadow: 0 4px 15px rgba(251, 146, 60, 0.2); transform: scale(1.05);
+        }
+        .vip-badge {
+            background: #ea580c; color: white; padding: 2px 8px; border-radius: 4px;
+            font-size: 0.8em; margin-right: 8px; font-weight: bold; display: flex; align-items: center; gap: 4px;
+        }
+        
+        .header-stats { display: flex; justify-content: center; gap: 40px; margin-top: 20px; flex-wrap: wrap; }
+        .stat-item { display: flex; align-items: center; gap: 10px; color: #666; font-weight: 500; }
+
+        /* 核心亮点 */
+        .highlights-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px; margin-bottom: 50px;
+        }
+        .highlight-box {
+            background: rgba(255, 255, 255, 0.9); padding: 25px; border-radius: 16px;
+            text-align: center; transition: transform 0.3s;
+        }
+        .highlight-box:hover { transform: translateY(-5px); }
+        .h-icon { font-size: 2.5em; margin-bottom: 15px; display: block; }
+        .h-title { font-weight: 700; color: #333; margin-bottom: 10px; }
+        .h-desc { font-size: 0.9em; color: #666; }
+
+        /* 大纲章节 */
+        .syllabus-section {
+            background: rgba(255, 255, 255, 0.95); border-radius: 20px; padding: 50px; margin-bottom: 40px;
+        }
+        .section-title { text-align: center; font-size: 2.2em; color: #333; margin-bottom: 50px; font-weight: 700; }
+        .phase-title {
+            color: #6366f1; font-size: 1.4em; margin: 40px 0 20px 0; padding-bottom: 10px;
+            border-bottom: 2px solid #e0e7ff; display: flex; align-items: center; gap: 10px;
+        }
+        .chapter-card {
+            background: #f8f9ff; border-radius: 16px; padding: 30px; margin-bottom: 30px;
+            border: 1px solid rgba(99, 102, 241, 0.1); transition: all 0.3s ease;
+        }
+        .chapter-card:hover { box-shadow: 0 10px 30px rgba(99, 102, 241, 0.1); border-color: #8b5cf6; }
+        .chapter-header {
+            display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;
+        }
+        .chapter-title { font-size: 1.3em; font-weight: 700; color: #1f2937; }
+        .chapter-tag {
+            background: #8b5cf6; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.85em; font-weight: 600;
+        }
+        .chapter-content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        @media (max-width: 768px) { 
+            .chapter-content-grid { grid-template-columns: 1fr; } 
+            .course-header { padding: 40px 20px; }
+            .syllabus-section { padding: 30px 20px; }
+        }
+        
+        .content-block h5 { color: #6366f1; margin-bottom: 12px; font-size: 1.05em; }
+        .tech-list { list-style: none; padding: 0; }
+        .tech-list li { padding: 6px 0; padding-left: 25px; position: relative; color: #555; font-size: 0.95em; }
+        .tech-list li::before { content: '✓'; position: absolute; left: 0; color: #10b981; font-weight: bold; }
+        .output-box {
+            background: #ecfdf5; border: 1px dashed #10b981; border-radius: 10px; padding: 15px; margin-top: 15px;
+            color: #065f46; font-size: 0.9em; display: flex; align-items: center; gap: 10px;
+        }
+
+        /* 底部 */
+        footer {
+            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); padding: 40px;
+            text-align: center; border-radius: 20px; color: #666; margin-top: 40px;
+        }
+
+        /* --- 悬浮咨询栏（含移动端优化） --- */
+        .contact-section {
+            position: fixed; bottom: 40px; right: 40px; background: white; padding: 20px;
+            border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); z-index: 100;
+            text-align: center; transition: all 0.3s;
+        }
+        .contact-section:hover { transform: translateY(-5px); }
+        .qrcode-container img { width: 120px; height: 120px; border-radius: 8px; margin-bottom: 5px; }
+        .wechat-id { font-weight: bold; color: #333; font-size: 0.9em; }
+
+        /* 移动端默认隐藏头部 */
+        .contact-mobile-header { display: none; }
+        .copy-btn {
+            margin-top: 10px; padding: 6px 15px; background: #f3f4f6;
+            border: 1px solid #ddd; border-radius: 20px; font-size: 0.85em;
+            color: #555; cursor: pointer; width: 100%;
+        }
+        .copy-btn:active { background: #e5e7eb; }
+
+        /* 移动端适配 CSS */
+        @media (max-width: 768px) {
+            .contact-section {
+                bottom: 20px; right: 20px; padding: 0; width: auto;
+                max-width: 140px; overflow: hidden; cursor: pointer;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .contact-section:hover { transform: none; } /* 移动端移除悬浮效果 */
+
+            /* 移动端显示的按钮条 */
+            .contact-mobile-header {
+                display: flex; align-items: center; justify-content: space-between;
+                padding: 12px 20px; background: linear-gradient(135deg, #6366f1, #8b5cf6);
+                color: white; font-weight: bold; font-size: 0.95em; border-radius: 16px;
+            }
+
+            /* 默认隐藏详细内容 */
+            .contact-content { display: none; padding: 20px; background: white; }
+            .contact-content h2 { display: none; }
+
+            /* 展开状态 */
+            .contact-section.expanded {
+                max-width: 300px; box-shadow: 0 0 0 100vh rgba(0,0,0,0.5); z-index: 2000;
+                position: fixed; top: 50%; left: 50%; right: auto; bottom: auto;
+                transform: translate(-50%, -50%); width: 85%; border-radius: 16px;
+            }
+            .contact-section.expanded .contact-mobile-header { border-radius: 16px 16px 0 0; }
+            .contact-section.expanded .toggle-icon { transform: rotate(180deg); }
+            .contact-section.expanded .contact-content { display: block; animation: fadeIn 0.3s ease; }
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <nav class="navbar" id="navMenu">
+        <div class="nav-container">
+            <div class="nav-logo" onclick="window.location.href='index.html'">AI Quant Course</div>
+            <div class="menu-toggle" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">🏠 首页</a></li>
+                <li class="nav-item"><a href="ai-quant-basic-course.html" class="nav-link">📖 基础课</a></li>
+                <li class="nav-item"><a href="factor-engineering-course.html" class="nav-link">💎 因子工程</a></li>
+                <li class="nav-item"><a href="ai-quant-fullprocess-course.html" class="nav-link">🚀 AI全流程</a></li>
+                <li class="nav-item"><a href="advanced-factor-engineering-course.html" class="nav-link active">🏆 高级因子</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="course-header">
+            <h1>AI量化系列：因子工程科学评估大乘班</h1>
+            <p class="course-subtitle">架构师级实战 · 高级因子工程科学评估体系：从“回测好看”到“预测未来”</p>
+            
+            <div class="price-group">
+                <div class="price-tag">
+                    <span class="price-label">原价</span>
+                    <span class="price-symbol">¥</span><span class="price-value">请咨询</span>
+                </div>
+                <div class="price-tag vip">
+                    <span class="vip-badge">👑 优惠价格</span>
+                    <span class="price-symbol">¥</span><span class="price-value">请咨询</span>
+                </div>
+                 
+            </div>
+
+            <div class="header-stats">
+                <div class="stat-item">🏗️ 五层架构设计</div>
+                <div class="stat-item">♻️ 因子生命周期</div>
+                <div class="stat-item">🧠 CNN卷积网络</div>
+                <div class="stat-item">⚡ 核心算子库</div>
+            </div>
+        </div>
+
+        <div class="highlights-grid">
+            <div class="highlight-box">
+                <span class="h-icon">🏗️</span>
+                <div class="h-title">系统架构设计</div>
+                <div class="h-desc">掌握特征工程的五层解耦架构，构建高内聚低耦合的量化系统</div>
+            </div>
+            <div class="highlight-box">
+                <span class="h-icon">♻️</span>
+                <div class="h-title">生命周期管理</div>
+                <div class="h-desc">解决因子衰退难题，建立合格/试用/淘汰的动态权重分配机制</div>
+            </div>
+            <div class="highlight-box">
+                <span class="h-icon">🏭</span>
+                <div class="h-title">范式生产思维</div>
+                <div class="h-desc">从单一指标到工厂化批量生产，建立因子开发的工业化标准</div>
+            </div>
+            <div class="highlight-box">
+                <span class="h-icon">🧠</span>
+                <div class="h-title">深度学习融合</div>
+                <div class="h-desc">利用CNN卷积网络提取时序特征，实现技术指标的深度学习化</div>
+            </div>
+        </div>
+
+        <div class="syllabus-section">
+            <h2 class="section-title">📅 课程详细大纲</h2>
+
+            <div class="phase-title"><span>Phase 1</span> 第一阶段：顶层架构与工程部署</div>
+
+            <div class="chapter-card">
+                <div class="chapter-header">
+                    <div class="chapter-title">第01课：因子工程架构详细讲解</div>
+                    <span class="chapter-tag">Architecture</span>
+                </div>
+                <div class="chapter-content-grid">
+                    <div class="content-block">
+                        <h5>🎯 核心内容</h5>
+                        <ul class="tech-list">
+                            <li>特征工程系统整体架构设计理念</li>
+                            <li>数据层、计算层、存储层、应用层四层模型</li>
+                            <li>五层模型架构深度解析与数据流转</li>
+                            <li>模块化设计与解耦策略</li>
+                        </ul>
+                    </div>
+                    <div class="content-block">
+                        <h5>📖 学习模块</h5>
+                        <ul class="tech-list">
+                            <li>架构图详解与设计理念实战</li>
+                            <li>缓存机制与计算性能优化</li>
+                            <li>系统的可扩展性与维护性设计</li>
+                        </ul>
+                        <div class="output-box">🏆 产出：企业级因子工程架构图</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chapter-card">
+                <div class="chapter-header">
+                    <div class="chapter-title">第02课：因子溯源之高效执行工程部署</div>
+                    <span class="chapter-tag">Provenance</span>
+                </div>
+                <div class="chapter-content-grid">
+                    <div class="content-block">
+                        <h5>🎯 核心内容</h5>
+                        <ul class="tech-list">
+                            <li>特征溯源系统五层模型详解</li>
+                            <li>从研究(Research)到生产(Production)的完整链路</li>
+                            <li>高效执行引擎设计与优化技巧</li>
+                            <li>因子血缘追踪与版本管理机制</li>
+                        </ul>
+                    </div>
+                    <div class="content-block">
+                        <h5>📖 学习模块</h5>
+                        <ul class="tech-list">
+                            <li>溯源系统架构搭建与数据流监控</li>
+                            <li>计算引擎性能优化最佳实践</li>
+                            <li>生产环境部署与监控预警</li>
+                        </ul>
+                        <div class="output-box">🏆 产出：因子全生命周期溯源系统</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="phase-title"><span>Phase 2</span> 第二阶段：核心逻辑与思维升维</div>
+
+            <div class="chapter-card">
+                <div class="chapter-header">
+                    <div class="chapter-title">第03课：因子持续赚钱的秘密：生命周期管理</div>
+                    <span class="chapter-tag">Lifecycle</span>
+                </div>
+                <div class="chapter-content-grid">
+                    <div class="content-block">
+                        <h5>🎯 核心内容</h5>
+                        <ul class="tech-list">
+                            <li>因子衰退的本质原因分析</li>
+                            <li>生命周期管理框架：观察/试用/合格/淘汰</li>
+                            <li>因子状态分类与动态权重分配策略</li>
+                            <li>夏普加权策略(4.72夏普)实战解析</li>
+                        </ul>
+                    </div>
+                    <div class="content-block">
+                        <h5>📖 学习模块</h5>
+                        <ul class="tech-list">
+                            <li>传统等权重方法的缺陷与解决方案</li>
+                            <li>近期/中期/长期绩效评估体系</li>
+                            <li>60因子组合管理的完整流程演练</li>
+                        </ul>
+                        <div class="output-box">🏆 产出：动态因子权重管理系统</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chapter-card">
+                <div class="chapter-header">
+                    <div class="chapter-title">第04课：从单一指标到范式设计思维</div>
+                    <span class="chapter-tag">Paradigm</span>
+                </div>
+                <div class="chapter-content-grid">
+                    <div class="content-block">
+                        <h5>🎯 核心内容</h5>
+                        <ul class="tech-list">
+                            <li>投资策略的系统化演进过程</li>
+                            <li>从单一指标到范式思维的5层抽象升级</li>
+                            <li>工程化解决方案与批量生产模式</li>
+                            <li>设计模式在因子开发中的应用</li>
+                        </ul>
+                    </div>
+                    <div class="content-block">
+                        <h5>📖 学习模块</h5>
+                        <ul class="tech-list">
+                            <li>单一指标的局限性与价值挖掘</li>
+                            <li>方法论提炼与工厂化生产实战</li>
+                            <li>范式思维下的因子体系构建案例</li>
+                        </ul>
+                        <div class="output-box">🏆 产出：自动化因子生产工厂</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="phase-title"><span>Phase 3</span> 第三阶段：深度技术与算子底座</div>
+
+            <div class="chapter-card">
+                <div class="chapter-header">
+                    <div class="chapter-title">第05课：卷积神经网络(CNN)与技术指标</div>
+                    <span class="chapter-tag">Deep Learning</span>
+                </div>
+                <div class="chapter-content-grid">
+                    <div class="content-block">
+                        <h5>🎯 核心内容</h5>
+                        <ul class="tech-list">
+                            <li>CNN在量化交易中的创新应用与图像化思维</li>
+                            <li>时序数据的卷积特征提取方法</li>
+                            <li>多时间尺度特征融合策略</li>
+                            <li>深度学习因子与传统技术因子的结合</li>
+                        </ul>
+                    </div>
+                    <div class="content-block">
+                        <h5>📖 学习模块</h5>
+                        <ul class="tech-list">
+                            <li>卷积网络架构设计原理与代码实现</li>
+                            <li>金融时序数据的图像化预处理</li>
+                            <li>实战案例：基于CNN的Alpha因子策略</li>
+                        </ul>
+                        <div class="output-box">🏆 产出：CNN技术指标特征提取模型</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chapter-card">
+                <div class="chapter-header">
+                    <div class="chapter-title">第06课：构建核心算子库与Alpha101增强</div>
+                    <span class="chapter-tag">Core Operators</span>
+                </div>
+                <div class="chapter-content-grid">
+                    <div class="content-block">
+                        <h5>🎯 核心内容</h5>
+                        <ul class="tech-list">
+                            <li>核心算子设计原则与命名规范</li>
+                            <li>Alpha101因子详解、复现与性能优化</li>
+                            <li>自定义算子开发实战 (util_funcs)</li>
+                            <li>算子性能优化与向量化(Vectorization)加速</li>
+                        </ul>
+                    </div>
+                    <div class="content-block">
+                        <h5>📖 学习模块</h5>
+                        <ul class="tech-list">
+                            <li>常用算子库详解 (hicyc/locyc/fstcyc等)</li>
+                            <li>算子组合与复杂因子生成逻辑</li>
+                            <li>建立个人高性能算子库的最佳实践</li>
+                        </ul>
+                        <div class="output-box">🏆 产出：高性能量化核心算子库</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <footer>
+            <p>© 2025 AI量化交易课程体系 | 邹老师量化培训 | 15年大厂经验倾囊相授</p>
+        </footer>
+    </div>
+
+    <div class="contact-section" id="contactCard">
+        <div class="contact-mobile-header" onclick="toggleContact()">
+            <span class="icon">📱</span> 微信咨询
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="contact-content">
+            <h2>📱 微信咨询</h2>
+            <div class="qrcode-container">
+                <img src="pic/wechat.jpg" alt="微信二维码">
+            </div>
+            <div class="wechat-id">微信号: 446860105</div>
+            <button class="copy-btn" onclick="copyWechatId(event)">复制微信号</button>
+        </div>
+    </div>
+
+    <script>
+        // --- 导航栏交互 ---
+        function toggleMenu() {
+            document.getElementById('navMenu').classList.toggle('active');
+        }
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navMenu').classList.remove('active');
+            });
+        });
+        document.addEventListener('click', (e) => {
+            const navMenu = document.getElementById('navMenu');
+            const menuToggle = document.querySelector('.menu-toggle');
+            if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+                navMenu.classList.remove('active');
+            }
+        });
+
+        // --- 悬浮窗交互逻辑 ---
+        function toggleContact() {
+            if (window.innerWidth <= 768) {
+                const card = document.getElementById('contactCard');
+                card.classList.toggle('expanded');
+                const icon = card.querySelector('.toggle-icon');
+                icon.textContent = card.classList.contains('expanded') ? '▲' : '▼';
+            }
+        }
+
+        function copyWechatId(e) {
+            e.stopPropagation();
+            navigator.clipboard.writeText("446860105").then(() => {
+                const btn = e.target;
+                const originalText = btn.innerText;
+                btn.innerText = "已复制！";
+                btn.style.background = "#d1fae5";
+                btn.style.color = "#065f46";
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.style.background = "#f3f4f6";
+                    btn.style.color = "#555";
+                }, 2000);
+            }).catch(err => {
+                alert("复制失败，请手动选择复制");
+            });
+        }
+
+        document.addEventListener('click', (e) => {
+            const card = document.getElementById('contactCard');
+            if (card && !card.contains(e.target) && card.classList.contains('expanded')) {
+                toggleContact();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+[
+  {
+    "slug": "ai-quant-basic",
+    "sourceFile": "ai-quant-basic-course.html",
+    "title": "AI量化系列：AI量化基础课程班",
+    "shortTitle": "AI量化基础课程班",
+    "subtitle": "从数据清洗到实盘交易 · 掌握标准化的量化工程范式",
+    "summary": "适合从零起步建立 AI 量化底座，覆盖数据清洗、特征工程、建模思路与实盘级交付流程。",
+    "category": "基础体系",
+    "level": "入门",
+    "badge": "新手友好",
+    "price": "请咨询",
+    "published": true,
+    "featured": true,
+    "sortOrder": 1,
+    "stats": [
+      "⚡ 6大实战模块",
+      "🐍 Python实战",
+      "🌊 数据 → 交易全流程",
+      "📊 适合入门转行"
+    ],
+    "tags": [
+      "工业级数据清洗",
+      "量化特化ML",
+      "24因子体系",
+      "实盘级交付"
+    ]
+  },
+  {
+    "slug": "factor-engineering",
+    "sourceFile": "factor-engineering-course.html",
+    "title": "AI量化系列：因子工程设计卓越班",
+    "shortTitle": "因子工程设计卓越班",
+    "subtitle": "因子工程全景图：从投资直觉到可进化因子系统",
+    "summary": "围绕因子工程搭建完整设计框架，覆盖 AI 特征衍生、策略因子设计和可进化的因子体系。",
+    "category": "因子工程",
+    "level": "进阶",
+    "badge": "热门课程",
+    "price": "请咨询",
+    "published": true,
+    "featured": true,
+    "sortOrder": 2,
+    "stats": [
+      "💎 核心技能",
+      "🧬 AI特征衍生",
+      "💹 CTA+Crypto",
+      "🤖 Transformer"
+    ],
+    "tags": [
+      "5层设计框架",
+      "AI特征衍生",
+      "肥尾效应攻克",
+      "Transformer实战"
+    ]
+  },
+  {
+    "slug": "advanced-factor-engineering",
+    "sourceFile": "advanced-factor-engineering-course.html",
+    "title": "AI量化系列：因子工程科学评估大乘班",
+    "shortTitle": "因子工程科学评估大乘班",
+    "subtitle": "架构师级实战 · 高级因子工程科学评估体系：从“回测好看”到“预测未来”",
+    "summary": "面向高阶学员的架构师路线课程，聚焦因子生命周期、科学评估方法和深度学习融合。",
+    "category": "高级评估",
+    "level": "高阶",
+    "badge": "架构师路线",
+    "price": "请咨询",
+    "published": true,
+    "featured": false,
+    "sortOrder": 3,
+    "stats": [
+      "🏗️ 五层架构设计",
+      "♻️ 因子生命周期",
+      "🧠 CNN卷积网络",
+      "⚡ 核心算子库"
+    ],
+    "tags": [
+      "系统架构设计",
+      "生命周期管理",
+      "范式生产思维",
+      "深度学习融合"
+    ]
+  },
+  {
+    "slug": "ai-quant-fullprocess",
+    "sourceFile": "ai-quant-fullprocess-course.html",
+    "title": "AI量化系列：AI量化全流程高级班",
+    "shortTitle": "AI量化全流程高级班",
+    "subtitle": "从模型调优到自动化交易 · 打造闭环的智能交易系统",
+    "summary": "以策略闭环为目标，打通模型优化、增量学习、自动化部署和智能风控的完整链路。",
+    "category": "策略闭环",
+    "level": "高级",
+    "badge": "实盘闭环",
+    "price": "请咨询",
+    "published": true,
+    "featured": true,
+    "sortOrder": 4,
+    "stats": [
+      "🚀 策略落地",
+      "🔄 增量学习",
+      "🛡️ 智能风控",
+      "🤖 Transformer"
+    ],
+    "tags": [
+      "增量迁移学习",
+      "风控模型化",
+      "自动化部署",
+      "传统策略增强"
+    ]
+  },
+  {
+    "slug": "brain-quant",
+    "sourceFile": "brain-quant-course.html",
+    "title": "WorldQuant Brain 实战与求职课",
+    "shortTitle": "WorldQuant Brain 实战与求职课",
+    "subtitle": "专攻 WorldQuant 平台 · 掌握自动化挖掘与 Alpha 优化",
+    "summary": "聚焦 WorldQuant Brain 平台的专项课程，兼顾自动化挖掘、Alpha 优化与求职准备。",
+    "category": "平台专项",
+    "level": "专项",
+    "badge": "求职专项",
+    "price": "请咨询",
+    "published": true,
+    "featured": false,
+    "sortOrder": 5,
+    "stats": [
+      "🧠 WQ 平台专精",
+      "🤖 自动化挖掘",
+      "📈 Alpha 优化",
+      "💼 AI求职指导"
+    ],
+    "tags": [
+      "WQ Brain生态",
+      "自动化挖掘",
+      "策略深度优化",
+      "求职升学指导"
+    ]
+  }
+]

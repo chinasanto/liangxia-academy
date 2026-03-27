@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI量化基础课 | 邹老师量化培训</title>
+    <style>
+        /* --- 基础样式 --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
+            min-height: 100vh;
+        }
+
+        /* --- 导航栏 --- */
+        .navbar {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: sticky; top: 0; z-index: 1000;
+            border-bottom: 3px solid #6366f1;
+        }
+        .nav-container {
+            max-width: 1400px; margin: 0 auto; padding: 0 20px;
+            display: flex; align-items: center; justify-content: space-between; height: 70px;
+        }
+        .nav-logo {
+            font-size: 1.5em; font-weight: 700;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .nav-menu { display: flex; gap: 15px; list-style: none; align-items: center; }
+        .nav-link {
+            display: block; padding: 10px 20px; color: #333; text-decoration: none;
+            font-weight: 500; border-radius: 8px; transition: all 0.3s ease;
+        }
+        .nav-link.active { background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+
+        /* --- 课程头部 --- */
+        .course-header {
+            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);
+            padding: 60px 40px; border-radius: 20px; margin-bottom: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); text-align: center;
+        }
+        .course-header h1 {
+            font-size: 2.3em; background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 15px; font-weight: 800;
+        }
+        .price-tag {
+            display: inline-flex; align-items: baseline; background: #fff1f2; color: #e11d48;
+            padding: 10px 30px; border-radius: 50px; border: 2px solid #fecdd3; margin-bottom: 30px;
+        }
+        .price-value { font-size: 2.5em; font-weight: 800; }
+        .header-stats { display: flex; justify-content: center; gap: 40px; margin-top: 20px; flex-wrap: wrap; }
+        .stat-item { display: flex; align-items: center; gap: 10px; color: #666; font-weight: 600; }
+
+        /* --- 课程大纲 --- */
+        .syllabus-section {
+            background: rgba(255, 255, 255, 0.95); border-radius: 20px; padding: 50px; margin-bottom: 40px;
+        }
+        .section-title { text-align: center; font-size: 2.2em; color: #333; margin-bottom: 50px; font-weight: 700; }
+        .phase-title {
+            color: #6366f1; font-size: 1.4em; margin: 40px 0 20px 0; padding-bottom: 10px;
+            border-bottom: 2px solid #e0e7ff; display: flex; align-items: center; gap: 10px;
+        }
+        .chapter-card {
+            background: #f8f9ff; border-radius: 16px; padding: 30px; margin-bottom: 30px;
+            border: 1px solid rgba(99, 102, 241, 0.1); transition: all 0.3s ease;
+        }
+        
+        /* 试听课样式 */
+        .trial-card { border: 2px solid #ff4b2b !important; background: #fffafa !important; }
+        .tag-free { 
+            background: linear-gradient(135deg, #ff416c, #ff4b2b) !important; 
+            animation: pulse 2s infinite; 
+        }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+
+        .chapter-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
+        .chapter-title { font-size: 1.3em; font-weight: 700; color: #1f2937; }
+        .chapter-tag { background: #8b5cf6; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.85em; font-weight: 600; }
+        
+        .chapter-content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .content-block h5 { color: #6366f1; margin-bottom: 12px; font-size: 1.05em; }
+        .tech-list { list-style: none; padding: 0; }
+        .tech-list li { padding: 6px 0; padding-left: 25px; position: relative; color: #555; font-size: 0.95em; }
+        .tech-list li::before { content: '✓'; position: absolute; left: 0; color: #10b981; font-weight: bold; }
+        
+        .output-box {
+            background: #ecfdf5; border: 1px dashed #10b981; border-radius: 10px; padding: 15px; margin-top: 15px;
+            color: #065f46; font-size: 0.9em; display: flex; align-items: center; gap: 10px;
+        }
+
+        /* 咨询悬浮窗 */
+        .contact-section {
+            position: fixed; bottom: 40px; right: 40px; background: white; padding: 20px;
+            border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 100;
+            text-align: center; border: 1px solid #eee;
+        }
+        .qrcode-container img { width: 120px; height: 120px; border-radius: 8px; margin-bottom: 10px; }
+
+        @media (max-width: 768px) {
+            .chapter-content-grid { grid-template-columns: 1fr; }
+            .course-header { padding: 40px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">AI Quant Training</div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#" class="nav-link active">📖 AI量化基础</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">💎 因子工厂</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">🚀 进阶实盘</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="course-header">
+            <h1>AI量化系列：AI量化基础课程班</h1>
+            <p style="font-size: 1.2em; color: #666; margin-bottom: 25px;">2026 升级版：从数据根基到“舆情龙虾”智能实盘</p>
+            <div class="price-tag">
+                <span class="price-value">¥ 咨询获取</span>
+            </div>
+            <div class="header-stats">
+                <div class="stat-item">📅 8课时精研</div>
+                <div class="stat-item">🤖 Cursor+LLM 提效</div>
+                <div class="stat-item">🦞 智能龙虾 Agent</div>
+                <div class="stat-item">🎁 2节高价值试听</div>
+            </div>
+        </div>
+
+        <div class="syllabus-section">
+            <h2 class="section-title">📅 课程详细大纲</h2>
+
+            <div class="phase-title"><span>Phase 1</span> 第一阶段：量化工程根基</div>
+
+            <div class="chapter-card">
+                <div class="chapter-header">
+                    <div class="chapter-title">第01课：行情数据体系与 EDA 分析</div>
+                    <span class="chapter-tag">Data Logic</span>
+                </div>
+                <div class="chapter-content-grid">
+                    <div class="content-block">
+                        <h5>🎯 核心内容</h5>
+                        <ul class="tech-list">
+                            <li>多市场数据源接入 (期货/股票/Crypto)</li>
+                            <li>OHLCV 标准化清洗与重采样</li>
+                            <li>数据体检：缺失、异常点识别与修正</li>
+                        </ul>
+                    </div>
+                    <div class="content-block">
+                        <h5>📖 产出物</h5>
+                        <div class="output-box">🏆 属于你的标准化数据处理管线 (Raw → Clean)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chapter-card">
+                <div class="chapter-header">
+                    <div class="chapter-title">第02课：机器学习基础与量化特化</div>
+                    <span class="chapter-tag">Specialized ML</span>
+                </div>
+                <div class="chapter-content-grid">
+                    <div class="content-block">
+                        <h5>🎯 核心内容</h5>
+                        <ul class="tech-list">
+                            <li>量化约束：防止 Shuffle、Walk-forward 验证</li>
+                            <li>评价体系：IC、RankIC 与分位收益分析</li>
+                            <li>模型选择：线性 vs 树模型 (XGB/LGB) 的适用边界</li>
+                        </ul>
+                    </div>
+                    <div class="content-block">
+                        <h5>📖 产出物</h5>
+                        <div class="output-box">🏆 量化专用模型评价代码库及防未来函数 Checklist</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="phase-title"><span>Phase 2</span> 第二阶段：因子体系与模型建模</div>
+
+            <div class="chapter-card">
+                <div class="chapter-header">
+                    <div class="chapter-title">第03课：24 因子体系构建（从基础到进阶）</div>
+                    <span class="chapter-tag">Alpha Features</span>
+                </div>
+                <div class="chapter-content-grid">
+                    <div class="content-block">
+                        <h5>🎯 核心内容</h5>
+                        <ul class="tech-list">
+                            <li>8个基础因子：价量变化、均线系统、K线结构</li>
+                            <li>16个进阶因子：波动率偏倚、量价背离、横截面强度</li>
+                            <li>因子工程：滞后、滚动窗口与横截面排名标准化</li>
+                        </ul>
+                    </div>
+                    <div class="content-block">
+                        <h5>📖 产出物</h5>
+                        <div class="output-box">🏆 标准化多因子特征矩阵与因子有效性报告</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chapter-card">
+                <div class="chapter-header">
+                    <div class="chapter-title">第04课：Alpha 范式与 AI 策略建模</div>
+                    <span class="chapter-tag">Alpha Factory</span>
+                </div>
+                <div class="chapter-content-grid">
+                    <div class="content-block">
+                        <h5>🎯 核心内容</h5>
+                        <ul class="tech-list">
+                            <li>四级范式转化：工程化 → 相对化 → 策略化 → 工厂化</li>
+                            <li>XGBoost 建模实战：特征筛选、多空分层与对冲结构</li>
+                            <li>回测系统：夏普比率、最大回测与换手率优化</li>
+                        </ul>
+                    </div>
+                    <div class="content-block">
+                        <h5>📖 产出物</h5>
+                        <div class="output-box">🏆 完整的 AI 策略回测绩效分析报告</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="phase-title"><span>Phase 3</span> 第三阶段：系统架构与风控</div>
+
+            <div class="chapter-card">
+                <div class="chapter-header">
+                    <div class="chapter-title">第05课：CTA 执行系统架构与风控</div>
+                    <span class="chapter-tag">System Design</span>
+                </div>
+                <div class="chapter-content-grid">
+                    <div class="content-block">
+                        <h5>🎯 核心内容</h5>
+                        <ul class="tech-list">
+                            <li>执行流逻辑：行情接收 → 信号计算 → 下单管理</li>
+                            <li>风控体系：仓位动态管理 (Kelly)、止盈止损、熔断机制</li>
+                            <li>生产 Checklist：实盘环境与回测环境的一致性校验</li>
+                        </ul>
+                    </div>
+                    <div class="content-block">
+                        <h5>📖 产出物</h5>
+                        <div class="output-box">🏆 自动化量化执行流程图及风险监控代码模块</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chapter-card">
+                <div class="chapter-header">
+                    <div class="chapter-title">第06课：从研究到实盘的“最后一公里”</div>
+                    <span class="chapter-tag">Bridge to Live</span>
+                </div>
+                <div class="chapter-content-grid">
+                    <div class="content-block">
+                        <h5>🎯 核心内容</h5>
+                        <ul class="tech-list">
+                            <li>实盘痛点深度解析：滑点控制、成交延迟、网络波动处理</li>
+                            <li>多账户协同管理：分资金水位的多策略配置逻辑</li>
+                            <li>对账系统：实盘成交记录与模型预期误差分析</li>
+                        </ul>
+                    </div>
+                    <div class="content-block">
+                        <h5>📖 产出物</h5>
+                        <div class="output-box">🏆 策略实盘部署手册 (Checklist)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="phase-title"><span>Phase 4</span> 第四阶段：前沿 AI 效能（🎁 免费试听）</div>
+
+            <div class="chapter-card trial-card">
+                <div class="chapter-header">
+                    <div class="chapter-title">第07课：AI 大模型辅助量化编程</div>
+                    <span class="chapter-tag tag-free">🔥 试听模块：效率革命</span>
+                </div>
+                <div class="chapter-content-grid">
+                    <div class="content-block">
+                        <h5>🎯 核心内容</h5>
+                        <ul class="tech-list">
+                            <li><strong>Cursor 实战：</strong>利用 AI 指令快速孵化高性能因子代码</li>
+                            <li><strong>研报一键转化：</strong>将 PDF 公式快速翻译为 Pandas 向量化逻辑</li>
+                            <li><strong>代码降维打击：</strong>利用 LLM 进行策略 Bug 诊断与回测瓶颈重构</li>
+                        </ul>
+                    </div>
+                    <div class="content-block">
+                        <h5>📖 产出物</h5>
+                        <div class="output-box" style="background: #fff5f5; border-color: #feb2b2;">
+                            🚀 产出：提升 10 倍开发速度的现代量化工作流
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chapter-card trial-card">
+                <div class="chapter-header">
+                    <div class="chapter-title">第08课：OpenClaw 智能“舆情决策”龙虾</div>
+                    <span class="chapter-tag tag-free">🔥 试听模块：养龙虾实战</span>
+                </div>
+                <div class="chapter-content-grid">
+                    <div class="content-block">
+                        <h5>🎯 核心内容</h5>
+                        <ul class="tech-list">
+                            <li><strong>喂养：</strong>接入财联社/股吧实时舆情流作为“龙虾营养”</li>
+                            <li><strong>大脑：</strong>利用 Claude 对新闻进行语义评分，量化市场情绪</li>
+                            <li><strong>捕猎：</strong>“情绪评分 + 行情趋势因子信号”共振驱动 OpenClaw </li>
+                            <li><strong>生存：</strong>舆情黑天鹅实时监控，实现毫秒级驱动</li>
+                        </ul>
+                    </div>
+                    <div class="content-block">
+                        <h5>📖 产出物</h5>
+                        <div class="output-box" style="background: #fff5f5; border-color: #feb2b2;">
+                            🦞 产出：一个会看新闻、会算指标、能秒级交易的“智能龙虾”
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <footer style="text-align: center; padding: 40px; color: #fff; background: rgba(0,0,0,0.1); border-radius: 20px;">
+            <p>© 2025-2026 AI量化交易课程 | 邹老师量化培训 | 专注实战交付</p>
+        </footer>
+    </div>
+
+    <div class="contact-section">
+        <div class="qrcode-container">
+            <p style="font-size: 0.8em; margin-bottom: 5px; color: #666;">扫码领取试听课</p>
+            <img src="pic/wechat.jpg" alt="微信二维码">
+        </div>
+        <div style="font-weight: bold; color: #333; margin-bottom: 5px;">微信号: 446860105</div>
+        <p style="font-size: 0.75em; color: #999;">（暗号：养龙虾）</p>
+    </div>
+</body>
+</html>

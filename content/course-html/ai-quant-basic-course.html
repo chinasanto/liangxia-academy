@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI量化基础课 | 邹老师量化培训</title>
+    <style>
+        /* --- 基础样式 --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
+            min-height: 100vh;
+        }
+
+        /* --- 导航栏 --- */
+        .navbar {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: sticky; top: 0; z-index: 1000;
+            border-bottom: 3px solid #6366f1;
+        }
+        .nav-container {
+            max-width: 1400px; margin: 0 auto; padding: 0 20px;
+            display: flex; align-items: center; justify-content: space-between; height: 70px;
+        }
+        .nav-logo {
+            font-size: 1.5em; font-weight: 700;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            cursor: pointer;
+        }
+        .nav-menu { display: flex; gap: 15px; list-style: none; align-items: center; }
+        .nav-link {
+            display: block; padding: 10px 20px; color: #333; text-decoration: none;
+            font-weight: 500; border-radius: 8px; transition: all 0.3s ease;
+        }
+        .nav-link:hover, .nav-link.active {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white;
+        }
+        .menu-toggle { display: none; flex-direction: column; gap: 4px; cursor: pointer; padding: 10px; }
+        .menu-toggle span { width: 25px; height: 3px; background: #6366f1; border-radius: 2px; }
+
+        /* 移动端菜单样式 */
+        @media (max-width: 1024px) {
+            .nav-menu {
+                position: fixed; top: 70px; left: -100%; width: 100%; height: calc(100vh - 70px);
+                background: rgba(255, 255, 255, 0.98); flex-direction: column; padding: 20px;
+                transition: left 0.3s ease;
+            }
+            .nav-menu.active { left: 0; }
+            .menu-toggle { display: flex; }
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+
+        /* --- 课程详情页特有样式 --- */
+        .course-header {
+            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);
+            padding: 60px 40px; border-radius: 20px; margin-bottom: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); text-align: center;
+        }
+        .course-header h1 {
+            font-size: 2.3em; background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 15px; font-weight: 800;
+        }
+        .course-subtitle { font-size: 1.4em; color: #555; margin-bottom: 25px; font-weight: 300; }
+        .price-tag {
+            display: inline-flex; align-items: baseline; background: #fff1f2; color: #e11d48;
+            padding: 10px 30px; border-radius: 50px; border: 2px solid #fecdd3; margin-bottom: 30px;
+        }
+        .price-symbol { font-size: 1.2em; font-weight: 600; margin-right: 5px; }
+        .price-value { font-size: 2.5em; font-weight: 800; font-family: 'DIN Alternate', sans-serif; }
+        
+        .header-stats { display: flex; justify-content: center; gap: 40px; margin-top: 20px; flex-wrap: wrap; }
+        .stat-item { display: flex; align-items: center; gap: 10px; color: #666; font-weight: 500; }
+
+        /* 核心亮点 */
+        .highlights-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px; margin-bottom: 50px;
+        }
+        .highlight-box {
+            background: rgba(255, 255, 255, 0.9); padding: 25px; border-radius: 16px;
+            text-align: center; transition: transform 0.3s;
+        }
+        .highlight-box:hover { transform: translateY(-5px); }
+        .h-icon { font-size: 2.5em; margin-bottom: 15px; display: block; }
+        .h-title { font-weight: 700; color: #333; margin-bottom: 10px; }
+        .h-desc { font-size: 0.9em; color: #666; }
+
+        /* 大纲章节 */
+        .syllabus-section {
+            background: rgba(255, 255, 255, 0.95); border-radius: 20px; padding: 50px; margin-bottom: 40px;
+        }
+        .section-title { text-align: center; font-size: 2.2em; color: #333; margin-bottom: 50px; font-weight: 700; }
+        .phase-title {
+            color: #6366f1; font-size: 1.4em; margin: 40px 0 20px 0; padding-bottom: 10px;
+            border-bottom: 2px solid #e0e7ff; display: flex; align-items: center; gap: 10px;
+        }
+        .chapter-card {
+            background: #f8f9ff; border-radius: 16px; padding: 30px; margin-bottom: 30px;
+            border: 1px solid rgba(99, 102, 241, 0.1); transition: all 0.3s ease;
+        }
+        .chapter-card:hover { box-shadow: 0 10px 30px rgba(99, 102, 241, 0.1); border-color: #8b5cf6; }
+        .chapter-header {
+            display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;
+        }
+        .chapter-title { font-size: 1.3em; font-weight: 700; color: #1f2937; }
+        .chapter-tag {
+            background: #8b5cf6; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.85em; font-weight: 600;
+        }
+        .chapter-content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        @media (max-width: 768px) { 
+            .chapter-content-grid { grid-template-columns: 1fr; } 
+            .course-header { padding: 40px 20px; }
+            .syllabus-section { padding: 30px 20px; }
+        }
+        
+        .content-block h5 { color: #6366f1; margin-bottom: 12px; font-size: 1.05em; }
+        .tech-list { list-style: none; padding: 0; }
+        .tech-list li { padding: 6px 0; padding-left: 25px; position: relative; color: #555; font-size: 0.95em; }
+        .tech-list li::before { content: '✓'; position: absolute; left: 0; color: #10b981; font-weight: bold; }
+        .output-box {
+            background: #ecfdf5; border: 1px dashed #10b981; border-radius: 10px; padding: 15px; margin-top: 15px;
+            color: #065f46; font-size: 0.9em; display: flex; align-items: center; gap: 10px;
+        }
+
+        /* 底部 */
+        footer {
+            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); padding: 40px;
+            text-align: center; border-radius: 20px; color: #666; margin-top: 40px;
+        }
+
+        /* --- 悬浮咨询栏（含移动端优化） --- */
+        .contact-section {
+            position: fixed; bottom: 40px; right: 40px; background: white; padding: 20px;
+            border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); z-index: 100;
+            text-align: center; transition: all 0.3s;
+        }
+        .contact-section:hover { transform: translateY(-5px); }
+        .qrcode-container img { width: 120px; height: 120px; border-radius: 8px; margin-bottom: 5px; }
+        .wechat-id { font-weight: bold; color: #333; font-size: 0.9em; }
+
+        /* 移动端默认隐藏头部 */
+        .contact-mobile-header { display: none; }
+        .copy-btn {
+            margin-top: 10px; padding: 6px 15px; background: #f3f4f6;
+            border: 1px solid #ddd; border-radius: 20px; font-size: 0.85em;
+            color: #555; cursor: pointer; width: 100%;
+        }
+        .copy-btn:active { background: #e5e7eb; }
+
+        /* 移动端适配 CSS */
+        @media (max-width: 768px) {
+            .contact-section {
+                bottom: 20px; right: 20px; padding: 0; width: auto;
+                max-width: 140px; overflow: hidden; cursor: pointer;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .contact-section:hover { transform: none; }
+
+            .contact-mobile-header {
+                display: flex; align-items: center; justify-content: space-between;
+                padding: 12px 20px; background: linear-gradient(135deg, #6366f1, #8b5cf6);
+                color: white; font-weight: bold; font-size: 0.95em; border-radius: 16px;
+            }
+
+            .contact-content { display: none; padding: 20px; background: white; }
+            .contact-content h2 { display: none; }
+
+            .contact-section.expanded {
+                max-width: 300px; box-shadow: 0 0 0 100vh rgba(0,0,0,0.5); z-index: 2000;
+                position: fixed; top: 50%; left: 50%; right: auto; bottom: auto;
+                transform: translate(-50%, -50%); width: 85%; border-radius: 16px;
+            }
+            .contact-section.expanded .contact-mobile-header { border-radius: 16px 16px 0 0; }
+            .contact-section.expanded .toggle-icon { transform: rotate(180deg); }
+            .contact-section.expanded .contact-content { display: block; animation: fadeIn 0.3s ease; }
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <nav class="navbar" id="navMenu">
+        <div class="nav-container">
+            <div class="nav-logo" onclick="window.location.href='index.html'">AI Quant Course</div>
+            <div class="menu-toggle" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">🏠 首页</a></li>
+                <li class="nav-item"><a href="ai-quant-basic-course.html" class="nav-link active">📖 基础课</a></li>
+                <li class="nav-item"><a href="factor-engineering-course.html" class="nav-link">💎 因子工程</a></li>
+                <li class="nav-item"><a href="ai-quant-fullprocess-course.html" class="nav-link">🚀 AI全流程</a></li>
+                <li class="nav-item"><a href="advanced-factor-engineering-course.html" class="nav-link">🏆 高级因子</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        
+        <div class="course-header">
+            <h1>AI量化系列：AI量化基础课程班</h1>
+            <p class="course-subtitle">从数据清洗到实盘交易 · 掌握标准化的量化工程范式</p>
+            
+            <div class="price-tag">
+                <span class="price-symbol">¥</span><span class="price-value">请咨询</span>
+            </div>
+
+            <div class="header-stats">
+                <div class="stat-item">⚡ 6大实战模块</div>
+                <div class="stat-item">🐍 Python实战</div>
+                <div class="stat-item">🌊 数据 → 交易全流程</div>
+                <div class="stat-item">📊 适合入门转行</div>
+            </div>
+        </div>
+
+        <div class="highlights-grid">
+            <div class="highlight-box">
+                <span class="h-icon">🌊</span>
+                <div class="h-title">工业级数据清洗</div>
+                <div class="h-desc">Raw→Clean→EDA标准管线，拒绝脏数据，产出专业体检报告</div>
+            </div>
+            <div class="highlight-box">
+                <span class="h-icon">🧠</span>
+                <div class="h-title">量化特化ML</div>
+                <div class="h-desc">掌握Walk-forward验证与防未来函数心法，避开通用AI误区</div>
+            </div>
+            <div class="highlight-box">
+                <span class="h-icon">📊</span>
+                <div class="h-title">24因子体系</div>
+                <div class="h-desc">8个基础+16个进阶因子，建立从单因子检验到矩阵构建的认知</div>
+            </div>
+            <div class="highlight-box">
+                <span class="h-icon">⚡</span>
+                <div class="h-title">实盘级交付</div>
+                <div class="h-desc">涵盖CTA执行系统架构、滑点控制及期货商接口对接的最后一公里</div>
+            </div>
+        </div>
+
+        <div class="syllabus-section">
+            <h2 class="section-title">📅 课程详细大纲</h2>
+
+            <div class="phase-title"><span>Phase 1</span> 第一阶段：数据与地基</div>
+
+            <div class="chapter-card">
+                <div class="chapter-header">
+                    <div class="chapter-title">第01课：行情数据体系与 EDA 分析（数据篇）</div>
+                    <span class="chapter-tag">Data Foundations</span>
+                </div>
+                <div class="chapter-content-grid">
+                    <div class="content-block">
+                        <h5>🎯 核心内容</h5>
+                        <ul class="tech-list">
+                            <li>多市场行情接入：期货/股票/Crypto数据源</li>
+                            <li>OHLCV 结构与时间频率：重采样与对齐</li>
+                            <li>数据质量检查：缺失、跳空、假期与异常点识别</li>
+                            <li>基础 EDA：收益率分布、波动率与相关性矩阵</li>
+                        </ul>
+                    </div>
+                    <div class="content-block">
+                        <h5>📖 学习模块</h5>
+                        <ul class="tech-list">
+                            <li>行情数据的来源与结构标准化</li>
+                            <li>数据清洗与质量评估方法论</li>
+                            <li>输出你的第一个「数据健康体检报告」</li>
+                        </ul>
+                        <div class="output-box">🏆 实战产出：标准化数据处理管线 (Raw → Clean)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chapter-card">
+                <div class="chapter-header">
+                    <div class="chapter-title">第02课：机器学习基础与量化特化（算法篇）</div>
+                    <span class="chapter-tag">Quant ML</span>
+                </div>
+                <div class="chapter-content-grid">
+                    <div class="content-block">
+                        <h5>🎯 核心内容</h5>
+                        <ul class="tech-list">
+                            <li>量化 vs 传统 ML：不可 shuffle、时间序列约束</li>
+                            <li>核心模型族：线性模型、树模型与MLP边界</li>
+                            <li>量化指标体系：IC、RankIC、分位收益与回测绩效</li>
+                            <li>时间序列交叉验证：Walk-forward 验证思路</li>
+                        </ul>
+                    </div>
+                    <div class="content-block">
+                        <h5>📖 学习模块</h5>
+                        <ul class="tech-list">
+                            <li>量化视角下的机器学习基础</li>
+                            <li>未来收益、涨跌方向、Rank 预测的目标构造</li>
+                            <li>用少量因子训练第一个 ML 模型</li>
+                        </ul>
+                        <div class="output-box">🏆 实战产出：量化专用模型评价指标代码库</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="phase-title"><span>Phase 2</span> 第二阶段：因子与范式</div>
+
+            <div class="chapter-card">
+                <div class="chapter-header">
+                    <div class="chapter-title">第03课：24 因子体系构建</div>
+                    <span class="chapter-tag">Feature Engineering</span>
+                </div>
+                <div class="chapter-content-grid">
+                    <div class="content-block">
+                        <h5>🎯 核心内容</h5>
+                        <ul class="tech-list">
+                            <li>8个基础因子：价量变化 + K线结构</li>
+                            <li>16个进阶因子：趋势/波动率/量价/结构定位</li>
+                            <li>因子工程要点：滞后处理、滚动窗口与防未来函数</li>
+                            <li>单因子检验：IC 曲线与稳定性分析</li>
+                        </ul>
+                    </div>
+                    <div class="content-block">
+                        <h5>📖 学习模块</h5>
+                        <ul class="tech-list">
+                            <li>基础与进阶因子的代码实现</li>
+                            <li>多因子矩阵：多品种、多日期的统一特征矩阵</li>
+                            <li>单因子有效性评估方法</li>
+                        </ul>
+                        <div class="output-box">🏆 实战产出：构建可供模型使用的标准化因子矩阵</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chapter-card">
+                <div class="chapter-header">
+                    <div class="chapter-title">第04课：因子范式思维与 Alpha 设计方法论</div>
+                    <span class="chapter-tag">Alpha Design</span>
+                </div>
+                <div class="chapter-content-grid">
+                    <div class="content-block">
+                        <h5>🎯 核心内容</h5>
+                        <ul class="tech-list">
+                            <li>四级范式：工程化 → 相对化 → 策略化 → 工厂化</li>
+                            <li>相对化：行业中性、市值中性与横截面排名</li>
+                            <li>策略化：信号强度、市场环境与条件触发</li>
+                            <li>工厂化：字段库 × 时间窗 × 操作符系统</li>
+                        </ul>
+                    </div>
+                    <div class="content-block">
+                        <h5>📖 学习模块</h5>
+                        <ul class="tech-list">
+                            <li>从单一指标演化为一族 Alpha 策略</li>
+                            <li>如何把因子变成可执行的策略模块</li>
+                            <li>设计属于你自己的 Alpha 范式</li>
+                        </ul>
+                        <div class="output-box">🏆 实战产出：一套完整的 Alpha 因子挖掘框架</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="phase-title"><span>Phase 3</span> 第三阶段：建模与实盘</div>
+
+            <div class="chapter-card">
+                <div class="chapter-header">
+                    <div class="chapter-title">第05课：基于 XGBoost 的 AI 量化策略构建</div>
+                    <span class="chapter-tag">Strategy Building</span>
+                </div>
+                <div class="chapter-content-grid">
+                    <div class="content-block">
+                        <h5>🎯 核心内容</h5>
+                        <ul class="tech-list">
+                            <li>特征工程：筛选模型输入，控制共线性与泄漏</li>
+                            <li>XGBoost 关键参数：树深度、学习率、子采样</li>
+                            <li>信号生成：Cutoff 设计、多空分层与对冲结构</li>
+                            <li>简易回测：夏普、最大回撤与换手率计算</li>
+                        </ul>
+                    </div>
+                    <div class="content-block">
+                        <h5>📖 学习模块</h5>
+                        <ul class="tech-list">
+                            <li>构建特征矩阵与目标变量</li>
+                            <li>训练集/验证集设计：滚动训练与时间切片</li>
+                            <li>实现一个完整的回测 Demo</li>
+                        </ul>
+                        <div class="output-box">🏆 实战产出：AI策略回测绩效分析报告</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chapter-card">
+                <div class="chapter-header">
+                    <div class="chapter-title">第06课：CTA 执行系统与模型对接</div>
+                    <span class="chapter-tag">Real Trading</span>
+                </div>
+                <div class="chapter-content-grid">
+                    <div class="content-block">
+                        <h5>🎯 核心内容</h5>
+                        <ul class="tech-list">
+                            <li>CTA 执行架构：行情→信号→下单→风控→对账</li>
+                            <li>实盘关键：滑点、延迟、成交率与熔断处理</li>
+                            <li>交易接口：期货商对接逻辑与风控约束</li>
+                            <li>从研究脚本到生产系统：策略迁移 Checklist</li>
+                        </ul>
+                    </div>
+                    <div class="content-block">
+                        <h5>📖 学习模块</h5>
+                        <ul class="tech-list">
+                            <li>CTA 执行系统的基本组成</li>
+                            <li>模型输出如何对接到真实交易</li>
+                            <li>实盘中需要特别注意的细节</li>
+                        </ul>
+                        <div class="output-box">🏆 实战产出：自动运行的 CTA 执行流程图与代码框架</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <footer>
+            <p>© 2025 AI量化交易课程体系 | 邹老师量化培训 | 15年大厂经验倾囊相授</p>
+        </footer>
+    </div>
+
+    <div class="contact-section" id="contactCard">
+        <div class="contact-mobile-header" onclick="toggleContact()">
+            <span class="icon">📱</span> 微信咨询
+            <span class="toggle-icon">▼</span>
+        </div>
+
+        <div class="contact-content">
+            <h2>📱 微信咨询</h2>
+            <div class="qrcode-container">
+                <img src="pic/wechat.jpg" alt="微信二维码">
+            </div>
+            <div class="wechat-id">
+                微信号: 446860105
+            </div>
+            <button class="copy-btn" onclick="copyWechatId(event)">复制微信号</button>
+        </div>
+    </div>
+
+    <script>
+        // --- 导航栏交互 ---
+        function toggleMenu() {
+            document.getElementById('navMenu').classList.toggle('active');
+        }
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navMenu').classList.remove('active');
+            });
+        });
+        document.addEventListener('click', (e) => {
+            const navMenu = document.getElementById('navMenu');
+            const menuToggle = document.querySelector('.menu-toggle');
+            if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+                navMenu.classList.remove('active');
+            }
+        });
+
+        // --- 悬浮窗交互逻辑 (移动端) ---
+        function toggleContact() {
+            if (window.innerWidth <= 768) {
+                const card = document.getElementById('contactCard');
+                card.classList.toggle('expanded');
+                
+                const icon = card.querySelector('.toggle-icon');
+                if (card.classList.contains('expanded')) {
+                    icon.textContent = '▲';
+                } else {
+                    icon.textContent = '▼';
+                }
+            }
+        }
+
+        // 复制微信号功能
+        function copyWechatId(e) {
+            e.stopPropagation(); 
+            const wechatId = "446860105";
+            navigator.clipboard.writeText(wechatId).then(() => {
+                const btn = e.target;
+                const originalText = btn.innerText;
+                btn.innerText = "已复制！";
+                btn.style.background = "#d1fae5";
+                btn.style.color = "#065f46";
+                
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.style.background = "#f3f4f6";
+                    btn.style.color = "#555";
+                }, 2000);
+            }).catch(err => {
+                console.error('复制失败:', err);
+                alert("复制失败，请手动选择复制");
+            });
+        }
+
+        // 点击遮罩层关闭 (点击页面其他空白处)
+        document.addEventListener('click', (e) => {
+            const card = document.getElementById('contactCard');
+            // 如果点击的不是卡片内部，且卡片是展开状态
+            if (card && !card.contains(e.target) && card.classList.contains('expanded')) {
+                toggleContact();
+            }
+        });
+    </script>
+</body>
+</html>
