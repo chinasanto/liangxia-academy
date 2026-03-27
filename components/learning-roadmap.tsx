@@ -25,7 +25,7 @@ const roadmapSteps: RoadmapStep[] = [
     order: '1',
     title: 'AI量化基础课程班',
     subtitle: '建立直觉，跑通从数据到实盘的完整工程流程',
-    bridge: '掌握基础范式后，全面深化各模块认知，建立正确的量化世界观。',
+    bridge: '掌握基础范式后，先把 AI 大模型工具链接进研发流程，后面所有写码、研报转策略和系统开发都会更高效。',
     unlock: '解锁：完整 AI 量化工程范式，从数据到实盘执行的底层闭环。',
     slug: 'ai-quant-basic',
     accent: 'text-[#8ff0c6]',
@@ -36,6 +36,19 @@ const roadmapSteps: RoadmapStep[] = [
   },
   {
     order: '2',
+    title: 'AI大模型辅助量化编程',
+    subtitle: '工具提效，把 Codex 与 ChatGPT 5.4 变成量化研发搭档',
+    bridge: '掌握 AI 协作编程之后，再去做全流程策略开发，会明显提高原型孵化、研报转策略和系统落地效率。',
+    unlock: '解锁：因子代码孵化、PDF 研报转逻辑、向量化改写与量化系统模块化开发能力。',
+    slug: 'ai-llm-quant-coding',
+    accent: 'text-[#ffd5ff]',
+    ring: 'border-[#b35cd9]',
+    bg: 'bg-[linear-gradient(135deg,rgba(155,76,196,0.23),rgba(18,10,30,0.92))]',
+    text: 'text-[#f8eaff]',
+    tags: ['Codex 协作编程', 'ChatGPT 5.4 工作流', 'PDF 研报转策略', '向量化改写', '量化系统搭建', 'AI 代码治理'],
+  },
+  {
+    order: '3',
     title: 'AI量化全流程高级班',
     subtitle: '深化认知，建立更完整的量化世界观与实战闭环',
     bridge: '世界观建立后，专项突破因子生产核心，开始规模化构建高质量因子池。',
@@ -48,7 +61,7 @@ const roadmapSteps: RoadmapStep[] = [
     tags: ['多算法深度比较', '策略目标设计', '大规模因子筛选', '过拟合防控调优', '增量学习迭代', '自动化实盘闭环'],
   },
   {
-    order: '3',
+    order: '4',
     title: '因子工程设计卓越班',
     subtitle: '规模化生产，构建高质量、可治理的因子池',
     bridge: '有了海量因子后，开始科学区分信号与噪声，并进一步评估未来赚钱能力。',
@@ -61,7 +74,7 @@ const roadmapSteps: RoadmapStep[] = [
     tags: ['白箱算子空间', '模板引擎批量生产', '五层生产架构', '准入 Gate 筛选', '入库版本管理', '生命周期治理'],
   },
   {
-    order: '4',
+    order: '5',
     title: '因子工程科学评估大乘班',
     subtitle: '科学评估、动态组合，走向生产级策略运营',
     bridge: '最终目标是把因子研究升级为可长期运营、可持续迭代的生产级策略体系。',
@@ -86,7 +99,7 @@ export function LearningRoadmap() {
         </div>
 
         <div className="rounded-2xl border border-white/[0.08] bg-background/65 px-4 py-3 text-sm text-muted-foreground">
-          基础课 → 全流程高级班 → 因子工程 → 科学评估大乘班
+          基础课 → AI大模型辅助编程 → 全流程高级班 → 因子工程 → 科学评估大乘班
         </div>
       </div>
 

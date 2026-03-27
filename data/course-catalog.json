@@ -133,5 +133,32 @@
       "策略深度优化",
       "求职升学指导"
     ]
+  },
+  {
+    "slug": "ai-llm-quant-coding",
+    "sourceFile": "ai-llm-quant-coding-course.html",
+    "title": "AI量化系列：AI大模型辅助量化编程 Efficiency Revolution",
+    "shortTitle": "AI大模型辅助量化编程",
+    "subtitle": "用 Codex 与 ChatGPT 5.4 提升量化研发效率",
+    "summary": "聚焦 AI 大模型在量化研发中的提效场景，覆盖因子代码孵化、研报转策略、向量化改写、回测系统搭建与生产级代码协作。",
+    "category": "工具提效",
+    "level": "提效",
+    "badge": "效率革命",
+    "price": "请咨询",
+    "published": true,
+    "featured": true,
+    "sortOrder": 6,
+    "stats": [
+      "⚡ AI 编程提效",
+      "📄 研报转策略",
+      "🤖 Codex + ChatGPT 5.4",
+      "🛠️ 量化系统搭建"
+    ],
+    "tags": [
+      "Prompt工程",
+      "因子代码孵化",
+      "PDF转策略逻辑",
+      "量化研发协作"
+    ]
   }
 ]

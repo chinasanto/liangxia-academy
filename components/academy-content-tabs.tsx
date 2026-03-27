@@ -50,7 +50,7 @@ export function AcademyContentTabs({
                 <br />
                 打造完整量化交易知识图谱
               </h1>
-              <p className="max-w-2xl text-sm leading-7 text-foreground/78 sm:text-base">
+              <p className="max-w-2xl text-sm leading-7 text-white sm:text-base">
                 AI量化学院集中承载 AI 量化课程体系，覆盖基础入门、因子工程、全流程实战与高级评估架构。
                 课程内容围绕机器学习、深度学习、因子生命周期管理和交易系统落地展开，
                 帮助学习者把知识、策略和实盘执行真正串起来。
@@ -70,7 +70,7 @@ export function AcademyContentTabs({
                   <div className="font-mono text-2xl font-bold text-foreground">
                     {item.value}
                   </div>
-                  <div className="mt-1 text-xs text-muted-foreground">
+                  <div className="mt-1 text-xs text-white">
                     {item.label}
                   </div>
                 </div>
@@ -86,7 +86,7 @@ export function AcademyContentTabs({
                 </div>
                 <div>
                   <div className="text-xl font-semibold text-foreground">AI量化邹老师</div>
-                  <div className="text-sm text-muted-foreground">
+                  <div className="text-sm text-white">
                     15年大厂经验倾囊相授
                   </div>
                 </div>
@@ -95,7 +95,7 @@ export function AcademyContentTabs({
               <div className="space-y-5">
                 <div>
                   <div className="mb-2 text-sm font-semibold text-primary">核心背景</div>
-                  <p className="text-sm leading-7 text-foreground/76">
+                  <p className="text-sm leading-7 text-white">
                     长期深耕大数据算法、量化投资与 AI 量化研究，
                     兼具平台级算法决策、因子工程搭建和实盘交易系统经验，
                     强调课程内容必须可执行、可复盘、可迁移。
@@ -104,7 +104,7 @@ export function AcademyContentTabs({
 
                 <div>
                   <div className="mb-2 text-sm font-semibold text-primary">专业专长</div>
-                  <p className="text-sm leading-7 text-foreground/76">
+                  <p className="text-sm leading-7 text-white">
                     擅长因子工程架构设计、系统化策略开发、多因子生命周期管理、WorldQuant Brain 专项训练，
                     以及从研究到自动化交易部署的完整闭环。
                   </p>
@@ -112,7 +112,7 @@ export function AcademyContentTabs({
 
                 <div>
                   <div className="mb-2 text-sm font-semibold text-primary">教学理念</div>
-                  <p className="text-sm leading-7 text-foreground/76">
+                  <p className="text-sm leading-7 text-white">
                     立足实战，注重思维构建，不只讲理论，更强调学员能把方法论转换成自己的研究框架和项目成果。
                   </p>
                 </div>
@@ -124,7 +124,7 @@ export function AcademyContentTabs({
                 <Target className="h-5 w-5" />
                 <span className="text-sm font-semibold">课程体系总览</span>
               </div>
-              <ul className="mb-5 space-y-3 text-sm leading-6 text-foreground/76">
+              <ul className="mb-5 space-y-3 text-sm leading-6 text-white">
                 <li>基础课到高级班按能力阶梯衔接，适合系统学习。</li>
                 <li>每门课已统一重构为 6 节 × 2 小时，结构更清晰。</li>
                 <li>课程主页、详情页、主站导航都已打通。</li>
@@ -157,9 +157,6 @@ export function AcademyContentTabs({
           <section className="mt-10">
             <div className="mb-6">
               <h3 className="text-2xl font-bold text-foreground">课程目录</h3>
-              <p className="mt-2 text-sm text-muted-foreground">
-                封面图、价格展示和课程详情都已统一整理。
-              </p>
             </div>
 
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">

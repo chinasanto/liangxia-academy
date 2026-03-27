@@ -10,7 +10,7 @@ const zouTeacher: CourseInstructor = {
   description:
     '聚焦 AI 量化交易、因子工程、WorldQuant Brain 与生产级策略闭环，强调课程内容可落地、可复用、可持续升级。',
   students: '5600+',
-  courseCount: '5门课',
+  courseCount: '6门课',
   rating: '4.9',
 }
 
@@ -390,6 +390,78 @@ export const courseDetailsBySlug: Record<string, CourseDetailConfig> = {
         name: '徐同学',
         role: '平台研究爱好者',
         comment: '如果已经有基础，这门课很适合直接提升 WorldQuant Brain 平台上的实际战斗力。',
+      },
+    ],
+  },
+  'ai-llm-quant-coding': {
+    coverImage: '/course-covers/ai-llm-quant-coding.jpg',
+    coverAlt: 'AI大模型辅助量化编程课程封面',
+    originalPrice: '¥3999',
+    rating: '4.9',
+    reviewCount: '186',
+    studentCount: '186',
+    duration: '12小时',
+    lessonCount: '6节',
+    instructor: zouTeacher,
+    highlights: [
+      '围绕 Codex 与 ChatGPT 5.4 设计量化研发提效工作流，不只讲工具，更讲协作方法。',
+      '覆盖因子代码孵化、PDF 研报转策略逻辑、向量化改写与量化系统搭建。',
+      '6 节课每节 2 小时，适合量化研究员、开发者和策略团队做效率升级。',
+      '强调 Prompt 结构、上下文组织、代码评审与生产级协作闭环。',
+    ],
+    requirements: [
+      '建议具备基础 Python 编码能力和量化研究常识。',
+      '适合已经在做量化开发、希望提升研发效率的人。',
+      '愿意把 AI 大模型作为协作搭档而不是单次问答工具。',
+    ],
+    audience: [
+      '量化开发工程师',
+      '想提高写码效率的研究员',
+      '需要把研报快速转策略的团队',
+      '对 Codex / ChatGPT 量化工作流感兴趣的人',
+    ],
+    catalogSections: [
+      makeSection('llm-coding-1', '第01课：AI大模型辅助量化编程工作流总览', [
+        'Codex 与 ChatGPT 5.4 在量化研发中的角色分工',
+        '如何搭建从需求→Prompt→代码→验证的提效链路',
+        '建立可复用的量化 AI 协作模板库',
+      ]),
+      makeSection('llm-coding-2', '第02课：因子代码快速孵化与重构', [
+        '把想法描述成可执行的因子代码任务',
+        '让大模型输出可读、可测、可回测的因子函数',
+        '旧因子代码重构、注释补全与风格统一',
+      ]),
+      makeSection('llm-coding-3', '第03课：PDF研报一键转向量化策略逻辑', [
+        '从 PDF 研报提取关键假设、指标与交易线索',
+        '把自然语言结论拆成向量化表达与信号流程',
+        '研报到回测框架的结构化转换模板',
+      ]),
+      makeSection('llm-coding-4', '第04课：向量化改写与批量代码生成', [
+        '把循环式研究代码改成 pandas / numpy 向量化代码',
+        '批量生成特征工程、清洗脚本和评估函数',
+        '提高可读性、性能与复用性的提示技巧',
+      ]),
+      makeSection('llm-coding-5', '第05课：利用AI编写量化交易系统模块', [
+        '快速搭建数据接入、策略执行、风控、日志与监控模块',
+        '让大模型协助写 CLI 工具、配置文件与测试脚本',
+        '从策略原型走向可运行系统的模块化设计',
+      ]),
+      makeSection('llm-coding-6', '第06课：生产级协作与AI代码治理', [
+        'Prompt 版本管理、上下文管理与结果审计',
+        '如何用 AI 做代码评审、Bug 排查与测试补齐',
+        '团队级 AI 编程规范与提效闭环落地',
+      ]),
+    ],
+    reviews: [
+      {
+        name: 'Allen',
+        role: '量化开发工程师',
+        comment: '最有价值的是把 AI 工具真正变成研发流程的一部分，不再是零散地问几个问题。',
+      },
+      {
+        name: '苏同学',
+        role: '策略研究助理',
+        comment: '研报转策略和向量化改写这两部分非常实用，能明显缩短从想法到回测的时间。',
       },
     ],
   },
