@@ -1,9 +1,9 @@
 import Link from 'next/link'
-import { ChevronRight, Home, Layers3 } from 'lucide-react'
+import { BookOpenText, ChevronLeft, Layers3 } from 'lucide-react'
 
 import { AcademyContentTabs } from '@/components/academy-content-tabs'
+import { Button } from '@/components/ui/button'
 import { Footer } from '@/components/footer'
-import { Header } from '@/components/header'
 import { getPublishedCourses } from '@/lib/course-store'
 
 export const dynamic = 'force-dynamic'
@@ -14,19 +14,49 @@ export default async function AcademyPage() {
 
   return (
     <main className="min-h-screen bg-background">
-      <Header />
-
-      <div className="px-6 pb-20 pt-28 lg:px-12">
-        <div className="mx-auto max-w-7xl">
-          <nav className="mb-6 flex items-center gap-2 text-sm text-muted-foreground">
-            <Link href="/" className="inline-flex items-center gap-2 hover:text-primary">
-              <Home className="h-4 w-4" />
-              主页
+      <header className="sticky top-0 z-50 border-b border-white/[0.06] bg-background/95 backdrop-blur-xl">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center gap-4">
+            <Link
+              href="/"
+              className="flex items-center gap-2 text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <ChevronLeft className="h-5 w-5" />
+              <span className="text-sm">返回首页</span>
             </Link>
-            <ChevronRight className="h-4 w-4" />
-            <span className="text-foreground">量虾学院</span>
-          </nav>
+            <div className="hidden h-6 w-px bg-border sm:block" />
+            <div className="hidden items-center gap-2 sm:flex">
+              <BookOpenText className="h-5 w-5 text-primary" />
+              <span className="font-mono text-sm font-bold tracking-wider text-primary">
+                量虾学院
+              </span>
+              <span className="text-xs text-muted-foreground">/</span>
+              <span className="text-xs text-muted-foreground">QClaw Academy</span>
+            </div>
+          </div>
 
+          <div className="flex items-center gap-3">
+            <Button
+              asChild
+              variant="outline"
+              size="sm"
+              className="hidden border-primary/30 text-primary sm:inline-flex"
+            >
+              <Link href="/academy/ai-quant-basic">查看课程</Link>
+            </Button>
+            <Button
+              asChild
+              size="sm"
+              className="bg-primary text-primary-foreground hover:bg-primary/90"
+            >
+              <Link href="/">返回主页</Link>
+            </Button>
+          </div>
+        </div>
+      </header>
+
+      <div className="px-6 pb-20 pt-8 lg:px-12">
+        <div className="mx-auto max-w-7xl">
           <AcademyContentTabs courses={courses} featuredCount={featuredCount} />
 
           <section className="mt-12 rounded-[28px] border border-white/[0.08] bg-card/50 p-6">
