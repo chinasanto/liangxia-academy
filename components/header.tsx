@@ -31,7 +31,7 @@ export function Header() {
           <li key={link.name}>
             <Link
               href={link.href}
-              className="text-[13px] font-light text-muted-foreground hover:text-primary transition-colors tracking-wide"
+              className="rounded-full px-3 py-2 text-[15px] font-medium text-foreground/80 transition-all duration-200 tracking-[0.08em] hover:bg-white/[0.05] hover:text-primary"
             >
               {link.name}
             </Link>
@@ -65,7 +65,7 @@ export function Header() {
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-sm font-light text-muted-foreground hover:text-primary transition-colors py-2"
+                className="rounded-2xl border border-white/[0.06] bg-white/[0.02] px-4 py-3 text-base font-medium text-foreground/85 transition-colors hover:text-primary"
                 onClick={() => setIsOpen(false)}
               >
                 {link.name}
