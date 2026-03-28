@@ -11,21 +11,20 @@ type CourseCardProps = {
 
 export function CourseCard({ course }: CourseCardProps) {
   return (
-    <article className="group overflow-hidden rounded-[26px] border border-white/[0.08] bg-card/65 shadow-[0_18px_50px_rgba(3,10,18,0.28)] transition duration-300 hover:-translate-y-1 hover:border-primary/30">
-      <div className="relative aspect-[4/3] overflow-hidden border-b border-white/[0.08]">
+    <article className="group overflow-hidden rounded-[26px] border border-white/[0.08] bg-card/85 shadow-[0_18px_50px_rgba(3,10,18,0.12)] transition duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[0_22px_60px_rgba(3,10,18,0.16)] dark:bg-card/65 dark:shadow-[0_18px_50px_rgba(3,10,18,0.28)]">
+      <div className="relative aspect-[4/3] overflow-hidden border-b border-white/[0.08] bg-muted/40">
         <Image
           src={course.coverImage ?? '/placeholder.jpg'}
           alt={course.coverAlt ?? course.shortTitle}
           fill
-          className="object-cover transition duration-500 group-hover:scale-[1.03]"
+          className="object-cover object-center transition duration-500 group-hover:scale-[1.03]"
           sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/15 to-transparent" />
         <div className="absolute left-4 top-4 flex flex-wrap gap-2">
           <span className="rounded-full bg-primary/90 px-3 py-1 text-[11px] font-semibold text-primary-foreground">
             {course.level}
           </span>
-          <span className="rounded-full bg-background/80 px-3 py-1 text-[11px] font-medium text-foreground">
+          <span className="rounded-full border border-white/50 bg-background/92 px-3 py-1 text-[11px] font-medium text-foreground shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-background/80">
             {course.badge}
           </span>
         </div>

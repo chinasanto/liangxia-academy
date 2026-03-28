@@ -78,7 +78,7 @@ export default function RootLayout({
   return (
     <html lang="zh-CN" suppressHydrationWarning>
       <body className={`${notoSans.variable} ${notoSerif.variable} ${spaceMono.variable} font-sans antialiased grid-overlay`}>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
           {children}
           <WechatFloat />
         </ThemeProvider>
