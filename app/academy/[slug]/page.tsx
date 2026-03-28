@@ -14,11 +14,14 @@ import {
 
 import { AcademyShellHeader } from '@/components/academy-shell-header'
 import { CourseDetailContent } from '@/components/course-detail-content'
+import { CourseRelatedLinks } from '@/components/course-related-links'
 import { Footer } from '@/components/footer'
 import { JsonLd } from '@/components/json-ld'
 import { Button } from '@/components/ui/button'
 import { buildCourseFaqs } from '@/lib/course-faq'
-import { getCourseBySlug } from '@/lib/course-store'
+import { buildCoursePositioning } from '@/lib/course-positioning'
+import { buildCourseRecommendations } from '@/lib/course-recommendations'
+import { getAllCourses, getCourseBySlug } from '@/lib/course-store'
 import { buildCourseMetadata } from '@/lib/seo'
 import { buildCourseDetailJsonLd } from '@/lib/structured-data'
 
@@ -53,13 +56,18 @@ export default async function CourseDetailPage({
   const { slug } = await params
   const query = await searchParams
   const preview = query.preview === '1'
-  const course = await getCourseBySlug(slug, { includeDrafts: preview })
+  const [course, allCourses] = await Promise.all([
+    getCourseBySlug(slug, { includeDrafts: preview }),
+    getAllCourses({ includeDrafts: preview }),
+  ])
 
   if (!course) {
     notFound()
   }
 
   const faqs = buildCourseFaqs(course)
+  const positioning = buildCoursePositioning(course)
+  const relatedCourses = buildCourseRecommendations(course, allCourses)
 
   return (
     <main className="min-h-screen bg-background">
@@ -216,7 +224,10 @@ export default async function CourseDetailPage({
             reviews={course.reviews ?? []}
             faqs={faqs}
             seoSections={course.seoSections ?? []}
+            positioning={positioning}
           />
+
+          <CourseRelatedLinks items={relatedCourses} />
 
           <section className="mt-8 rounded-[28px] border border-white/[0.08] bg-card/50 p-6">
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">

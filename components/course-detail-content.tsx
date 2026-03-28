@@ -11,6 +11,7 @@ import {
 import type {
   CourseCatalogSection,
   CourseFaq,
+  CoursePositioning,
   CourseReview,
   CourseSeoSection,
 } from '@/lib/course-types'
@@ -23,6 +24,7 @@ type CourseDetailContentProps = {
   reviews: CourseReview[]
   faqs: CourseFaq[]
   seoSections: CourseSeoSection[]
+  positioning: CoursePositioning
 }
 
 export function CourseDetailContent({
@@ -33,17 +35,19 @@ export function CourseDetailContent({
   reviews,
   faqs,
   seoSections,
+  positioning,
 }: CourseDetailContentProps) {
   return (
     <div className="space-y-8">
       <section className="rounded-[28px] border border-white/[0.08] bg-card/55 p-4">
         <div className="flex flex-wrap gap-2">
-          {[
-            { href: '#course-overview', label: '课程介绍' },
-            { href: '#course-insight', label: '课程解读' },
-            { href: '#course-catalog', label: '课程目录' },
-            { href: '#course-reviews', label: '学员评价' },
-            { href: '#course-faq', label: '常见问题' },
+            {[
+              { href: '#course-overview', label: '课程介绍' },
+              { href: '#course-insight', label: '课程解读' },
+              { href: '#course-fit', label: '学习定位' },
+              { href: '#course-catalog', label: '课程目录' },
+              { href: '#course-reviews', label: '学员评价' },
+              { href: '#course-faq', label: '常见问题' },
           ].map((item) => (
             <a
               key={item.href}
@@ -52,6 +56,57 @@ export function CourseDetailContent({
             >
               {item.label}
             </a>
+          ))}
+        </div>
+      </section>
+
+      <section
+        id="course-fit"
+        className="scroll-mt-24 rounded-[28px] border border-white/[0.08] bg-card/55 p-8"
+      >
+        <div className="mb-6">
+          <h2 className="text-2xl font-bold text-foreground">学习定位对比</h2>
+          <p className="mt-2 text-sm text-muted-foreground">
+            这部分会明确告诉你这门课更适合谁、不太适合谁，以及学完之后能具体带走什么。
+          </p>
+        </div>
+
+        <div className="grid gap-5 lg:grid-cols-3">
+          {[
+            {
+              title: '适合谁',
+              items: positioning.suitableFor,
+              tone: 'bg-primary/15 text-primary',
+            },
+            {
+              title: '不适合谁',
+              items: positioning.notSuitableFor,
+              tone: 'bg-rose-500/15 text-rose-300',
+            },
+            {
+              title: '学完能做什么',
+              items: positioning.outcomes,
+              tone: 'bg-emerald-500/15 text-emerald-300',
+            },
+          ].map((group) => (
+            <article
+              key={group.title}
+              className="rounded-[24px] border border-white/[0.08] bg-background/75 p-6"
+            >
+              <div
+                className={`mb-4 inline-flex rounded-full px-3 py-1 text-sm font-semibold ${group.tone}`}
+              >
+                {group.title}
+              </div>
+              <ul className="space-y-3 text-sm leading-7 text-foreground/85">
+                {group.items.map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
           ))}
         </div>
       </section>

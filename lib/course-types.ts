@@ -89,6 +89,18 @@ export type CourseSeoSection = {
   paragraphs: string[]
 }
 
+export type CoursePositioning = {
+  suitableFor: string[]
+  notSuitableFor: string[]
+  outcomes: string[]
+}
+
+export type CourseRecommendation = {
+  label: string
+  reason: string
+  course: CourseCatalogEntry
+}
+
 export type CourseDetailConfig = {
   coverImage: string
   coverAlt: string
