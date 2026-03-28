@@ -242,22 +242,6 @@ export default async function CourseDetailPage({
                   ))}
                 </div>
 
-                <div className="mt-6 rounded-[22px] border border-white/[0.08] bg-background/72 p-5">
-                  <div className="mb-3 text-base font-semibold text-foreground">为什么由邹老师来讲这门课</div>
-                  <ul className="space-y-3">
-                    {[
-                      '长期聚焦 AI 量化交易、因子工程与 WorldQuant Brain 方向，兼顾研究深度与实战落地。',
-                      '既讲课程知识点，也讲真实研发中的取舍逻辑、系统搭建方式和常见误区。',
-                      '课程目标不是只学完目录，而是帮助学员建立一套可复制的量化研发方法。 ',
-                    ].map((item) => (
-                      <li key={item} className="flex items-start gap-3 text-sm leading-7 text-foreground/88">
-                        <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
                 <div className="mt-6">
                   <div className="mb-4 text-lg font-semibold text-foreground">本课重点</div>
                   <ul className="space-y-3">
