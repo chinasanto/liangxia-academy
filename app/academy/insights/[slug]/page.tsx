@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { ArrowRight, CalendarDays, Clock3 } from 'lucide-react'
 
+import { AcademySubnav } from '@/components/academy-subnav'
 import { AcademyShellHeader } from '@/components/academy-shell-header'
 import { CourseCard } from '@/components/course-card'
 import { Footer } from '@/components/footer'
@@ -61,6 +62,8 @@ export default async function AcademyInsightDetailPage({
 
       <div className="px-6 pb-20 pt-8 lg:px-12">
         <div className="mx-auto max-w-5xl">
+          <AcademySubnav active="insights" className="mb-8" />
+
           <Link
             href="/academy/insights"
             className="mb-6 inline-flex items-center gap-2 text-sm font-semibold text-primary transition hover:opacity-85"

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 
+import { AcademySubnav } from '@/components/academy-subnav'
 import { AcademyShellHeader } from '@/components/academy-shell-header'
 import { Footer } from '@/components/footer'
 import { InsightsExplorer } from '@/components/insights-explorer'
@@ -21,6 +22,8 @@ export default async function AcademyInsightsPage() {
 
       <div className="px-6 pb-20 pt-8 lg:px-12">
         <div className="mx-auto max-w-7xl">
+          <AcademySubnav active="insights" className="mb-8" />
+
           <section className="mb-10 rounded-[30px] border border-white/[0.08] bg-card/45 p-8 sm:p-10">
             <div className="max-w-4xl">
               <div className="mb-4 inline-flex rounded-full bg-primary/12 px-4 py-1.5 text-xs font-semibold text-primary">
