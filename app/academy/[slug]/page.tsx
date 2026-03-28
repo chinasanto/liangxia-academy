@@ -23,6 +23,7 @@ import { Footer } from '@/components/footer'
 import { JsonLd } from '@/components/json-ld'
 import { Button } from '@/components/ui/button'
 import { buildCoursePathNavigation } from '@/lib/academy-roadmap'
+import { hasAdminSession } from '@/lib/admin-auth'
 import { buildCourseFaqs } from '@/lib/course-faq'
 import { buildCoursePositioning } from '@/lib/course-positioning'
 import { buildCourseRecommendations } from '@/lib/course-recommendations'
@@ -44,7 +45,9 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>
 }): Promise<Metadata> {
   const { slug } = await params
-  const course = await getCourseBySlug(slug, { includeDrafts: true })
+  const course = await getCourseBySlug(slug, {
+    includeDrafts: await hasAdminSession(),
+  })
 
   if (!course) {
     return {
@@ -61,7 +64,8 @@ export default async function CourseDetailPage({
 }: CourseDetailPageProps) {
   const { slug } = await params
   const query = await searchParams
-  const preview = query.preview === '1'
+  const isAdmin = await hasAdminSession()
+  const preview = query.preview === '1' && isAdmin
   const [course, allCourses] = await Promise.all([
     getCourseBySlug(slug, { includeDrafts: preview }),
     getAllCourses({ includeDrafts: preview }),

@@ -1,8 +1,9 @@
 'use client'
 
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useEffect, useMemo, useState, useTransition } from 'react'
-import { ExternalLink, Save, Settings2, Sparkles } from 'lucide-react'
+import { ExternalLink, LogOut, Save, Settings2, Sparkles } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import type { CourseCatalogEntry, CourseUpdatePayload } from '@/lib/course-types'
@@ -24,6 +25,7 @@ function toPayload(course: CourseCatalogEntry): CourseUpdatePayload {
 }
 
 export default function AdminPage() {
+  const router = useRouter()
   const [courses, setCourses] = useState<CourseCatalogEntry[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -107,6 +109,18 @@ export default function AdminPage() {
     }
   }
 
+  async function handleLogout() {
+    setError(null)
+    setNotice(null)
+
+    await fetch('/api/admin/session', {
+      method: 'DELETE',
+    })
+
+    router.replace('/admin/login')
+    router.refresh()
+  }
+
   return (
     <main className="min-h-screen bg-background px-6 pb-20 pt-28 lg:px-12">
       <div className="mx-auto max-w-7xl">
@@ -153,6 +167,14 @@ export default function AdminPage() {
             <Settings2 className="h-4 w-4" />
             {loading ? '正在加载课程...' : '后台已连接课程数据'}
           </div>
+          <Button
+            variant="outline"
+            className="font-mono text-xs"
+            onClick={() => void handleLogout()}
+          >
+            <LogOut className="h-4 w-4" />
+            退出登录
+          </Button>
           {notice ? (
             <div className="rounded-full border border-green-500/20 bg-green-500/10 px-4 py-2 text-green-300">
               {notice}

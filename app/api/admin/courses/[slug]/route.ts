@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
 
+import { hasAdminSession } from '@/lib/admin-auth'
 import { getCourseBySlug, updateCourse } from '@/lib/course-store'
 
 export const dynamic = 'force-dynamic'
@@ -25,6 +26,10 @@ export async function PATCH(
   request: Request,
   context: { params: Promise<{ slug: string }> },
 ) {
+  if (!(await hasAdminSession())) {
+    return NextResponse.json({ error: '未授权' }, { status: 401 })
+  }
+
   const { slug } = await context.params
   const existingCourse = await getCourseBySlug(slug, { includeDrafts: true })
 
