@@ -14,10 +14,12 @@ import {
 
 import { AcademyShellHeader } from '@/components/academy-shell-header'
 import { CourseDetailContent } from '@/components/course-detail-content'
+import { CoursePathNav } from '@/components/course-path-nav'
 import { CourseRelatedLinks } from '@/components/course-related-links'
 import { Footer } from '@/components/footer'
 import { JsonLd } from '@/components/json-ld'
 import { Button } from '@/components/ui/button'
+import { buildCoursePathNavigation } from '@/lib/academy-roadmap'
 import { buildCourseFaqs } from '@/lib/course-faq'
 import { buildCoursePositioning } from '@/lib/course-positioning'
 import { buildCourseRecommendations } from '@/lib/course-recommendations'
@@ -68,6 +70,7 @@ export default async function CourseDetailPage({
   const faqs = buildCourseFaqs(course)
   const positioning = buildCoursePositioning(course)
   const relatedCourses = buildCourseRecommendations(course, allCourses)
+  const pathNavigation = buildCoursePathNavigation(course, allCourses)
 
   return (
     <main className="min-h-screen bg-background">
@@ -215,6 +218,12 @@ export default async function CourseDetailPage({
               </div>
             </div>
           </section>
+
+          <CoursePathNav
+            previous={pathNavigation.previous}
+            next={pathNavigation.next}
+            parallel={pathNavigation.parallel}
+          />
 
           <CourseDetailContent
             highlights={course.highlights ?? []}

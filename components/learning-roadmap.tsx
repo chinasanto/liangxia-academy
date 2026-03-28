@@ -5,6 +5,7 @@ import {
   GraduationCap,
   Target,
 } from 'lucide-react'
+import { getMainRoadmapSlugs } from '@/lib/academy-roadmap'
 
 type RoadmapStep = {
   order: string
@@ -19,6 +20,8 @@ type RoadmapStep = {
   text: string
   tags: string[]
 }
+
+const mainRoadmapOrder = getMainRoadmapSlugs()
 
 const roadmapSteps: RoadmapStep[] = [
   {
@@ -99,7 +102,9 @@ export function LearningRoadmap() {
         </div>
 
         <div className="rounded-2xl border border-white/[0.08] bg-background/65 px-4 py-3 text-sm text-muted-foreground">
-          基础课 → AI大模型辅助编程 → 全流程高级班 → 因子工程 → 科学评估大乘班
+          {mainRoadmapOrder.length > 0
+            ? '基础课 → AI大模型辅助编程 → 全流程高级班 → 因子工程 → 科学评估大乘班'
+            : ''}
         </div>
       </div>
 
