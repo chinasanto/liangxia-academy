@@ -1,4 +1,5 @@
-import type { CourseCatalogEntry, CourseReview } from '@/lib/course-types'
+import { buildCourseFaqs } from '@/lib/course-faq'
+import type { CourseCatalogEntry, CourseFaq, CourseReview } from '@/lib/course-types'
 import { SITE_NAME, SITE_URL, absoluteUrl } from '@/lib/seo'
 
 const ORGANIZATION_ID = absoluteUrl('/#organization')
@@ -128,6 +129,22 @@ function buildReviewJsonLd(review: CourseReview) {
   }
 }
 
+function buildFaqPageJsonLd(courseUrl: string, faqs: CourseFaq[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    '@id': `${courseUrl}#faq`,
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  }
+}
+
 export function buildHomeJsonLd(courses: CourseCatalogEntry[]) {
   return [
     buildOrganizationJsonLd(),
@@ -167,6 +184,7 @@ export function buildCourseDetailJsonLd(course: CourseCatalogEntry) {
   const ratingValue = parseNumericValue(course.rating)
   const ratingCount = parseIntegerValue(course.reviewCount)
   const reviews = (course.reviews ?? []).slice(0, 2).map(buildReviewJsonLd)
+  const faqs = buildCourseFaqs(course)
 
   return [
     buildOrganizationJsonLd(),
@@ -225,5 +243,6 @@ export function buildCourseDetailJsonLd(course: CourseCatalogEntry) {
           : undefined,
       review: reviews.length > 0 ? reviews : undefined,
     },
+    buildFaqPageJsonLd(courseUrl, faqs),
   ]
 }

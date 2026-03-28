@@ -17,6 +17,7 @@ import { CourseDetailContent } from '@/components/course-detail-content'
 import { Footer } from '@/components/footer'
 import { JsonLd } from '@/components/json-ld'
 import { Button } from '@/components/ui/button'
+import { buildCourseFaqs } from '@/lib/course-faq'
 import { getCourseBySlug } from '@/lib/course-store'
 import { buildCourseMetadata } from '@/lib/seo'
 import { buildCourseDetailJsonLd } from '@/lib/structured-data'
@@ -57,6 +58,8 @@ export default async function CourseDetailPage({
   if (!course) {
     notFound()
   }
+
+  const faqs = buildCourseFaqs(course)
 
   return (
     <main className="min-h-screen bg-background">
@@ -211,6 +214,7 @@ export default async function CourseDetailPage({
             audience={course.audience ?? []}
             catalogSections={course.catalogSections ?? []}
             reviews={course.reviews ?? []}
+            faqs={faqs}
           />
 
           <section className="mt-8 rounded-[28px] border border-white/[0.08] bg-card/50 p-6">

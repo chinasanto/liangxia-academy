@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/accordion'
 import type {
   CourseCatalogSection,
+  CourseFaq,
   CourseReview,
 } from '@/lib/course-types'
 
@@ -19,6 +20,7 @@ type CourseDetailContentProps = {
   audience: string[]
   catalogSections: CourseCatalogSection[]
   reviews: CourseReview[]
+  faqs: CourseFaq[]
 }
 
 export function CourseDetailContent({
@@ -27,6 +29,7 @@ export function CourseDetailContent({
   audience,
   catalogSections,
   reviews,
+  faqs,
 }: CourseDetailContentProps) {
   return (
     <div className="space-y-8">
@@ -36,6 +39,7 @@ export function CourseDetailContent({
             { href: '#course-overview', label: '课程介绍' },
             { href: '#course-catalog', label: '课程目录' },
             { href: '#course-reviews', label: '学员评价' },
+            { href: '#course-faq', label: '常见问题' },
           ].map((item) => (
             <a
               key={item.href}
@@ -191,6 +195,35 @@ export function CourseDetailContent({
             </article>
           ))}
         </div>
+      </section>
+
+      <section
+        id="course-faq"
+        className="scroll-mt-24 rounded-[28px] border border-white/[0.08] bg-card/55 p-8"
+      >
+        <div className="mb-6">
+          <h2 className="text-2xl font-bold text-foreground">常见问题</h2>
+          <p className="mt-2 text-sm text-muted-foreground">
+            这里整理了这门课最常被问到的几个问题，方便在报名前快速判断是否匹配你的学习目标。
+          </p>
+        </div>
+
+        <Accordion type="single" collapsible defaultValue={faqs[0]?.question}>
+          {faqs.map((faq) => (
+            <AccordionItem
+              key={faq.question}
+              value={faq.question}
+              className="mb-4 overflow-hidden rounded-[24px] border border-white/[0.08] bg-background/70 px-5 last:mb-0"
+            >
+              <AccordionTrigger className="py-5 text-base text-foreground no-underline hover:no-underline">
+                {faq.question}
+              </AccordionTrigger>
+              <AccordionContent className="pb-5 text-sm leading-7 text-foreground/85">
+                <p>{faq.answer}</p>
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
       </section>
     </div>
   )

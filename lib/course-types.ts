@@ -76,6 +76,11 @@ export type CourseReview = {
   comment: string
 }
 
+export type CourseFaq = {
+  question: string
+  answer: string
+}
+
 export type CourseDetailConfig = {
   coverImage: string
   coverAlt: string
