@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import { BookOpenText, ChevronLeft } from 'lucide-react'
 
+import { ThemeToggle } from '@/components/theme-toggle'
+
 type AcademyShellHeaderProps = {
   backHref?: string
   backLabel?: string
@@ -32,7 +34,7 @@ export function AcademyShellHeader({
           </div>
         </div>
 
-        <div />
+        <ThemeToggle compact />
       </div>
     </header>
   )

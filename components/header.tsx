@@ -4,6 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 const navLinks = [
   { name: "领虾营", href: "/#adoption", sub: "ShrimpSeed" },
@@ -41,6 +42,7 @@ export function Header() {
 
       {/* Desktop CTA */}
       <div className="hidden md:flex items-center gap-2.5">
+        <ThemeToggle compact />
         <Button asChild variant="outline" size="sm" className="font-mono text-xs border-primary/30 text-primary hover:bg-primary/10 tracking-wider">
           <Link href="/academy">查看课程</Link>
         </Button>
@@ -72,6 +74,7 @@ export function Header() {
               </Link>
             ))}
             <div className="flex flex-col gap-2 pt-4 border-t border-white/[0.06]">
+              <ThemeToggle />
               <Button asChild variant="outline" size="sm" className="font-mono text-xs border-primary/30 text-primary">
                 <Link href="/academy">查看课程</Link>
               </Button>

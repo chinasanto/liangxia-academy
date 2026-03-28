@@ -4,25 +4,24 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* QClaw Theme - Deep dark with teal accent */
-  --background: #070C12;
-  --foreground: #EDF4FA;
-  --card: #101821;
-  --card-foreground: #EDF4FA;
-  --popover: #15202B;
-  --popover-foreground: #EDF4FA;
+  --background: #FFFFFF;
+  --foreground: #10202E;
+  --card: #F7FAFD;
+  --card-foreground: #10202E;
+  --popover: #FFFFFF;
+  --popover-foreground: #10202E;
   --primary: #00E5B0;
   --primary-foreground: #060A0F;
-  --secondary: #15202B;
-  --secondary-foreground: #EDF4FA;
-  --muted: #15202B;
-  --muted-foreground: #93A9B8;
+  --secondary: #ECF3F8;
+  --secondary-foreground: #10202E;
+  --muted: #ECF3F8;
+  --muted-foreground: #5E7283;
   --accent: #00C49A;
   --accent-foreground: #060A0F;
   --destructive: #FF4D6A;
-  --destructive-foreground: #EDF4FA;
-  --border: rgba(0, 229, 176, 0.18);
-  --input: #15202B;
+  --destructive-foreground: #FFFFFF;
+  --border: rgba(16, 32, 46, 0.10);
+  --input: #FFFFFF;
   --ring: #00E5B0;
   --chart-1: #00E5B0;
   --chart-2: #9B7EFF;
@@ -30,13 +29,13 @@
   --chart-4: #FF4D6A;
   --chart-5: #4D9EFF;
   --radius: 0.5rem;
-  --sidebar: #070C12;
-  --sidebar-foreground: #EDF4FA;
+  --sidebar: #F7FAFD;
+  --sidebar-foreground: #10202E;
   --sidebar-primary: #00E5B0;
   --sidebar-primary-foreground: #060A0F;
-  --sidebar-accent: #15202B;
-  --sidebar-accent-foreground: #EDF4FA;
-  --sidebar-border: rgba(0, 229, 176, 0.18);
+  --sidebar-accent: #ECF3F8;
+  --sidebar-accent-foreground: #10202E;
+  --sidebar-border: rgba(16, 32, 46, 0.10);
   --sidebar-ring: #00E5B0;
   
   /* Service colors */
@@ -151,6 +150,32 @@
   z-index: 0;
 }
 
+.light .grid-overlay::before {
+  background-image:
+    linear-gradient(rgba(16, 32, 46, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16, 32, 46, 0.05) 1px, transparent 1px);
+}
+
+.light [class*='border-white/['] {
+  border-color: rgba(16, 32, 46, 0.10) !important;
+}
+
+.light [class*='bg-white/['] {
+  background-color: rgba(16, 32, 46, 0.03) !important;
+}
+
+.light [class*='hover:bg-white/[']:hover {
+  background-color: rgba(16, 32, 46, 0.06) !important;
+}
+
+.light [class*='text-white'] {
+  color: var(--foreground) !important;
+}
+
+.light .neon-text {
+  text-shadow: 0 0 40px rgba(0, 196, 154, 0.18), 0 0 80px rgba(0, 196, 154, 0.08);
+}
+
 /* Animations */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(20px); }
@@ -227,11 +252,11 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #060A0F;
+  background: var(--background);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 229, 176, 0.3);
+  background: rgba(0, 229, 176, 0.32);
   border-radius: 4px;
 }
 
