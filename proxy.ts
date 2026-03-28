@@ -20,6 +20,7 @@ export function proxy(request: NextRequest) {
   const isAdminLogin = pathname === '/admin/login'
   const isAdminPage = pathname.startsWith('/admin')
   const isAdminApi = pathname.startsWith('/api/admin')
+  const isAdminSessionApi = pathname === '/api/admin/session'
   const wantsDraftPreview =
     pathname.startsWith('/academy/') && searchParams.get('preview') === '1'
   const authorized = hasAdminSession(request)
@@ -28,7 +29,7 @@ export function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL('/admin', request.url))
   }
 
-  if ((isAdminPage && !isAdminLogin) || isAdminApi) {
+  if ((isAdminPage && !isAdminLogin) || (isAdminApi && !isAdminSessionApi)) {
     if (!authorized) {
       if (isAdminApi) {
         return NextResponse.json({ error: '未授权' }, { status: 401 })
