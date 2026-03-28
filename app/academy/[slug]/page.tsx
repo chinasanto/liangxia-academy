@@ -6,7 +6,6 @@ import {
   BookOpen,
   CheckCircle2,
   Clock3,
-  Layers3,
   Star,
   Users,
 } from 'lucide-react'
@@ -322,39 +321,6 @@ export default async function CourseDetailPage({
           <CourseRelatedLinks items={relatedCourses} />
 
           <CourseRelatedInsights articles={relatedInsights} />
-
-          <section className="mt-8 rounded-[28px] border border-white/[0.08] bg-card/50 p-5 sm:p-6">
-            <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-              <div className="flex items-center gap-3">
-                <div className="rounded-2xl bg-primary/15 p-3 text-primary">
-                  <Layers3 className="h-5 w-5" />
-                </div>
-                <div>
-                  <div className="text-lg font-semibold text-foreground">
-                    课程详情与主页现在已经可以自由往返
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    你可以继续回主页看其它版块，也可以回课程总览继续浏览。
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex flex-wrap gap-3">
-                <Link
-                  href="/"
-                  className="inline-flex items-center justify-center rounded-full border border-white/[0.08] px-5 py-3 text-sm font-semibold text-foreground transition hover:border-primary/35"
-                >
-                  回主页
-                </Link>
-                <Link
-                  href="/academy"
-                  className="inline-flex items-center justify-center rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition hover:opacity-90"
-                >
-                  回课程总览
-                </Link>
-              </div>
-            </div>
-          </section>
         </div>
       </div>
 

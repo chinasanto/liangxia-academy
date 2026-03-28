@@ -197,7 +197,6 @@ export function AcademyContentTabs({
               <ul className="mb-5 space-y-3 text-sm leading-6 text-foreground/78">
                 <li>基础课到高级班按能力阶梯衔接，适合系统学习。</li>
                 <li>每门课已统一重构为 6 节 × 2 小时，结构更清晰。</li>
-                <li>课程主页、详情页、主站导航都已打通。</li>
               </ul>
               <div>
                 <div className="mb-3 flex items-center gap-3 text-primary">

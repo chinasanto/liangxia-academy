@@ -47,9 +47,6 @@ export function Footer() {
                 </div>
                 <span className="text-xl font-bold neon-text">QClaw</span>
               </div>
-              <p className="text-muted-foreground mb-6 max-w-sm">
-                AI量化学院已经整合进主站，课程、技巧文章、学习路径与联系方式都能在同一套站点里完成浏览。
-              </p>
               <div className="flex items-center gap-4">
                 {socialLinks.map((social) => (
                   <Link
@@ -89,10 +86,6 @@ export function Footer() {
           <p className="text-sm text-muted-foreground">
             © 2026 AI Quant Academy. 保留所有权利。
           </p>
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-muted-foreground">核心保障：</span>
-            <span className="text-xs text-primary">课程首页、详情页与主站导航已经打通，可在不同页面间自由往返。</span>
-          </div>
         </div>
       </div>
     </footer>
