@@ -5,6 +5,8 @@ export type CourseCatalogEntry = {
   shortTitle: string
   subtitle: string
   summary: string
+  seoTitle?: string
+  seoDescription?: string
   category: string
   level: string
   badge: string
@@ -28,6 +30,7 @@ export type CourseCatalogEntry = {
   audience?: string[]
   catalogSections?: CourseCatalogSection[]
   reviews?: CourseReview[]
+  seoSections?: CourseSeoSection[]
 }
 
 export type CourseUpdatePayload = Partial<
@@ -81,6 +84,11 @@ export type CourseFaq = {
   answer: string
 }
 
+export type CourseSeoSection = {
+  title: string
+  paragraphs: string[]
+}
+
 export type CourseDetailConfig = {
   coverImage: string
   coverAlt: string
@@ -96,4 +104,7 @@ export type CourseDetailConfig = {
   audience: string[]
   catalogSections: CourseCatalogSection[]
   reviews: CourseReview[]
+  seoTitle?: string
+  seoDescription?: string
+  seoSections?: CourseSeoSection[]
 }

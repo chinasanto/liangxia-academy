@@ -215,6 +215,7 @@ export default async function CourseDetailPage({
             catalogSections={course.catalogSections ?? []}
             reviews={course.reviews ?? []}
             faqs={faqs}
+            seoSections={course.seoSections ?? []}
           />
 
           <section className="mt-8 rounded-[28px] border border-white/[0.08] bg-card/50 p-6">

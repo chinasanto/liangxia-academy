@@ -2,6 +2,7 @@ import type {
   CourseCatalogSection,
   CourseDetailConfig,
   CourseInstructor,
+  CourseSeoSection,
 } from '@/lib/course-types'
 
 const zouTeacher: CourseInstructor = {
@@ -32,6 +33,16 @@ function makeSection(
   }
 }
 
+function makeSeoSection(
+  title: string,
+  paragraphs: string[],
+): CourseSeoSection {
+  return {
+    title,
+    paragraphs,
+  }
+}
+
 export const courseDetailsBySlug: Record<string, CourseDetailConfig> = {
   'ai-quant-basic': {
     coverImage: '/course-covers/ai-quant-basic.jpg',
@@ -42,6 +53,9 @@ export const courseDetailsBySlug: Record<string, CourseDetailConfig> = {
     studentCount: '2120',
     duration: '12小时',
     lessonCount: '6节',
+    seoTitle: 'AI量化基础课程班 | AI量化入门、量化交易基础与因子工程基础',
+    seoDescription:
+      'AI量化基础课程班适合零基础或转岗学习者，系统讲解量化数据处理、机器学习、24因子体系、XGBoost策略与CTA执行流程，帮助建立完整的 AI量化交易入门框架。',
     instructor: zouTeacher,
     highlights: [
       '围绕数据工程、机器学习、因子体系和 CTA 执行系统搭建完整入门闭环',
@@ -92,6 +106,16 @@ export const courseDetailsBySlug: Record<string, CourseDetailConfig> = {
         '模型输出如何对接到真实交易系统',
       ]),
     ],
+    seoSections: [
+      makeSeoSection('为什么这门课适合作为 AI量化入门第一站', [
+        '如果你正在找一门真正覆盖 AI量化入门、量化交易基础和因子工程基础的课程，这门课的价值在于把数据、因子、模型和执行系统放到同一条学习主线上。很多课程只讲回测、只讲指标，或者只讲机器学习模型，但真正落地的量化研发必须把这些模块串起来。',
+        '这门课会从行情数据清洗、EDA、机器学习评价、24 因子体系到 CTA 执行流程逐步展开，尤其适合刚接触 AI量化课程、想建立完整研究框架的人。对于程序员、数据分析师或金融背景学习者来说，这样的入门路径更容易形成长期可复用的方法论。',
+      ]),
+      makeSeoSection('学完 AI量化基础课程班后能解决什么问题', [
+        '完成这门课后，你会更清楚量化交易系统为什么不能只靠单个因子或单个模型驱动，而需要一套包含特征工程、信号生成、策略回测和实盘对接的整体架构。这种理解对后续学习因子工程、高级评估体系或全流程高级班都非常关键。',
+        '从搜索需求上看，很多人关心“量化交易怎么入门”“AI量化课程是否适合零基础”“因子工程之前要学什么”。这门课本身就是围绕这些问题设计的，定位清晰，适合作为后续进阶课程的前置基础。',
+      ]),
+    ],
     reviews: [
       {
         name: '陈同学',
@@ -114,6 +138,9 @@ export const courseDetailsBySlug: Record<string, CourseDetailConfig> = {
     studentCount: '645',
     duration: '12小时',
     lessonCount: '6节',
+    seoTitle: '因子工程设计卓越班 | 因子工程课程、Alpha因子设计与AI特征衍生',
+    seoDescription:
+      '因子工程设计卓越班围绕 Alpha 因子设计、AI 特征衍生、CTA 与 Crypto 场景建模展开，适合已经具备基础量化认知、希望系统提升因子工程能力的学习者。',
     instructor: zouTeacher,
     highlights: [
       '围绕因子设计、AI 特征衍生、另类市场与 CTA/Crypto 全流程建模展开',
@@ -164,6 +191,16 @@ export const courseDetailsBySlug: Record<string, CourseDetailConfig> = {
         'CRYPTO 交易策略实盘模拟与评估',
       ]),
     ],
+    seoSections: [
+      makeSeoSection('这门因子工程课程重点解决什么问题', [
+        '很多学习者在进入量化研究后，会发现自己能写指标、能跑回测，但很难持续稳定地产出高质量因子。因子工程设计卓越班的重点，就是把“想到一个指标”升级为“构建一个可扩展、可评估、可复用的 Alpha 因子体系”。',
+        '课程会覆盖 AI 特征衍生、时序与横截面算子、另类市场因子设计，以及 CTA 和 Crypto 两类典型场景。对于想认真做因子工程、系统理解 Alpha 设计逻辑的人来说，这门课比单纯学技术指标更接近真实量化研究工作流。',
+      ]),
+      makeSeoSection('适合哪些想提升因子研究能力的人', [
+        '如果你已经完成量化基础学习，或者已经在做一些简单的多因子回测，那么这门课会帮助你从“会搭研究脚本”进入“会搭研究框架”的阶段。特别是对因子研究员、CTA 策略开发者和数字资产研究者来说，课程中的 AI 特征衍生和 Transformer 视角会比较有启发。',
+        '从搜索意图看，用户常搜索“因子工程课程”“Alpha 因子设计怎么学”“AI 因子工程实战”。这门课正面对应这些需求，既讲设计原理，也讲代码与场景落地，页面内容也会更准确反映这门课的实际定位。',
+      ]),
+    ],
     reviews: [
       {
         name: 'Leo',
@@ -186,6 +223,9 @@ export const courseDetailsBySlug: Record<string, CourseDetailConfig> = {
     studentCount: '523',
     duration: '12小时',
     lessonCount: '6节',
+    seoTitle: '因子工程科学评估大乘班 | 因子评估、统计过拟合与因子工厂体系',
+    seoDescription:
+      '因子工程科学评估大乘班聚焦统计过拟合、Bootstrap/PBO、因子生命周期、元因子预测与动态组合，适合需要搭建机构级因子评估体系和因子工厂框架的高级学员。',
     instructor: zouTeacher,
     highlights: [
       '课程核心是把因子研发从“看曲线”升级到“看概率”，再升级为可运营资产',
@@ -236,6 +276,16 @@ export const courseDetailsBySlug: Record<string, CourseDetailConfig> = {
         '形成评价、预测、生产、筛选、组合的一体化闭环',
       ]),
     ],
+    seoSections: [
+      makeSeoSection('为什么高级因子工程要从评估体系开始升级', [
+        '很多高级量化研究卡在一个问题上：能做出不少候选因子，却无法稳定判断哪些因子真的具备未来价值。因子工程科学评估大乘班不是继续教你“多造几个因子”，而是帮助你建立一套判断因子是否值得继续持有、组合和运营的科学评估体系。',
+        '课程会把统计过拟合、Bootstrap、PBO、准入系统、生命周期管理和元因子预测放进同一个框架里。对于想搭建机构级因子工厂的人来说，这些内容比单一回测结果更重要，因为它们直接关系到因子生产质量和未来稳定性。',
+      ]),
+      makeSeoSection('这门课更适合什么阶段的量化研究者', [
+        '如果你已经有一定因子研究经验，能理解回测、横截面因子、多空组合和基础评价指标，那么这门课会把你从研究执行者推向系统设计者。你不再只看收益曲线，而是学会用概率、统计和体系化流程去管理因子资产。',
+        '搜索“因子评估课程”“统计过拟合 量化”“因子工厂怎么搭建”的用户，通常已经不是零基础。这个页面新增的课程解读也会更明确告诉搜索引擎和学习者，这是一门偏架构、偏体系、偏高级评估的高阶课程。',
+      ]),
+    ],
     reviews: [
       {
         name: '钱同学',
@@ -258,6 +308,9 @@ export const courseDetailsBySlug: Record<string, CourseDetailConfig> = {
     studentCount: '856',
     duration: '12小时',
     lessonCount: '6节',
+    seoTitle: 'AI量化全流程高级班 | 模型调优、风控、自动化部署与量化交易系统',
+    seoDescription:
+      'AI量化全流程高级班围绕模型调优、动态风控、自动化部署、Crypto 时序建模和 AI 增强策略展开，适合希望从回测研究走向生产级量化交易系统的人。',
     instructor: zouTeacher,
     highlights: [
       '围绕目标设定、模型调优、动态风控、自动部署和 AI 增强形成全流程闭环',
@@ -308,6 +361,16 @@ export const courseDetailsBySlug: Record<string, CourseDetailConfig> = {
         '输出可复用的 AI 增强型策略库',
       ]),
     ],
+    seoSections: [
+      makeSeoSection('为什么这门课更接近生产级量化交易系统', [
+        'AI量化全流程高级班不是只讨论“模型怎么训练”，而是把目标设定、模型调优、风险控制、增量学习、自动化部署和传统策略增强放在同一个闭环里。对于真正准备做实盘迁移的人来说，这些模块必须同时成立，策略才能稳定运行。',
+        '课程里会覆盖时间序列交叉验证、过拟合控制、止盈止损设计、Concept Drift、自动化交易脚本和 Crypto 场景建模。这些内容能帮助学习者从“会做回测”逐步过渡到“会搭一个可维护的量化交易系统”。',
+      ]),
+      makeSeoSection('适合哪些准备从研究走向执行的人', [
+        '如果你已经懂基础回测，也写过一些机器学习策略，但还不清楚如何做模型调优、如何处理线上风控、如何做自动部署，那么这门课会非常贴合你的当前阶段。它特别适合量化开发进阶者、策略团队成员和希望建立生产流程的人。',
+        '从搜索层面看，“AI量化全流程课程”“量化交易系统搭建”“机器学习策略自动化部署”都是非常明确的需求。这门课的 SEO 文案升级后，会更清晰地让用户和搜索引擎知道它是一门面向闭环落地的高级课程。',
+      ]),
+    ],
     reviews: [
       {
         name: 'Kevin',
@@ -330,6 +393,9 @@ export const courseDetailsBySlug: Record<string, CourseDetailConfig> = {
     studentCount: '980',
     duration: '12小时',
     lessonCount: '6节',
+    seoTitle: 'WorldQuant Brain 实战与求职课 | Alpha挖掘、平台实战与量化求职',
+    seoDescription:
+      'WorldQuant Brain 实战与求职课聚焦 WorldQuant Brain 平台实战、Alpha 自动化挖掘、策略优化与量化求职表达，适合想做平台专项提升和作品集积累的学习者。',
     instructor: zouTeacher,
     highlights: [
       '专项聚焦 WorldQuant Brain 平台，直接围绕自动化挖掘、Alpha 优化与求职指导展开',
@@ -380,6 +446,16 @@ export const courseDetailsBySlug: Record<string, CourseDetailConfig> = {
         '形成面向求职和升学的系统表达模板',
       ]),
     ],
+    seoSections: [
+      makeSeoSection('这门 WorldQuant Brain 课程为什么更偏专项提升', [
+        '如果你已经听说过 WorldQuant Brain，但还没有系统理解平台数据、Valid Alpha、自动化挖掘和 Alpha 优化方法，这门课会是非常直接的专项入口。它不走泛泛而谈的量化入门路线，而是围绕 WorldQuant Brain 平台本身展开训练。',
+        '课程内容包括平台数据源理解、自动化程序、Alpha Machine、优化方法、机器学习 Demo 以及求职升学辅导。对于想在平台上快速形成研究成果或作品集的人来说，这种“专项聚焦 + 实战输出”的课程结构会更有效率。',
+      ]),
+      makeSeoSection('适合哪些想做平台项目与求职准备的人', [
+        '这门课特别适合希望提升量化求职竞争力的学生、已经在尝试 Brain 表达式的人，以及需要集中提升 Alpha 挖掘效率的研究者。课程不仅帮助你提升平台实战能力，也会帮助你把这些能力转化成更好的项目表达和求职表达。',
+        '很多用户会搜索“WorldQuant Brain课程”“Alpha 自动化挖掘”“量化求职课程”。新增的课程解读文案会更直观地回应这些问题，让课程页不只是展示目录，而是真正说明这门课在 Brain 平台学习路径里的位置。',
+      ]),
+    ],
     reviews: [
       {
         name: 'Iris',
@@ -402,6 +478,9 @@ export const courseDetailsBySlug: Record<string, CourseDetailConfig> = {
     studentCount: '186',
     duration: '12小时',
     lessonCount: '6节',
+    seoTitle: 'AI大模型辅助量化编程 | Codex、ChatGPT量化开发与研报转策略',
+    seoDescription:
+      'AI大模型辅助量化编程课程围绕 Codex、ChatGPT 5.4、因子代码孵化、PDF研报转策略、向量化改写与量化交易系统搭建展开，适合需要提升量化研发效率的研究员与开发者。',
     instructor: zouTeacher,
     highlights: [
       '围绕 Codex 与 ChatGPT 5.4 设计量化研发提效工作流，不只讲工具，更讲协作方法。',
@@ -450,6 +529,16 @@ export const courseDetailsBySlug: Record<string, CourseDetailConfig> = {
         'Prompt 版本管理、上下文管理与结果审计',
         '如何用 AI 做代码评审、Bug 排查与测试补齐',
         '团队级 AI 编程规范与提效闭环落地',
+      ]),
+    ],
+    seoSections: [
+      makeSeoSection('为什么 AI 大模型会改变量化研发效率', [
+        'AI大模型辅助量化编程这门课的核心，不是把 Codex 或 ChatGPT 当成一次性问答工具，而是把它们放进真实的量化研发流程。课程会讲清楚如何把需求拆成 Prompt、如何组织上下文、如何让模型输出更可测的因子代码，以及如何把结果纳入团队协作规范。',
+        '对于量化研究和开发来说，最耗时间的往往不是单次写代码，而是从想法到验证之间的往返。课程中的因子代码孵化、PDF 研报转策略逻辑、向量化改写和系统模块生成，正是围绕这些高频痛点设计的。',
+      ]),
+      makeSeoSection('这门课适合哪些想用 Codex 和 ChatGPT 做量化开发的人', [
+        '如果你已经在写 Python、做回测、做特征工程，或者团队里已经开始尝试用大模型辅助开发，那么这门课会帮助你把零散的工具使用升级为稳定的工作流。它尤其适合量化开发工程师、策略研究员和需要快速把研报转为策略框架的团队。',
+        '从搜索需求看，用户会直接搜“Codex 量化编程”“ChatGPT 写因子代码”“PDF 研报转量化策略”“AI 量化开发提效”。这门课新增的 SEO 文案，会更清晰地覆盖这些关键词，同时保持页面内容和课程真实价值一致。',
       ]),
     ],
     reviews: [

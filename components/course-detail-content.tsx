@@ -12,6 +12,7 @@ import type {
   CourseCatalogSection,
   CourseFaq,
   CourseReview,
+  CourseSeoSection,
 } from '@/lib/course-types'
 
 type CourseDetailContentProps = {
@@ -21,6 +22,7 @@ type CourseDetailContentProps = {
   catalogSections: CourseCatalogSection[]
   reviews: CourseReview[]
   faqs: CourseFaq[]
+  seoSections: CourseSeoSection[]
 }
 
 export function CourseDetailContent({
@@ -30,6 +32,7 @@ export function CourseDetailContent({
   catalogSections,
   reviews,
   faqs,
+  seoSections,
 }: CourseDetailContentProps) {
   return (
     <div className="space-y-8">
@@ -37,6 +40,7 @@ export function CourseDetailContent({
         <div className="flex flex-wrap gap-2">
           {[
             { href: '#course-overview', label: '课程介绍' },
+            { href: '#course-insight', label: '课程解读' },
             { href: '#course-catalog', label: '课程目录' },
             { href: '#course-reviews', label: '学员评价' },
             { href: '#course-faq', label: '常见问题' },
@@ -48,6 +52,36 @@ export function CourseDetailContent({
             >
               {item.label}
             </a>
+          ))}
+        </div>
+      </section>
+
+      <section
+        id="course-insight"
+        className="scroll-mt-24 rounded-[28px] border border-white/[0.08] bg-card/55 p-8"
+      >
+        <div className="mb-6">
+          <h2 className="text-2xl font-bold text-foreground">课程解读</h2>
+          <p className="mt-2 text-sm text-muted-foreground">
+            这部分会更直接回答学习目标、课程定位和能力收益，帮助你更快判断这门课是否适合当前阶段。
+          </p>
+        </div>
+
+        <div className="grid gap-5 lg:grid-cols-2">
+          {seoSections.map((section) => (
+            <article
+              key={section.title}
+              className="rounded-[24px] border border-white/[0.08] bg-background/75 p-6"
+            >
+              <h3 className="mb-4 text-lg font-semibold text-foreground">
+                {section.title}
+              </h3>
+              <div className="space-y-4 text-sm leading-7 text-foreground/85">
+                {section.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+            </article>
           ))}
         </div>
       </section>

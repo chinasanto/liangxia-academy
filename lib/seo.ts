@@ -93,8 +93,11 @@ export function buildAcademyMetadata(): Metadata {
 }
 
 export function buildCourseMetadata(course: CourseCatalogEntry): Metadata {
-  const title = `${course.shortTitle} | ${course.category} | AI量化学院`
-  const description = `${course.shortTitle}：${course.subtitle}。${course.summary} 课程时长${course.duration ?? ''}，共${course.lessonCount ?? ''}，由${course.instructor?.name ?? 'AI量化讲师'}授课。`
+  const title =
+    course.seoTitle ?? `${course.shortTitle} | ${course.category} | AI量化学院`
+  const description =
+    course.seoDescription ??
+    `${course.shortTitle}：${course.subtitle}。${course.summary} 课程时长${course.duration ?? ''}，共${course.lessonCount ?? ''}，由${course.instructor?.name ?? 'AI量化讲师'}授课。`
   const keywords = dedupeKeywords([
     course.shortTitle,
     course.title,
