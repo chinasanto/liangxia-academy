@@ -15,9 +15,11 @@ import {
 import { AcademyShellHeader } from '@/components/academy-shell-header'
 import { CourseDetailContent } from '@/components/course-detail-content'
 import { Footer } from '@/components/footer'
+import { JsonLd } from '@/components/json-ld'
 import { Button } from '@/components/ui/button'
 import { getCourseBySlug } from '@/lib/course-store'
 import { buildCourseMetadata } from '@/lib/seo'
+import { buildCourseDetailJsonLd } from '@/lib/structured-data'
 
 type CourseDetailPageProps = {
   params: Promise<{ slug: string }>
@@ -58,6 +60,7 @@ export default async function CourseDetailPage({
 
   return (
     <main className="min-h-screen bg-background">
+      <JsonLd data={buildCourseDetailJsonLd(course)} />
       <AcademyShellHeader backHref="/academy" backLabel="返回课程列表" />
 
       <div className="px-6 pb-20 pt-8 lg:px-12">

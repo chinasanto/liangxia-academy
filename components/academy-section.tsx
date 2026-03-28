@@ -3,10 +3,15 @@ import { BookOpen, GraduationCap, Sparkles } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { CourseCard } from '@/components/course-card'
+import type { CourseCatalogEntry } from '@/lib/course-types'
 import { getPublishedCourses } from '@/lib/course-store'
 
-export async function AcademySection() {
-  const courses = await getPublishedCourses()
+type AcademySectionProps = {
+  courses?: CourseCatalogEntry[]
+}
+
+export async function AcademySection({ courses: initialCourses }: AcademySectionProps) {
+  const courses = initialCourses ?? (await getPublishedCourses())
   const featuredCourses = courses.filter((course) => course.featured)
 
   return (

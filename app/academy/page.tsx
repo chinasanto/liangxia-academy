@@ -5,8 +5,10 @@ import { Layers3 } from 'lucide-react'
 import { AcademyContentTabs } from '@/components/academy-content-tabs'
 import { AcademyShellHeader } from '@/components/academy-shell-header'
 import { Footer } from '@/components/footer'
+import { JsonLd } from '@/components/json-ld'
 import { getPublishedCourses } from '@/lib/course-store'
 import { buildAcademyMetadata } from '@/lib/seo'
+import { buildAcademyJsonLd } from '@/lib/structured-data'
 
 export const dynamic = 'force-dynamic'
 export const metadata: Metadata = buildAcademyMetadata()
@@ -17,6 +19,7 @@ export default async function AcademyPage() {
 
   return (
     <main className="min-h-screen bg-background">
+      <JsonLd data={buildAcademyJsonLd(courses)} />
       <AcademyShellHeader />
 
       <div className="px-6 pb-20 pt-8 lg:px-12">
