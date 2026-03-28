@@ -207,6 +207,57 @@ export default async function CourseDetailPage({
                   {course.instructor?.description}
                 </p>
 
+                <div className="mt-6 grid gap-3 sm:grid-cols-3">
+                  {[
+                    {
+                      label: '教学侧重',
+                      value: '实战闭环',
+                      description: '强调从研究、回测到部署的完整链路，而不是只停留在理论讲解。',
+                    },
+                    {
+                      label: '课程风格',
+                      value: '可落地',
+                      description: '重点讲清怎么做、为什么这样做，以及如何迁移到自己的系统里。',
+                    },
+                    {
+                      label: '交付结果',
+                      value: '可复用',
+                      description: '帮助学员沉淀可复盘、可扩展、可持续升级的量化研发框架。',
+                    },
+                  ].map((item) => (
+                    <div
+                      key={item.label}
+                      className="rounded-[20px] border border-white/[0.08] bg-background/70 p-4"
+                    >
+                      <div className="text-xs font-semibold tracking-[0.12em] text-primary">
+                        {item.label}
+                      </div>
+                      <div className="mt-2 text-lg font-semibold text-foreground">
+                        {item.value}
+                      </div>
+                      <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                        {item.description}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-6 rounded-[22px] border border-white/[0.08] bg-background/72 p-5">
+                  <div className="mb-3 text-base font-semibold text-foreground">为什么由邹老师来讲这门课</div>
+                  <ul className="space-y-3">
+                    {[
+                      '长期聚焦 AI 量化交易、因子工程与 WorldQuant Brain 方向，兼顾研究深度与实战落地。',
+                      '既讲课程知识点，也讲真实研发中的取舍逻辑、系统搭建方式和常见误区。',
+                      '课程目标不是只学完目录，而是帮助学员建立一套可复制的量化研发方法。 ',
+                    ].map((item) => (
+                      <li key={item} className="flex items-start gap-3 text-sm leading-7 text-foreground/88">
+                        <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
                 <div className="mt-6">
                   <div className="mb-4 text-lg font-semibold text-foreground">本课重点</div>
                   <ul className="space-y-3">
