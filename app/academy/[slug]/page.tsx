@@ -17,6 +17,7 @@ import { CourseDetailContent } from '@/components/course-detail-content'
 import { Footer } from '@/components/footer'
 import { Button } from '@/components/ui/button'
 import { getCourseBySlug } from '@/lib/course-store'
+import { buildCourseMetadata } from '@/lib/seo'
 
 type CourseDetailPageProps = {
   params: Promise<{ slug: string }>
@@ -39,10 +40,7 @@ export async function generateMetadata({
     }
   }
 
-  return {
-    title: `${course.shortTitle} | AI量化学院`,
-    description: course.summary,
-  }
+  return buildCourseMetadata(course)
 }
 
 export default async function CourseDetailPage({

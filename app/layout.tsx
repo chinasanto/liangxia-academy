@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Noto_Sans_SC, Noto_Serif_SC, Space_Mono } from 'next/font/google'
 import { WechatFloat } from '@/components/wechat-float'
+import { HOME_KEYWORDS, SITE_NAME, SITE_URL } from '@/lib/seo'
 import './globals.css'
 
 const notoSans = Noto_Sans_SC({ 
@@ -22,9 +23,30 @@ const spaceMono = Space_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'AI量化学院 | AI量化课程平台',
-  description: 'AI量化学院课程平台，支持课程展示、课程详情和本地文件型后台上架管理。',
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: `${SITE_NAME} | AI量化课程平台`,
+    template: `%s`,
+  },
+  description: 'AI量化学院课程平台，支持 AI量化课程展示、课程详情、因子工程学习与量化研发进阶。',
+  keywords: HOME_KEYWORDS,
+  applicationName: SITE_NAME,
   generator: 'v0.app',
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    siteName: SITE_NAME,
+    locale: 'zh_CN',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   icons: {
     icon: [
       {

@@ -1,12 +1,15 @@
 import Link from 'next/link'
+import type { Metadata } from 'next'
 import { Layers3 } from 'lucide-react'
 
 import { AcademyContentTabs } from '@/components/academy-content-tabs'
 import { AcademyShellHeader } from '@/components/academy-shell-header'
 import { Footer } from '@/components/footer'
 import { getPublishedCourses } from '@/lib/course-store'
+import { buildAcademyMetadata } from '@/lib/seo'
 
 export const dynamic = 'force-dynamic'
+export const metadata: Metadata = buildAcademyMetadata()
 
 export default async function AcademyPage() {
   const courses = await getPublishedCourses()

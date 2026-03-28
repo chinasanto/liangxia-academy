@@ -1,3 +1,5 @@
+import type { Metadata } from 'next'
+
 import { Header } from "@/components/header"
 import { HeroSection } from "@/components/hero-section"
 import { AdoptionSection } from "@/components/adoption-section"
@@ -6,8 +8,10 @@ import { CustomLobsterSection } from "@/components/custom-lobster-section"
 import { ProductsSection } from "@/components/products-section"
 import { ExchangeSection } from "@/components/exchange-section"
 import { Footer } from "@/components/footer"
+import { buildHomeMetadata } from '@/lib/seo'
 
 export const dynamic = 'force-dynamic'
+export const metadata: Metadata = buildHomeMetadata()
 
 export default async function Home() {
   return (
