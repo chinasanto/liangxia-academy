@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 import type { CourseCatalogEntry } from '@/lib/course-types'
+import type { InsightArticle } from '@/lib/insight-types'
 
 export const SITE_NAME = 'AI量化学院'
 export const SITE_URL = 'https://www.aiquantclaw.com'
@@ -16,6 +17,8 @@ export const HOME_KEYWORDS = [
   '量化学习路径',
   'AI量化基础课',
   '量化全流程课程',
+  '量化技巧文章',
+  '因子工程技巧',
 ]
 
 export const ACADEMY_KEYWORDS = [
@@ -26,6 +29,15 @@ export const ACADEMY_KEYWORDS = [
   'AI量化全流程高级班',
   'WorldQuant Brain实战课',
   'AI大模型辅助量化编程',
+  '量化技巧',
+]
+
+export const INSIGHTS_KEYWORDS = [
+  '量化技巧',
+  '因子工程文章',
+  '量化研发效率',
+  '量化工程方法',
+  'WorldQuant Brain技巧',
 ]
 
 function dedupeKeywords(items: string[]) {
@@ -83,6 +95,61 @@ export function buildAcademyMetadata(): Metadata {
       siteName: SITE_NAME,
       locale: 'zh_CN',
       type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+    },
+  }
+}
+
+export function buildInsightsMetadata(): Metadata {
+  const title = '量化技巧 | 因子工程、AI量化开发与量化研究方法'
+  const description =
+    '量化技巧模块沉淀因子工程、量化研究、AI 编程提效、WorldQuant Brain 与生产部署中的方法文章，帮助学习者在课程之外持续提升。'
+
+  return {
+    title,
+    description,
+    keywords: INSIGHTS_KEYWORDS,
+    alternates: {
+      canonical: '/insights',
+    },
+    openGraph: {
+      title,
+      description,
+      url: absoluteUrl('/insights'),
+      siteName: SITE_NAME,
+      locale: 'zh_CN',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+    },
+  }
+}
+
+export function buildInsightMetadata(article: InsightArticle): Metadata {
+  const title = `${article.title} | 量化技巧 | AI量化学院`
+  const description = article.description
+
+  return {
+    title,
+    description,
+    keywords: Array.from(new Set([...article.tags, article.category, '量化技巧', 'AI量化学院'])),
+    alternates: {
+      canonical: `/insights/${article.slug}`,
+    },
+    openGraph: {
+      title,
+      description,
+      url: absoluteUrl(`/insights/${article.slug}`),
+      siteName: SITE_NAME,
+      locale: 'zh_CN',
+      type: 'article',
     },
     twitter: {
       card: 'summary_large_image',

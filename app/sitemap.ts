@@ -1,10 +1,11 @@
 import type { MetadataRoute } from 'next'
 
 import { getAllCourses } from '@/lib/course-store'
+import { getAllInsights } from '@/lib/insight-store'
 import { absoluteUrl } from '@/lib/seo'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const courses = await getAllCourses()
+  const [courses, insights] = await Promise.all([getAllCourses(), getAllInsights()])
   const now = new Date()
 
   const staticPages: MetadataRoute.Sitemap = [
@@ -26,6 +27,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'weekly',
       priority: 0.8,
     },
+    {
+      url: absoluteUrl('/insights'),
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
   ]
 
   const coursePages: MetadataRoute.Sitemap = courses.map((course) => ({
@@ -35,5 +42,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }))
 
-  return [...staticPages, ...coursePages]
+  const insightPages: MetadataRoute.Sitemap = insights.map((article) => ({
+    url: absoluteUrl(`/insights/${article.slug}`),
+    lastModified: new Date(article.publishedAt),
+    changeFrequency: 'monthly',
+    priority: 0.7,
+  }))
+
+  return [...staticPages, ...coursePages, ...insightPages]
 }

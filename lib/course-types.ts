@@ -101,6 +101,13 @@ export type CourseRecommendation = {
   course: CourseCatalogEntry
 }
 
+export type CourseCaseStudy = {
+  title: string
+  scenario: string
+  approach: string
+  outcome: string
+}
+
 export type CourseDetailConfig = {
   coverImage: string
   coverAlt: string
@@ -119,4 +126,5 @@ export type CourseDetailConfig = {
   seoTitle?: string
   seoDescription?: string
   seoSections?: CourseSeoSection[]
+  caseStudies?: CourseCaseStudy[]
 }

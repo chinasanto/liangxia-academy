@@ -13,8 +13,11 @@ import {
 } from 'lucide-react'
 
 import { AcademyShellHeader } from '@/components/academy-shell-header'
+import { CourseCaseStudies } from '@/components/course-case-studies'
+import { CourseConsultCta } from '@/components/course-consult-cta'
 import { CourseDetailContent } from '@/components/course-detail-content'
 import { CoursePathNav } from '@/components/course-path-nav'
+import { CourseRelatedInsights } from '@/components/course-related-insights'
 import { CourseRelatedLinks } from '@/components/course-related-links'
 import { Footer } from '@/components/footer'
 import { JsonLd } from '@/components/json-ld'
@@ -24,6 +27,7 @@ import { buildCourseFaqs } from '@/lib/course-faq'
 import { buildCoursePositioning } from '@/lib/course-positioning'
 import { buildCourseRecommendations } from '@/lib/course-recommendations'
 import { getAllCourses, getCourseBySlug } from '@/lib/course-store'
+import { getInsightsForCourse } from '@/lib/insight-store'
 import { buildCourseMetadata } from '@/lib/seo'
 import { buildCourseDetailJsonLd } from '@/lib/structured-data'
 
@@ -71,6 +75,7 @@ export default async function CourseDetailPage({
   const positioning = buildCoursePositioning(course)
   const relatedCourses = buildCourseRecommendations(course, allCourses)
   const pathNavigation = buildCoursePathNavigation(course, allCourses)
+  const relatedInsights = await getInsightsForCourse(course, 2)
 
   return (
     <main className="min-h-screen bg-background">
@@ -219,6 +224,8 @@ export default async function CourseDetailPage({
             </div>
           </section>
 
+          <CourseConsultCta courseTitle={course.shortTitle} />
+
           <CoursePathNav
             previous={pathNavigation.previous}
             next={pathNavigation.next}
@@ -234,9 +241,14 @@ export default async function CourseDetailPage({
             faqs={faqs}
             seoSections={course.seoSections ?? []}
             positioning={positioning}
+            hasCaseStudies={(course.caseStudies ?? []).length > 0}
           />
 
+          <CourseCaseStudies items={course.caseStudies ?? []} />
+
           <CourseRelatedLinks items={relatedCourses} />
+
+          <CourseRelatedInsights articles={relatedInsights} />
 
           <section className="mt-8 rounded-[28px] border border-white/[0.08] bg-card/50 p-6">
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">

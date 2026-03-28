@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { BookOpen, GraduationCap, Sparkles } from 'lucide-react'
+import { BookOpen, BookText, GraduationCap, Sparkles } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { CourseCard } from '@/components/course-card'
@@ -57,11 +57,37 @@ export async function AcademySection({ courses: initialCourses }: AcademySection
           ))}
         </div>
 
+        <div className="mt-8 flex flex-wrap gap-3">
+          {[
+            { label: '零基础入门', href: '/academy?level=入门' },
+            { label: '因子工程方向', href: '/academy?category=因子工程' },
+            { label: '工具提效方向', href: '/academy?category=工具提效' },
+          ].map((item) => (
+            <Link
+              key={item.label}
+              href={item.href}
+              className="rounded-full border border-white/[0.08] bg-background/70 px-4 py-2 text-sm font-medium text-foreground transition hover:border-primary/30 hover:text-primary"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </div>
+
         <div className="mt-10 flex flex-col gap-3 sm:flex-row">
           <Button asChild className="font-mono text-xs">
             <Link href="/academy">
               浏览全部课程
               <GraduationCap className="h-4 w-4" />
+            </Link>
+          </Button>
+          <Button
+            asChild
+            variant="outline"
+            className="font-mono text-xs border-primary/30 text-primary hover:bg-primary/10"
+          >
+            <Link href="/insights">
+              查看量化技巧
+              <BookText className="h-4 w-4" />
             </Link>
           </Button>
         </div>

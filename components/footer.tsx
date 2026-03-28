@@ -12,6 +12,7 @@ const footerLinks = {
   ],
   资源: [
     { name: "课程中心", href: "/academy" },
+    { name: "量化技巧文章", href: "/insights" },
     { name: "返回首页", href: "/" },
     { name: "帮助中心", href: "#" },
     { name: "路线图", href: "#" },
@@ -47,7 +48,7 @@ export function Footer() {
                 <span className="text-xl font-bold neon-text">QClaw</span>
               </div>
               <p className="text-muted-foreground mb-6 max-w-sm">
-                AI量化学院已经整合进主站，课程首页、详情页与联系方式都能在同一套站点里完成浏览。
+                AI量化学院已经整合进主站，课程、技巧文章、学习路径与联系方式都能在同一套站点里完成浏览。
               </p>
               <div className="flex items-center gap-4">
                 {socialLinks.map((social) => (

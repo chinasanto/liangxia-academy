@@ -1,21 +1,78 @@
 'use client'
 
-import { GraduationCap, House, Map, Target } from 'lucide-react'
+import { useState } from 'react'
+import Link from 'next/link'
+import {
+  BookText,
+  GraduationCap,
+  House,
+  Map,
+  Search,
+  SlidersHorizontal,
+  Target,
+} from 'lucide-react'
 
+import { AcademyComparisonTable } from '@/components/academy-comparison-table'
 import { CourseCard } from '@/components/course-card'
+import { InsightsSection } from '@/components/insights-section'
 import { LearningRoadmap } from '@/components/learning-roadmap'
+import { Input } from '@/components/ui/input'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import type { CourseCatalogEntry } from '@/lib/course-types'
+import type { InsightArticle } from '@/lib/insight-types'
 
 type AcademyContentTabsProps = {
   courses: CourseCatalogEntry[]
   featuredCount: number
+  featuredInsights: InsightArticle[]
+  initialFilters?: {
+    level?: string
+    category?: string
+    search?: string
+  }
 }
 
 export function AcademyContentTabs({
   courses,
   featuredCount,
+  featuredInsights,
+  initialFilters,
 }: AcademyContentTabsProps) {
+  const [search, setSearch] = useState(initialFilters?.search ?? '')
+  const [selectedLevel, setSelectedLevel] = useState(
+    initialFilters?.level ?? '全部',
+  )
+  const [selectedCategory, setSelectedCategory] = useState(
+    initialFilters?.category ?? '全部',
+  )
+
+  const levels = ['全部', ...Array.from(new Set(courses.map((course) => course.level)))]
+  const categories = [
+    '全部',
+    ...Array.from(new Set(courses.map((course) => course.category))),
+  ]
+  const normalizedSearch = search.trim().toLowerCase()
+
+  const filteredCourses = courses.filter((course) => {
+    const matchLevel = selectedLevel === '全部' || course.level === selectedLevel
+    const matchCategory =
+      selectedCategory === '全部' || course.category === selectedCategory
+    const matchSearch =
+      normalizedSearch.length === 0 ||
+      [
+        course.shortTitle,
+        course.title,
+        course.subtitle,
+        course.summary,
+        ...(course.tags ?? []),
+      ]
+        .join(' ')
+        .toLowerCase()
+        .includes(normalizedSearch)
+
+    return matchLevel && matchCategory && matchSearch
+  })
+
   return (
     <Tabs defaultValue="home" className="mb-12">
       <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
@@ -154,17 +211,109 @@ export function AcademyContentTabs({
             </div>
           </div>
 
+          <AcademyComparisonTable courses={courses} />
+
           <section className="mt-10">
-            <div className="mb-6">
+            <div className="mb-6 flex flex-col gap-5 rounded-[24px] border border-white/[0.08] bg-background/72 p-5">
+              <div className="flex items-center gap-3 text-primary">
+                <SlidersHorizontal className="h-5 w-5" />
+                <span className="text-sm font-semibold">课程筛选</span>
+              </div>
+
+              <div className="grid gap-4 lg:grid-cols-[1.2fr_0.8fr_0.8fr]">
+                <div>
+                  <label className="mb-2 block text-xs font-semibold tracking-[0.12em] text-muted-foreground">
+                    搜索关键词
+                  </label>
+                  <div className="relative">
+                    <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                    <Input
+                      value={search}
+                      onChange={(event) => setSearch(event.target.value)}
+                      placeholder="搜索课程名、方向或关键词"
+                      className="border-white/[0.08] bg-card pl-10 text-foreground"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="mb-2 block text-xs font-semibold tracking-[0.12em] text-muted-foreground">
+                    学习阶段
+                  </label>
+                  <div className="flex flex-wrap gap-2">
+                    {levels.map((level) => (
+                      <button
+                        key={level}
+                        type="button"
+                        onClick={() => setSelectedLevel(level)}
+                        className={`rounded-full px-3 py-2 text-xs font-semibold transition ${
+                          selectedLevel === level
+                            ? 'bg-primary text-primary-foreground'
+                            : 'bg-card text-muted-foreground hover:text-foreground'
+                        }`}
+                      >
+                        {level}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <label className="mb-2 block text-xs font-semibold tracking-[0.12em] text-muted-foreground">
+                    课程方向
+                  </label>
+                  <div className="flex flex-wrap gap-2">
+                    {categories.map((category) => (
+                      <button
+                        key={category}
+                        type="button"
+                        onClick={() => setSelectedCategory(category)}
+                        className={`rounded-full px-3 py-2 text-xs font-semibold transition ${
+                          selectedCategory === category
+                            ? 'bg-primary text-primary-foreground'
+                            : 'bg-card text-muted-foreground hover:text-foreground'
+                        }`}
+                      >
+                        {category}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="mb-6 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
               <h3 className="text-2xl font-bold text-foreground">课程目录</h3>
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="rounded-full bg-primary/12 px-3 py-1.5 text-sm font-semibold text-primary">
+                  当前展示 {filteredCourses.length} / {courses.length} 门
+                </span>
+                <Link
+                  href="/insights"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] px-4 py-2 text-sm font-semibold text-primary transition hover:border-primary/30"
+                >
+                  <BookText className="h-4 w-4" />
+                  查看量化技巧
+                </Link>
+              </div>
             </div>
 
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
-              {courses.map((course) => (
+              {filteredCourses.map((course) => (
                 <CourseCard key={course.slug} course={course} />
               ))}
             </div>
+
+            {filteredCourses.length === 0 ? (
+              <div className="mt-5 rounded-[22px] border border-dashed border-white/[0.08] bg-background/60 p-6 text-sm text-muted-foreground">
+                当前筛选条件下没有匹配课程，可以切回“全部”或换一个关键词试试。
+              </div>
+            ) : null}
           </section>
+
+          <div className="mt-10">
+            <InsightsSection articles={featuredInsights} />
+          </div>
         </section>
       </TabsContent>
 

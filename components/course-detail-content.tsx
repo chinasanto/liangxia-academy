@@ -25,6 +25,7 @@ type CourseDetailContentProps = {
   faqs: CourseFaq[]
   seoSections: CourseSeoSection[]
   positioning: CoursePositioning
+  hasCaseStudies?: boolean
 }
 
 export function CourseDetailContent({
@@ -36,18 +37,22 @@ export function CourseDetailContent({
   faqs,
   seoSections,
   positioning,
+  hasCaseStudies = false,
 }: CourseDetailContentProps) {
   return (
     <div className="space-y-8">
       <section className="rounded-[28px] border border-white/[0.08] bg-card/55 p-4">
         <div className="flex flex-wrap gap-2">
-            {[
-              { href: '#course-overview', label: '课程介绍' },
-              { href: '#course-insight', label: '课程解读' },
-              { href: '#course-fit', label: '学习定位' },
-              { href: '#course-catalog', label: '课程目录' },
-              { href: '#course-reviews', label: '学员评价' },
-              { href: '#course-faq', label: '常见问题' },
+          {[
+            { href: '#course-overview', label: '课程介绍' },
+            { href: '#course-insight', label: '课程解读' },
+            { href: '#course-fit', label: '学习定位' },
+            ...(hasCaseStudies
+              ? [{ href: '#course-cases', label: '真实案例' }]
+              : []),
+            { href: '#course-catalog', label: '课程目录' },
+            { href: '#course-reviews', label: '学员评价' },
+            { href: '#course-faq', label: '常见问题' },
           ].map((item) => (
             <a
               key={item.href}

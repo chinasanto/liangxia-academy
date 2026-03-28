@@ -7,14 +7,23 @@ import { AcademyShellHeader } from '@/components/academy-shell-header'
 import { Footer } from '@/components/footer'
 import { JsonLd } from '@/components/json-ld'
 import { getPublishedCourses } from '@/lib/course-store'
+import { getFeaturedInsights } from '@/lib/insight-store'
 import { buildAcademyMetadata } from '@/lib/seo'
 import { buildAcademyJsonLd } from '@/lib/structured-data'
 
 export const dynamic = 'force-dynamic'
 export const metadata: Metadata = buildAcademyMetadata()
 
-export default async function AcademyPage() {
-  const courses = await getPublishedCourses()
+export default async function AcademyPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ level?: string; category?: string; search?: string }>
+}) {
+  const query = await searchParams
+  const [courses, featuredInsights] = await Promise.all([
+    getPublishedCourses(),
+    getFeaturedInsights(3),
+  ])
   const featuredCount = courses.filter((course) => course.featured).length
 
   return (
@@ -24,7 +33,12 @@ export default async function AcademyPage() {
 
       <div className="px-6 pb-20 pt-8 lg:px-12">
         <div className="mx-auto max-w-7xl">
-          <AcademyContentTabs courses={courses} featuredCount={featuredCount} />
+          <AcademyContentTabs
+            courses={courses}
+            featuredCount={featuredCount}
+            featuredInsights={featuredInsights}
+            initialFilters={query}
+          />
 
           <section className="mt-12 rounded-[28px] border border-white/[0.08] bg-card/50 p-6">
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">

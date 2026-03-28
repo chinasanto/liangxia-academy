@@ -1,5 +1,6 @@
 import { buildCourseFaqs } from '@/lib/course-faq'
 import type { CourseCatalogEntry, CourseFaq, CourseReview } from '@/lib/course-types'
+import type { InsightArticle } from '@/lib/insight-types'
 import { SITE_NAME, SITE_URL, absoluteUrl } from '@/lib/seo'
 
 const ORGANIZATION_ID = absoluteUrl('/#organization')
@@ -179,6 +180,37 @@ export function buildAcademyJsonLd(courses: CourseCatalogEntry[]) {
   ]
 }
 
+export function buildInsightsJsonLd(articles: InsightArticle[]) {
+  return [
+    buildOrganizationJsonLd(),
+    {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      '@id': absoluteUrl('/insights#collection-page'),
+      url: absoluteUrl('/insights'),
+      name: '量化技巧文章',
+      description:
+        'AI量化学院量化技巧模块，覆盖因子工程、量化研究、AI 编程提效与策略部署等专题文章。',
+      inLanguage: 'zh-CN',
+      isPartOf: {
+        '@id': WEBSITE_ID,
+      },
+      about: {
+        '@id': ORGANIZATION_ID,
+      },
+      mainEntity: {
+        '@type': 'ItemList',
+        itemListElement: articles.map((article, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          url: absoluteUrl(`/insights/${article.slug}`),
+          name: article.title,
+        })),
+      },
+    },
+  ]
+}
+
 export function buildCourseDetailJsonLd(course: CourseCatalogEntry) {
   const courseUrl = absoluteUrl(`/academy/${course.slug}`)
   const ratingValue = parseNumericValue(course.rating)
@@ -244,5 +276,54 @@ export function buildCourseDetailJsonLd(course: CourseCatalogEntry) {
       review: reviews.length > 0 ? reviews : undefined,
     },
     buildFaqPageJsonLd(courseUrl, faqs),
+  ]
+}
+
+export function buildInsightArticleJsonLd(article: InsightArticle) {
+  const articleUrl = absoluteUrl(`/insights/${article.slug}`)
+
+  return [
+    buildOrganizationJsonLd(),
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      '@id': `${articleUrl}#breadcrumb`,
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: '量化技巧',
+          item: absoluteUrl('/insights'),
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: article.title,
+        },
+      ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      '@id': `${articleUrl}#article`,
+      headline: article.title,
+      description: article.description,
+      url: articleUrl,
+      datePublished: article.publishedAt,
+      dateModified: article.publishedAt,
+      articleSection: article.category,
+      inLanguage: 'zh-CN',
+      keywords: article.tags.join(', '),
+      author: {
+        '@type': 'Person',
+        name: 'AI量化邹老师',
+      },
+      publisher: {
+        '@id': ORGANIZATION_ID,
+      },
+      isPartOf: {
+        '@id': WEBSITE_ID,
+      },
+    },
   ]
 }
