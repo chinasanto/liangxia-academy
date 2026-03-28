@@ -211,8 +211,6 @@ export function AcademyContentTabs({
             </div>
           </div>
 
-          <AcademyComparisonTable courses={courses} />
-
           <section className="mt-10">
             <div className="mb-6 flex flex-col gap-5 rounded-[24px] border border-white/[0.08] bg-background/72 p-5">
               <div className="flex items-center gap-3 text-primary">
@@ -310,6 +308,8 @@ export function AcademyContentTabs({
               </div>
             ) : null}
           </section>
+
+          <AcademyComparisonTable courses={courses} />
 
           <div className="mt-10">
             <InsightsSection articles={featuredInsights} />
