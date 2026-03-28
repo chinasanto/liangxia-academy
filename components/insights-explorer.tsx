@@ -31,6 +31,7 @@ export function InsightsExplorer({
   const [search, setSearch] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('全部')
   const [selectedTag, setSelectedTag] = useState('全部')
+  const [tagsExpanded, setTagsExpanded] = useState(false)
 
   const categories = useMemo(
     () => ['全部', ...Array.from(new Set(articles.map((article) => article.category)))],
@@ -53,6 +54,22 @@ export function InsightsExplorer({
         .map(([tag]) => tag),
     ]
   }, [articles])
+
+  const visibleTags = useMemo(() => {
+    const collapsedCount = 7
+
+    if (tagsExpanded || tags.length <= collapsedCount) {
+      return tags
+    }
+
+    const nextTags = tags.slice(0, collapsedCount)
+
+    if (selectedTag !== '全部' && !nextTags.includes(selectedTag)) {
+      return [...nextTags, selectedTag]
+    }
+
+    return nextTags
+  }, [selectedTag, tags, tagsExpanded])
 
   const normalizedSearch = normalizeText(search)
 
@@ -155,8 +172,8 @@ export function InsightsExplorer({
             <Tags className="h-4 w-4 text-primary" />
             热门标签
           </div>
-          <div className="flex flex-wrap gap-2">
-            {tags.map((tag) => (
+          <div className="flex flex-wrap items-center gap-2">
+            {visibleTags.map((tag) => (
               <button
                 key={tag}
                 type="button"
@@ -171,6 +188,24 @@ export function InsightsExplorer({
                 {tag}
               </button>
             ))}
+            {tags.length > visibleTags.length ? (
+              <button
+                type="button"
+                onClick={() => setTagsExpanded(true)}
+                className="rounded-full border border-white/[0.08] bg-card px-3 py-2 text-xs font-medium text-muted-foreground transition hover:text-foreground"
+              >
+                ...
+              </button>
+            ) : null}
+            {tagsExpanded && tags.length > 7 ? (
+              <button
+                type="button"
+                onClick={() => setTagsExpanded(false)}
+                className="rounded-full border border-primary/20 bg-primary/10 px-3 py-2 text-xs font-medium text-primary transition hover:opacity-85"
+              >
+                收起
+              </button>
+            ) : null}
           </div>
         </div>
       </div>

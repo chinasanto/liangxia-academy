@@ -1,6 +1,8 @@
 import type { InsightArticle } from '@/lib/insight-types'
+import { expansionInsightArticles } from '@/data/insights-expansion'
 
 export const insightArticles: InsightArticle[] = [
+  ...expansionInsightArticles,
   {
     slug: 'quant-trading-main-approaches',
     title: '量化交易到底有哪些主流做法？一篇看懂因子、CTA、套利、机器学习策略',
