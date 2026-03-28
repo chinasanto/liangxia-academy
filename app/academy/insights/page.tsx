@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 import { AcademyShellHeader } from '@/components/academy-shell-header'
 import { Footer } from '@/components/footer'
-import { InsightsSection } from '@/components/insights-section'
+import { InsightsExplorer } from '@/components/insights-explorer'
 import { JsonLd } from '@/components/json-ld'
 import { getAllInsights } from '@/lib/insight-store'
 import { buildInsightsMetadata } from '@/lib/seo'
@@ -38,10 +38,10 @@ export default async function AcademyInsightsPage() {
             </div>
           </section>
 
-          <InsightsSection
+          <InsightsExplorer
             articles={articles}
             title="全部技巧文章"
-            description="每篇文章都围绕一个高频量化问题展开，既能承接搜索流量，也能作为学院课程的延伸阅读。"
+            description="可以按关键词、分类和标签快速筛选文章，更方便找到当前最想看的量化问题和方法内容。"
           />
         </div>
       </div>

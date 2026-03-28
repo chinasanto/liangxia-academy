@@ -14,7 +14,7 @@ import {
 
 import { AcademyComparisonTable } from '@/components/academy-comparison-table'
 import { CourseCard } from '@/components/course-card'
-import { InsightsSection } from '@/components/insights-section'
+import { InsightsExplorer } from '@/components/insights-explorer'
 import { LearningRoadmap } from '@/components/learning-roadmap'
 import { Input } from '@/components/ui/input'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -349,10 +349,11 @@ export function AcademyContentTabs({
             </div>
           </div>
 
-          <InsightsSection
+          <InsightsExplorer
             articles={allInsights}
             title="量化技巧"
-            description="把量化研发中的高频难题拆成能读、能学、能直接拿去用的技巧文章，方便系统学习和持续查阅。"
+            description="支持按关键词、分类和标签筛选文章，更方便快速找到适合自己当前阶段的量化内容。"
+            showAllLink
           />
         </section>
       </TabsContent>
