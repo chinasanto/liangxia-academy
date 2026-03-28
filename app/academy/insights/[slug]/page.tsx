@@ -61,7 +61,7 @@ export default async function AcademyInsightDetailPage({
       <AcademyShellHeader backHref="/academy/insights" backLabel="返回量化技巧" />
 
       <div className="px-6 pb-20 pt-8 lg:px-12">
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-6xl">
           <AcademySubnav active="insights" className="mb-8" />
 
           <Link
@@ -72,7 +72,7 @@ export default async function AcademyInsightDetailPage({
             <ArrowRight className="h-4 w-4" />
           </Link>
 
-          <section className="rounded-[30px] border border-white/[0.08] bg-card/50 p-8 sm:p-10">
+          <section className="rounded-[30px] border border-white/[0.08] bg-card/50 p-8 sm:p-10 lg:p-12">
             <div className="mb-4 flex flex-wrap gap-2">
               <span className="rounded-full bg-primary/12 px-3 py-1 text-xs font-semibold text-primary">
                 {article.category}
@@ -110,7 +110,7 @@ export default async function AcademyInsightDetailPage({
             {article.sections.map((section) => (
               <section
                 key={section.title}
-                className="rounded-[28px] border border-white/[0.08] bg-card/45 p-8"
+                className="rounded-[28px] border border-white/[0.08] bg-card/45 p-8 lg:p-10"
               >
                 <h2 className="text-2xl font-bold text-foreground">
                   {section.title}
@@ -134,7 +134,7 @@ export default async function AcademyInsightDetailPage({
               </section>
             ))}
 
-            <section className="rounded-[28px] border border-primary/15 bg-primary/8 p-8">
+            <section className="rounded-[28px] border border-primary/15 bg-primary/8 p-8 lg:p-10">
               <h2 className="text-2xl font-bold text-foreground">关键结论</h2>
               <ul className="mt-4 space-y-3 text-sm leading-7 text-foreground/85">
                 {article.keyTakeaways.map((item) => (
@@ -146,7 +146,7 @@ export default async function AcademyInsightDetailPage({
               </ul>
             </section>
 
-            <section className="rounded-[28px] border border-white/[0.08] bg-card/45 p-8">
+            <section className="rounded-[28px] border border-white/[0.08] bg-card/45 p-8 lg:p-10">
               <div className="mb-6">
                 <h2 className="text-2xl font-bold text-foreground">关联课程</h2>
                 <p className="mt-2 text-sm leading-7 text-muted-foreground">
@@ -162,7 +162,7 @@ export default async function AcademyInsightDetailPage({
             </section>
 
             {relatedArticles.length > 0 ? (
-              <section className="rounded-[28px] border border-white/[0.08] bg-card/45 p-8">
+              <section className="rounded-[28px] border border-white/[0.08] bg-card/45 p-8 lg:p-10">
                 <div className="mb-6">
                   <h2 className="text-2xl font-bold text-foreground">继续阅读</h2>
                 </div>
