@@ -287,7 +287,7 @@ export function AcademyContentTabs({
                   当前展示 {filteredCourses.length} / {courses.length} 门
                 </span>
                 <Link
-                  href="/insights"
+                  href="/academy/insights"
                   className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] px-4 py-2 text-sm font-semibold text-primary transition hover:border-primary/30"
                 >
                   <BookText className="h-4 w-4" />

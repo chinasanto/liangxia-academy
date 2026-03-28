@@ -107,19 +107,19 @@ export function buildAcademyMetadata(): Metadata {
 export function buildInsightsMetadata(): Metadata {
   const title = '量化技巧 | 因子工程、AI量化开发与量化研究方法'
   const description =
-    '量化技巧模块沉淀因子工程、量化研究、AI 编程提效、WorldQuant Brain 与生产部署中的方法文章，帮助学习者在课程之外持续提升。'
+    'AI量化学院量化技巧子模块沉淀因子工程、量化研究、AI 编程提效、WorldQuant Brain 与生产部署中的方法文章，帮助学习者在课程之外持续提升。'
 
   return {
     title,
     description,
     keywords: INSIGHTS_KEYWORDS,
     alternates: {
-      canonical: '/insights',
+      canonical: '/academy/insights',
     },
     openGraph: {
       title,
       description,
-      url: absoluteUrl('/insights'),
+      url: absoluteUrl('/academy/insights'),
       siteName: SITE_NAME,
       locale: 'zh_CN',
       type: 'website',
@@ -141,12 +141,12 @@ export function buildInsightMetadata(article: InsightArticle): Metadata {
     description,
     keywords: Array.from(new Set([...article.tags, article.category, '量化技巧', 'AI量化学院'])),
     alternates: {
-      canonical: `/insights/${article.slug}`,
+      canonical: `/academy/insights/${article.slug}`,
     },
     openGraph: {
       title,
       description,
-      url: absoluteUrl(`/insights/${article.slug}`),
+      url: absoluteUrl(`/academy/insights/${article.slug}`),
       siteName: SITE_NAME,
       locale: 'zh_CN',
       type: 'article',

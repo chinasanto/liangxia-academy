@@ -41,7 +41,7 @@ export function InsightCard({ article }: InsightCardProps) {
       </div>
 
       <Link
-        href={`/insights/${article.slug}`}
+        href={`/academy/insights/${article.slug}`}
         className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary transition hover:opacity-85"
       >
         阅读文章

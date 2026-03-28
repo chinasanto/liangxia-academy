@@ -28,7 +28,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
-      url: absoluteUrl('/insights'),
+      url: absoluteUrl('/academy/insights'),
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.8,
@@ -43,7 +43,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }))
 
   const insightPages: MetadataRoute.Sitemap = insights.map((article) => ({
-    url: absoluteUrl(`/insights/${article.slug}`),
+    url: absoluteUrl(`/academy/insights/${article.slug}`),
     lastModified: new Date(article.publishedAt),
     changeFrequency: 'monthly',
     priority: 0.7,

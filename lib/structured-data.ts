@@ -186,11 +186,11 @@ export function buildInsightsJsonLd(articles: InsightArticle[]) {
     {
       '@context': 'https://schema.org',
       '@type': 'CollectionPage',
-      '@id': absoluteUrl('/insights#collection-page'),
-      url: absoluteUrl('/insights'),
+      '@id': absoluteUrl('/academy/insights#collection-page'),
+      url: absoluteUrl('/academy/insights'),
       name: '量化技巧文章',
       description:
-        'AI量化学院量化技巧模块，覆盖因子工程、量化研究、AI 编程提效与策略部署等专题文章。',
+        'AI量化学院量化技巧子模块，覆盖因子工程、量化研究、AI 编程提效与策略部署等专题文章。',
       inLanguage: 'zh-CN',
       isPartOf: {
         '@id': WEBSITE_ID,
@@ -203,7 +203,7 @@ export function buildInsightsJsonLd(articles: InsightArticle[]) {
         itemListElement: articles.map((article, index) => ({
           '@type': 'ListItem',
           position: index + 1,
-          url: absoluteUrl(`/insights/${article.slug}`),
+          url: absoluteUrl(`/academy/insights/${article.slug}`),
           name: article.title,
         })),
       },
@@ -280,7 +280,7 @@ export function buildCourseDetailJsonLd(course: CourseCatalogEntry) {
 }
 
 export function buildInsightArticleJsonLd(article: InsightArticle) {
-  const articleUrl = absoluteUrl(`/insights/${article.slug}`)
+  const articleUrl = absoluteUrl(`/academy/insights/${article.slug}`)
 
   return [
     buildOrganizationJsonLd(),
@@ -292,12 +292,18 @@ export function buildInsightArticleJsonLd(article: InsightArticle) {
         {
           '@type': 'ListItem',
           position: 1,
-          name: '量化技巧',
-          item: absoluteUrl('/insights'),
+          name: 'AI量化学院',
+          item: absoluteUrl('/academy'),
         },
         {
           '@type': 'ListItem',
           position: 2,
+          name: '量化技巧',
+          item: absoluteUrl('/academy/insights'),
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
           name: article.title,
         },
       ],

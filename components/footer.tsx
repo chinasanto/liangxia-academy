@@ -12,7 +12,7 @@ const footerLinks = {
   ],
   资源: [
     { name: "课程中心", href: "/academy" },
-    { name: "量化技巧文章", href: "/insights" },
+    { name: "学院量化技巧", href: "/academy/insights" },
     { name: "返回首页", href: "/" },
     { name: "帮助中心", href: "#" },
     { name: "路线图", href: "#" },

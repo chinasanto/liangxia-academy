@@ -27,7 +27,7 @@ export function InsightsSection({
         <div className="max-w-3xl">
           <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
             <BookText className="h-3.5 w-3.5" />
-            独立模块
+            学院子模块
           </div>
           <h3 className="text-2xl font-bold text-foreground">{title}</h3>
           <p className="mt-2 text-sm leading-7 text-muted-foreground">
@@ -36,7 +36,7 @@ export function InsightsSection({
         </div>
 
         <Link
-          href="/insights"
+          href="/academy/insights"
           className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] px-4 py-2 text-sm font-semibold text-primary transition hover:border-primary/30 hover:bg-background/60"
         >
           查看全部文章

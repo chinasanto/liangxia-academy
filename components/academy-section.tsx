@@ -85,7 +85,7 @@ export async function AcademySection({ courses: initialCourses }: AcademySection
             variant="outline"
             className="font-mono text-xs border-primary/30 text-primary hover:bg-primary/10"
           >
-            <Link href="/insights">
+            <Link href="/academy/insights">
               查看量化技巧
               <BookText className="h-4 w-4" />
             </Link>
