@@ -1,7 +1,9 @@
 import type { InsightArticle } from '@/lib/insight-types'
 import { expansionInsightArticles } from '@/data/insights-expansion'
+import { expansionInsightBatchTwoArticles } from '@/data/insights-batch-2'
 
 export const insightArticles: InsightArticle[] = [
+  ...expansionInsightBatchTwoArticles,
   ...expansionInsightArticles,
   {
     slug: 'quant-trading-main-approaches',
