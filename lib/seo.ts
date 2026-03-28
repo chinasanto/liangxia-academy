@@ -10,6 +10,7 @@ export const HOME_KEYWORDS = [
   'AI量化学院',
   'AI量化课程',
   '量化交易课程',
+  '量化交易方式',
   '因子工程课程',
   'WorldQuant Brain课程',
   'AI大模型辅助量化编程',
@@ -34,6 +35,10 @@ export const ACADEMY_KEYWORDS = [
 
 export const INSIGHTS_KEYWORDS = [
   '量化技巧',
+  '量化交易方式',
+  '量化学习路线',
+  'CTA策略',
+  '因子交易',
   '因子工程文章',
   '量化研发效率',
   '量化工程方法',
@@ -105,9 +110,9 @@ export function buildAcademyMetadata(): Metadata {
 }
 
 export function buildInsightsMetadata(): Metadata {
-  const title = '量化技巧 | 因子工程、AI量化开发与量化研究方法'
+  const title = '量化技巧与量化交易方式 | 因子、CTA、AI量化与研究方法'
   const description =
-    'AI量化学院量化技巧子模块沉淀因子工程、量化研究、AI 编程提效、WorldQuant Brain 与生产部署中的方法文章，帮助学习者在课程之外持续提升。'
+    'AI量化学院量化技巧子模块覆盖量化交易方式、因子工程、CTA、AI量化开发、学习路径与生产部署等高频主题，帮助学习者在课程之外持续提升。'
 
   return {
     title,
