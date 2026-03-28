@@ -7,7 +7,7 @@ import { AcademyShellHeader } from '@/components/academy-shell-header'
 import { Footer } from '@/components/footer'
 import { JsonLd } from '@/components/json-ld'
 import { getPublishedCourses } from '@/lib/course-store'
-import { getFeaturedInsights } from '@/lib/insight-store'
+import { getAllInsights } from '@/lib/insight-store'
 import { buildAcademyMetadata } from '@/lib/seo'
 import { buildAcademyJsonLd } from '@/lib/structured-data'
 
@@ -17,12 +17,17 @@ export const metadata: Metadata = buildAcademyMetadata()
 export default async function AcademyPage({
   searchParams,
 }: {
-  searchParams: Promise<{ level?: string; category?: string; search?: string }>
+  searchParams: Promise<{
+    level?: string
+    category?: string
+    search?: string
+    tab?: string
+  }>
 }) {
   const query = await searchParams
-  const [courses, featuredInsights] = await Promise.all([
+  const [courses, allInsights] = await Promise.all([
     getPublishedCourses(),
-    getFeaturedInsights(3),
+    getAllInsights(),
   ])
   const featuredCount = courses.filter((course) => course.featured).length
 
@@ -36,8 +41,9 @@ export default async function AcademyPage({
           <AcademyContentTabs
             courses={courses}
             featuredCount={featuredCount}
-            featuredInsights={featuredInsights}
+            allInsights={allInsights}
             initialFilters={query}
+            initialTab={query.tab}
           />
 
           <section className="mt-12 rounded-[28px] border border-white/[0.08] bg-card/50 p-6">

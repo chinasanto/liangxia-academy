@@ -24,7 +24,8 @@ import type { InsightArticle } from '@/lib/insight-types'
 type AcademyContentTabsProps = {
   courses: CourseCatalogEntry[]
   featuredCount: number
-  featuredInsights: InsightArticle[]
+  allInsights: InsightArticle[]
+  initialTab?: string
   initialFilters?: {
     level?: string
     category?: string
@@ -35,7 +36,8 @@ type AcademyContentTabsProps = {
 export function AcademyContentTabs({
   courses,
   featuredCount,
-  featuredInsights,
+  allInsights,
+  initialTab,
   initialFilters,
 }: AcademyContentTabsProps) {
   const [search, setSearch] = useState(initialFilters?.search ?? '')
@@ -73,8 +75,11 @@ export function AcademyContentTabs({
     return matchLevel && matchCategory && matchSearch
   })
 
+  const activeTab =
+    initialTab === 'roadmap' || initialTab === 'insights' ? initialTab : 'home'
+
   return (
-    <Tabs defaultValue="home" className="mb-12">
+    <Tabs defaultValue={activeTab} className="mb-12">
       <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div>
           <h2 className="text-2xl font-bold text-foreground">AI量化学院</h2>
@@ -94,6 +99,13 @@ export function AcademyContentTabs({
           >
             <Map className="h-4 w-4" />
             学习路径
+          </TabsTrigger>
+          <TabsTrigger
+            value="insights"
+            className="rounded-full px-4 py-2 text-sm data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+          >
+            <BookText className="h-4 w-4" />
+            文章技巧
           </TabsTrigger>
         </TabsList>
       </div>
@@ -287,7 +299,7 @@ export function AcademyContentTabs({
                   当前展示 {filteredCourses.length} / {courses.length} 门
                 </span>
                 <Link
-                  href="/academy/insights"
+                  href="/academy?tab=insights"
                   className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] px-4 py-2 text-sm font-semibold text-primary transition hover:border-primary/30"
                 >
                   <BookText className="h-4 w-4" />
@@ -310,15 +322,39 @@ export function AcademyContentTabs({
           </section>
 
           <AcademyComparisonTable courses={courses} />
-
-          <div className="mt-10">
-            <InsightsSection articles={featuredInsights} />
-          </div>
         </section>
       </TabsContent>
 
       <TabsContent value="roadmap" className="mt-0">
         <LearningRoadmap />
+      </TabsContent>
+
+      <TabsContent value="insights" className="mt-0">
+        <section className="bg-[radial-gradient(circle_at_top,rgba(0,229,176,0.12),transparent_42%)] py-3">
+          <div className="mb-8 rounded-[28px] border border-white/[0.08] bg-background/72 p-6 sm:p-8">
+            <div className="max-w-4xl">
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/12 px-4 py-1.5 text-xs font-semibold text-primary">
+                <BookText className="h-4 w-4" />
+                AI量化学院 · 文章技巧
+              </div>
+              <h3 className="font-serif text-3xl font-black leading-tight text-foreground sm:text-4xl">
+                课程之外的量化工程经验
+                <br />
+                在这里沉淀成可持续复用的文章体系
+              </h3>
+              <p className="mt-4 max-w-3xl text-sm leading-8 text-white sm:text-base">
+                这里集中收纳因子工程、AI量化开发、策略部署、WorldQuant Brain 与研究方法相关文章，
+                和课程、学习路径一起组成完整的 AI量化学院学习闭环。
+              </p>
+            </div>
+          </div>
+
+          <InsightsSection
+            articles={allInsights}
+            title="量化技巧"
+            description="把量化研发中的高频难题拆成能读、能学、能直接拿去用的技巧文章，方便系统学习和持续查阅。"
+          />
+        </section>
       </TabsContent>
     </Tabs>
   )
