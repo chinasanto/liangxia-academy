@@ -36,7 +36,9 @@ export function ThemeToggle({
       aria-label={isLight ? '切换到深色模式' : '切换到浅色模式'}
     >
       {isLight ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
-      <span>{mounted ? (isLight ? '深色' : '浅色') : '主题'}</span>
+      <span className={compact ? 'hidden sm:inline' : ''}>
+        {mounted ? (isLight ? '深色' : '浅色') : '主题'}
+      </span>
     </button>
   )
 }

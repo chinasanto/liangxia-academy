@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import {
-  ArrowLeft,
   BookOpen,
   CheckCircle2,
   Clock3,
@@ -88,18 +87,9 @@ export default async function CourseDetailPage({
 
       <div className="px-6 pb-20 pt-8 lg:px-12">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-6">
-            <Button asChild variant="ghost" className="pl-0 text-muted-foreground">
-              <Link href="/academy">
-                <ArrowLeft className="h-4 w-4" />
-                返回课程列表
-              </Link>
-            </Button>
-          </div>
-
           <section className="mb-8 overflow-hidden rounded-[32px] border border-white/[0.08] bg-card/60">
             <div className="grid gap-0 lg:grid-cols-[1.1fr_0.9fr]">
-              <div className="relative min-h-[320px] lg:min-h-[520px]">
+              <div className="relative min-h-[260px] sm:min-h-[320px] lg:min-h-[520px]">
                 <Image
                   src={course.coverImage ?? '/placeholder.jpg'}
                   alt={course.coverAlt ?? course.shortTitle}
@@ -107,10 +97,9 @@ export default async function CourseDetailPage({
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-background/15 to-transparent lg:hidden" />
               </div>
 
-              <div className="flex flex-col justify-between p-8 lg:p-10">
+              <div className="flex flex-col justify-between p-5 sm:p-8 lg:p-10">
                 <div>
                   <div className="mb-4 flex flex-wrap items-center gap-2">
                     <span className="rounded-full bg-primary/15 px-3 py-1 text-[11px] font-mono text-primary">
@@ -129,10 +118,10 @@ export default async function CourseDetailPage({
                     ) : null}
                   </div>
 
-                  <h1 className="mb-4 font-serif text-4xl font-black text-foreground">
+                  <h1 className="mb-4 font-serif text-3xl font-black leading-tight text-foreground sm:text-4xl">
                     {course.title}
                   </h1>
-                  <p className="mb-6 text-base leading-8 text-muted-foreground">
+                  <p className="mb-6 text-sm leading-7 text-muted-foreground sm:text-base sm:leading-8">
                     {course.subtitle}
                   </p>
 
@@ -160,7 +149,7 @@ export default async function CourseDetailPage({
                   </p>
                 </div>
 
-                <div className="mt-8 flex flex-wrap items-end justify-between gap-4 rounded-[28px] border border-white/[0.08] bg-background/75 p-5">
+                <div className="mt-8 flex flex-col items-start gap-4 rounded-[28px] border border-white/[0.08] bg-background/75 p-5 sm:flex-row sm:items-end sm:justify-between">
                   <div>
                     <div className="text-sm text-muted-foreground">课程价格</div>
                     <div className="font-mono text-3xl font-bold text-[#3da9ff]">
@@ -173,7 +162,7 @@ export default async function CourseDetailPage({
                     ) : null}
                   </div>
 
-                  <Button asChild className="rounded-full px-5 font-mono text-xs">
+                  <Button asChild className="w-full rounded-full px-5 font-mono text-xs sm:w-auto">
                     <Link href="/academy">返回课程总览</Link>
                   </Button>
                 </div>
@@ -181,7 +170,7 @@ export default async function CourseDetailPage({
             </div>
           </section>
 
-          <section className="mb-8 rounded-[28px] border border-white/[0.08] bg-card/55 p-8">
+          <section className="mb-8 rounded-[28px] border border-white/[0.08] bg-card/55 p-5 sm:p-8">
             <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
               <div>
                 <div className="mb-4 flex items-center gap-3">
@@ -254,7 +243,7 @@ export default async function CourseDetailPage({
 
           <CourseRelatedInsights articles={relatedInsights} />
 
-          <section className="mt-8 rounded-[28px] border border-white/[0.08] bg-card/50 p-6">
+          <section className="mt-8 rounded-[28px] border border-white/[0.08] bg-card/50 p-5 sm:p-6">
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
               <div className="flex items-center gap-3">
                 <div className="rounded-2xl bg-primary/15 p-3 text-primary">

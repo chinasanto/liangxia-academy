@@ -79,30 +79,30 @@ export function AcademyContentTabs({
     initialTab === 'roadmap' || initialTab === 'insights' ? initialTab : 'home'
 
   return (
-    <Tabs defaultValue={activeTab} className="mb-12">
+    <Tabs defaultValue={activeTab} className="mb-10 sm:mb-12">
       <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div>
           <h2 className="text-2xl font-bold text-foreground">AI量化学院</h2>
         </div>
 
-        <TabsList className="h-auto rounded-full border border-white/[0.08] bg-card/60 p-1">
+        <TabsList className="grid h-auto w-full grid-cols-3 rounded-[22px] border border-white/[0.08] bg-card/60 p-1 sm:inline-flex sm:w-auto sm:rounded-full">
           <TabsTrigger
             value="home"
-            className="rounded-full px-4 py-2 text-sm data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+            className="min-w-0 rounded-[18px] px-2 py-2 text-[11px] leading-tight whitespace-normal data-[state=active]:bg-primary data-[state=active]:text-primary-foreground sm:rounded-full sm:px-4 sm:text-sm sm:whitespace-nowrap"
           >
             <House className="h-4 w-4" />
             主页
           </TabsTrigger>
           <TabsTrigger
             value="roadmap"
-            className="rounded-full px-4 py-2 text-sm data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+            className="min-w-0 rounded-[18px] px-2 py-2 text-[11px] leading-tight whitespace-normal data-[state=active]:bg-primary data-[state=active]:text-primary-foreground sm:rounded-full sm:px-4 sm:text-sm sm:whitespace-nowrap"
           >
             <Map className="h-4 w-4" />
             学习路径
           </TabsTrigger>
           <TabsTrigger
             value="insights"
-            className="rounded-full px-4 py-2 text-sm data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+            className="min-w-0 rounded-[18px] px-2 py-2 text-[11px] leading-tight whitespace-normal data-[state=active]:bg-primary data-[state=active]:text-primary-foreground sm:rounded-full sm:px-4 sm:text-sm sm:whitespace-nowrap"
           >
             <BookText className="h-4 w-4" />
             文章技巧
@@ -111,22 +111,23 @@ export function AcademyContentTabs({
       </div>
 
       <TabsContent value="home" className="mt-0">
-        <section className="bg-[radial-gradient(circle_at_top,rgba(0,229,176,0.14),transparent_45%)] py-3">
+        <section className="bg-[radial-gradient(circle_at_top,rgba(0,229,176,0.14),transparent_45%)] py-2 sm:py-3">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-3xl">
-              <h1 className="mb-4 font-serif text-3xl font-black leading-[1.02] text-foreground sm:text-4xl lg:text-5xl">
-                从因子工程到实盘交易
-                <br />
-                打造完整量化交易知识图谱
+              <h1 className="mb-4 font-serif text-[1.8rem] font-black leading-[1.06] text-foreground sm:text-4xl lg:text-5xl">
+                <span className="block">从因子工程到实盘交易</span>
+                <span className="hidden sm:block">打造完整量化交易知识图谱</span>
+                <span className="block sm:hidden">打造完整量化交易</span>
+                <span className="block sm:hidden">知识图谱</span>
               </h1>
-              <p className="max-w-2xl text-sm leading-7 text-white sm:text-base">
+              <p className="max-w-2xl text-sm leading-7 text-foreground/78 sm:text-base">
                 AI量化学院集中承载 AI 量化课程体系，覆盖基础入门、因子工程、全流程实战与高级评估架构。
                 课程内容围绕机器学习、深度学习、因子生命周期管理和交易系统落地展开，
                 帮助学习者把知识、策略和实盘执行真正串起来。
               </p>
             </div>
 
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+            <div className="grid grid-cols-3 gap-3">
               {[
                 { label: '已上架课程', value: `${courses.length}` },
                 { label: '精选课程', value: `${featuredCount}` },
@@ -136,10 +137,10 @@ export function AcademyContentTabs({
                   key={item.label}
                   className="rounded-2xl border border-white/[0.08] bg-background/75 p-4"
                 >
-                  <div className="font-mono text-2xl font-bold text-foreground">
+                  <div className="font-mono text-xl font-bold text-foreground sm:text-2xl">
                     {item.value}
                   </div>
-                  <div className="mt-1 text-xs text-white">
+                  <div className="mt-1 text-[11px] leading-5 text-foreground/72 sm:text-xs">
                     {item.label}
                   </div>
                 </div>
@@ -155,7 +156,7 @@ export function AcademyContentTabs({
                 </div>
                 <div>
                   <div className="text-xl font-semibold text-foreground">AI量化邹老师</div>
-                  <div className="text-sm text-white">
+                  <div className="text-sm text-foreground/72">
                     15年大厂经验倾囊相授
                   </div>
                 </div>
@@ -164,7 +165,7 @@ export function AcademyContentTabs({
               <div className="space-y-5">
                 <div>
                   <div className="mb-2 text-sm font-semibold text-primary">核心背景</div>
-                  <p className="text-sm leading-7 text-white">
+                  <p className="text-sm leading-7 text-foreground/78">
                     长期深耕大数据算法、量化投资与 AI 量化研究，
                     兼具平台级算法决策、因子工程搭建和实盘交易系统经验，
                     强调课程内容必须可执行、可复盘、可迁移。
@@ -173,7 +174,7 @@ export function AcademyContentTabs({
 
                 <div>
                   <div className="mb-2 text-sm font-semibold text-primary">专业专长</div>
-                  <p className="text-sm leading-7 text-white">
+                  <p className="text-sm leading-7 text-foreground/78">
                     擅长因子工程架构设计、系统化策略开发、多因子生命周期管理、WorldQuant Brain 专项训练，
                     以及从研究到自动化交易部署的完整闭环。
                   </p>
@@ -181,7 +182,7 @@ export function AcademyContentTabs({
 
                 <div>
                   <div className="mb-2 text-sm font-semibold text-primary">教学理念</div>
-                  <p className="text-sm leading-7 text-white">
+                  <p className="text-sm leading-7 text-foreground/78">
                     立足实战，注重思维构建，不只讲理论，更强调学员能把方法论转换成自己的研究框架和项目成果。
                   </p>
                 </div>
@@ -193,7 +194,7 @@ export function AcademyContentTabs({
                 <Target className="h-5 w-5" />
                 <span className="text-sm font-semibold">课程体系总览</span>
               </div>
-              <ul className="mb-5 space-y-3 text-sm leading-6 text-white">
+              <ul className="mb-5 space-y-3 text-sm leading-6 text-foreground/78">
                 <li>基础课到高级班按能力阶梯衔接，适合系统学习。</li>
                 <li>每门课已统一重构为 6 节 × 2 小时，结构更清晰。</li>
                 <li>课程主页、详情页、主站导航都已打通。</li>
@@ -342,7 +343,7 @@ export function AcademyContentTabs({
                 <br />
                 在这里沉淀成可持续复用的文章体系
               </h3>
-              <p className="mt-4 max-w-3xl text-sm leading-8 text-white sm:text-base">
+              <p className="mt-4 max-w-3xl text-sm leading-8 text-foreground/78 sm:text-base">
                 这里集中收纳因子工程、AI量化开发、策略部署、WorldQuant Brain 与研究方法相关文章，
                 和课程、学习路径一起组成完整的 AI量化学院学习闭环。
               </p>

@@ -57,7 +57,7 @@ export function CourseDetailContent({
             <a
               key={item.href}
               href={item.href}
-              className="rounded-full bg-background/80 px-4 py-2 text-sm font-medium text-foreground transition hover:bg-primary hover:text-primary-foreground"
+              className="rounded-full bg-background/80 px-3 py-2 text-xs font-medium text-foreground transition hover:bg-primary hover:text-primary-foreground sm:px-4 sm:text-sm"
             >
               {item.label}
             </a>
@@ -67,7 +67,7 @@ export function CourseDetailContent({
 
       <section
         id="course-fit"
-        className="scroll-mt-24 rounded-[28px] border border-white/[0.08] bg-card/55 p-8"
+        className="scroll-mt-24 rounded-[28px] border border-white/[0.08] bg-card/55 p-5 sm:p-8"
       >
         <div className="mb-6">
           <h2 className="text-2xl font-bold text-foreground">学习定位对比</h2>
@@ -118,7 +118,7 @@ export function CourseDetailContent({
 
       <section
         id="course-insight"
-        className="scroll-mt-24 rounded-[28px] border border-white/[0.08] bg-card/55 p-8"
+        className="scroll-mt-24 rounded-[28px] border border-white/[0.08] bg-card/55 p-5 sm:p-8"
       >
         <div className="mb-6">
           <h2 className="text-2xl font-bold text-foreground">课程解读</h2>
@@ -148,7 +148,7 @@ export function CourseDetailContent({
 
       <section
         id="course-overview"
-        className="scroll-mt-24 rounded-[28px] border border-white/[0.08] bg-card/55 p-8"
+        className="scroll-mt-24 rounded-[28px] border border-white/[0.08] bg-card/55 p-5 sm:p-8"
       >
         <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
@@ -197,7 +197,7 @@ export function CourseDetailContent({
 
       <section
         id="course-catalog"
-        className="scroll-mt-24 rounded-[28px] border border-white/[0.08] bg-card/55 p-8"
+        className="scroll-mt-24 rounded-[28px] border border-white/[0.08] bg-card/55 p-5 sm:p-8"
       >
         <div className="mb-6">
           <h2 className="text-2xl font-bold text-foreground">课程目录</h2>
@@ -231,7 +231,7 @@ export function CourseDetailContent({
                   {section.lessons.map((lesson) => (
                     <div
                       key={`${section.id}-${lesson.title}`}
-                      className="flex items-center justify-between gap-3 rounded-2xl border border-white/[0.06] bg-card/45 px-4 py-3"
+                      className="flex items-center justify-between gap-3 rounded-2xl border border-white/[0.06] bg-card/45 px-3 py-3 sm:px-4"
                     >
                       <div className="flex min-w-0 items-center gap-3">
                         <PlayCircle className="h-4 w-4 shrink-0 text-[#c7d7ec]" />
@@ -244,7 +244,7 @@ export function CourseDetailContent({
                           </span>
                         ) : null}
                       </div>
-                      <span className="shrink-0 text-sm text-[#a8bdd8]">
+                      <span className="shrink-0 text-xs text-[#a8bdd8] sm:text-sm">
                         {lesson.duration}
                       </span>
                     </div>
@@ -258,7 +258,7 @@ export function CourseDetailContent({
 
       <section
         id="course-reviews"
-        className="scroll-mt-24 rounded-[28px] border border-white/[0.08] bg-card/55 p-8"
+        className="scroll-mt-24 rounded-[28px] border border-white/[0.08] bg-card/55 p-5 sm:p-8"
       >
         <div className="mb-6">
           <h2 className="text-2xl font-bold text-foreground">学员评价</h2>
@@ -293,7 +293,7 @@ export function CourseDetailContent({
 
       <section
         id="course-faq"
-        className="scroll-mt-24 rounded-[28px] border border-white/[0.08] bg-card/55 p-8"
+        className="scroll-mt-24 rounded-[28px] border border-white/[0.08] bg-card/55 p-5 sm:p-8"
       >
         <div className="mb-6">
           <h2 className="text-2xl font-bold text-foreground">常见问题</h2>
