@@ -17,9 +17,6 @@ import type {
 } from '@/lib/course-types'
 
 type CourseDetailContentProps = {
-  highlights: string[]
-  requirements: string[]
-  audience: string[]
   catalogSections: CourseCatalogSection[]
   reviews: CourseReview[]
   faqs: CourseFaq[]
@@ -29,9 +26,6 @@ type CourseDetailContentProps = {
 }
 
 export function CourseDetailContent({
-  highlights,
-  requirements,
-  audience,
   catalogSections,
   reviews,
   faqs,
@@ -62,55 +56,6 @@ export function CourseDetailContent({
               {item.label}
             </a>
           ))}
-        </div>
-      </section>
-
-      <section
-        id="course-overview"
-        className="scroll-mt-24 rounded-[28px] border border-white/[0.08] bg-card/55 p-5 sm:p-8"
-      >
-        <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-          <div>
-            <h2 className="mb-6 text-2xl font-bold text-foreground">课程介绍</h2>
-            <ul className="space-y-4">
-              {highlights.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm leading-7 text-foreground/90">
-                  <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-green-400" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="space-y-6">
-            <div>
-              <h3 className="mb-4 text-lg font-semibold text-foreground">学习要求</h3>
-              <ol className="space-y-3">
-                {requirements.map((item, index) => (
-                  <li key={item} className="flex items-start gap-3 text-sm leading-7 text-muted-foreground">
-                    <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/15 text-xs font-semibold text-primary">
-                      {index + 1}
-                    </span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ol>
-            </div>
-
-            <div>
-              <h3 className="mb-4 text-lg font-semibold text-foreground">适合人群</h3>
-              <div className="flex flex-wrap gap-2">
-                {audience.map((item) => (
-                  <span
-                    key={item}
-                    className="rounded-full bg-background/85 px-3 py-1.5 text-sm text-muted-foreground"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 

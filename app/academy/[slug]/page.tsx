@@ -170,9 +170,17 @@ export default async function CourseDetailPage({
             </div>
           </section>
 
-          <section className="mb-8 rounded-[28px] border border-white/[0.08] bg-card/55 p-5 sm:p-8">
+          <section
+            id="course-overview"
+            className="mb-8 scroll-mt-24 rounded-[28px] border border-white/[0.08] bg-card/55 p-5 sm:p-8"
+          >
             <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
               <div>
+                <div className="mb-5">
+                  <div className="text-xs font-semibold tracking-[0.14em] text-primary">
+                    课程介绍
+                  </div>
+                </div>
                 <div className="mb-4 flex items-center gap-3">
                   <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#2c6bff] text-2xl font-semibold text-white">
                     {course.instructor?.name.slice(0, 1)}
@@ -198,6 +206,18 @@ export default async function CourseDetailPage({
                 <p className="text-sm leading-7 text-foreground/85">
                   {course.instructor?.description}
                 </p>
+
+                <div className="mt-6">
+                  <div className="mb-4 text-lg font-semibold text-foreground">本课重点</div>
+                  <ul className="space-y-3">
+                    {(course.highlights ?? []).map((item) => (
+                      <li key={item} className="flex items-start gap-3 text-sm leading-7 text-foreground/90">
+                        <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-green-400" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
 
               <div className="rounded-[24px] border border-white/[0.08] bg-background/75 p-5">
@@ -213,14 +233,39 @@ export default async function CourseDetailPage({
                     </li>
                   ))}
                 </ul>
+
+                <div className="mt-6 border-t border-white/[0.08] pt-6">
+                  <div className="mb-3 text-base font-semibold text-foreground">学习要求</div>
+                  <ol className="space-y-3">
+                    {(course.requirements ?? []).map((item, index) => (
+                      <li key={item} className="flex items-start gap-3 text-sm leading-7 text-muted-foreground">
+                        <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/15 text-xs font-semibold text-primary">
+                          {index + 1}
+                        </span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+
+                <div className="mt-6 border-t border-white/[0.08] pt-6">
+                  <div className="mb-3 text-base font-semibold text-foreground">适合人群</div>
+                  <div className="flex flex-wrap gap-2">
+                    {(course.audience ?? []).map((item) => (
+                      <span
+                        key={item}
+                        className="rounded-full bg-card px-3 py-1.5 text-sm text-muted-foreground"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </section>
 
           <CourseDetailContent
-            highlights={course.highlights ?? []}
-            requirements={course.requirements ?? []}
-            audience={course.audience ?? []}
             catalogSections={course.catalogSections ?? []}
             reviews={course.reviews ?? []}
             faqs={faqs}
