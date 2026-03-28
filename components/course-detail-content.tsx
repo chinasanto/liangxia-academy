@@ -1,5 +1,6 @@
 'use client'
 
+import type { ReactNode } from 'react'
 import { CheckCircle2, MessageSquareText, PlayCircle } from 'lucide-react'
 
 import {
@@ -26,6 +27,7 @@ type CourseDetailContentProps = {
   seoSections: CourseSeoSection[]
   positioning: CoursePositioning
   hasCaseStudies?: boolean
+  afterOverview?: ReactNode
 }
 
 export function CourseDetailContent({
@@ -38,6 +40,7 @@ export function CourseDetailContent({
   seoSections,
   positioning,
   hasCaseStudies = false,
+  afterOverview,
 }: CourseDetailContentProps) {
   return (
     <div className="space-y-8">
@@ -66,11 +69,92 @@ export function CourseDetailContent({
       </section>
 
       <section
+        id="course-overview"
+        className="scroll-mt-24 rounded-[28px] border border-white/[0.08] bg-card/55 p-5 sm:p-8"
+      >
+        <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+          <div>
+            <h2 className="mb-6 text-2xl font-bold text-foreground">课程介绍</h2>
+            <ul className="space-y-4">
+              {highlights.map((item) => (
+                <li key={item} className="flex items-start gap-3 text-sm leading-7 text-foreground/90">
+                  <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-green-400" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="space-y-6">
+            <div>
+              <h3 className="mb-4 text-lg font-semibold text-foreground">学习要求</h3>
+              <ol className="space-y-3">
+                {requirements.map((item, index) => (
+                  <li key={item} className="flex items-start gap-3 text-sm leading-7 text-muted-foreground">
+                    <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/15 text-xs font-semibold text-primary">
+                      {index + 1}
+                    </span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+
+            <div>
+              <h3 className="mb-4 text-lg font-semibold text-foreground">适合人群</h3>
+              <div className="flex flex-wrap gap-2">
+                {audience.map((item) => (
+                  <span
+                    key={item}
+                    className="rounded-full bg-background/85 px-3 py-1.5 text-sm text-muted-foreground"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {afterOverview}
+
+      <section
+        id="course-insight"
+        className="scroll-mt-24 rounded-[28px] border border-white/[0.08] bg-card/55 p-5 sm:p-8"
+      >
+        <div className="mb-6">
+          <h2 className="text-2xl font-bold text-foreground">课程解读</h2>
+          <p className="mt-2 text-sm text-muted-foreground">
+            这部分会更直接回答学习目标、课程定位和能力收益，帮助你更快判断这门课是否适合当前阶段。
+          </p>
+        </div>
+
+        <div className="grid gap-5 lg:grid-cols-2">
+          {seoSections.map((section) => (
+            <article
+              key={section.title}
+              className="rounded-[24px] border border-white/[0.08] bg-background/75 p-6"
+            >
+              <h3 className="mb-4 text-lg font-semibold text-foreground">
+                {section.title}
+              </h3>
+              <div className="space-y-4 text-sm leading-7 text-foreground/85">
+                {section.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section
         id="course-fit"
         className="scroll-mt-24 rounded-[28px] border border-white/[0.08] bg-card/55 p-5 sm:p-8"
       >
         <div className="mb-6">
-          <h2 className="text-2xl font-bold text-foreground">学习定位对比</h2>
+          <h2 className="text-2xl font-bold text-foreground">学习定位</h2>
           <p className="mt-2 text-sm text-muted-foreground">
             这部分会明确告诉你这门课更适合谁、不太适合谁，以及学完之后能具体带走什么。
           </p>
@@ -113,85 +197,6 @@ export function CourseDetailContent({
               </ul>
             </article>
           ))}
-        </div>
-      </section>
-
-      <section
-        id="course-insight"
-        className="scroll-mt-24 rounded-[28px] border border-white/[0.08] bg-card/55 p-5 sm:p-8"
-      >
-        <div className="mb-6">
-          <h2 className="text-2xl font-bold text-foreground">课程解读</h2>
-          <p className="mt-2 text-sm text-muted-foreground">
-            这部分会更直接回答学习目标、课程定位和能力收益，帮助你更快判断这门课是否适合当前阶段。
-          </p>
-        </div>
-
-        <div className="grid gap-5 lg:grid-cols-2">
-          {seoSections.map((section) => (
-            <article
-              key={section.title}
-              className="rounded-[24px] border border-white/[0.08] bg-background/75 p-6"
-            >
-              <h3 className="mb-4 text-lg font-semibold text-foreground">
-                {section.title}
-              </h3>
-              <div className="space-y-4 text-sm leading-7 text-foreground/85">
-                {section.paragraphs.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
-                ))}
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section
-        id="course-overview"
-        className="scroll-mt-24 rounded-[28px] border border-white/[0.08] bg-card/55 p-5 sm:p-8"
-      >
-        <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-          <div>
-            <h2 className="mb-6 text-2xl font-bold text-foreground">课程亮点</h2>
-            <ul className="space-y-4">
-              {highlights.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm leading-7 text-foreground/90">
-                  <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-green-400" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="space-y-6">
-            <div>
-              <h3 className="mb-4 text-lg font-semibold text-foreground">学习要求</h3>
-              <ol className="space-y-3">
-                {requirements.map((item, index) => (
-                  <li key={item} className="flex items-start gap-3 text-sm leading-7 text-muted-foreground">
-                    <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/15 text-xs font-semibold text-primary">
-                      {index + 1}
-                    </span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ol>
-            </div>
-
-            <div>
-              <h3 className="mb-4 text-lg font-semibold text-foreground">适合人群</h3>
-              <div className="flex flex-wrap gap-2">
-                {audience.map((item) => (
-                  <span
-                    key={item}
-                    className="rounded-full bg-background/85 px-3 py-1.5 text-sm text-muted-foreground"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 

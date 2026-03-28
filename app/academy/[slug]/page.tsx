@@ -217,14 +217,6 @@ export default async function CourseDetailPage({
             </div>
           </section>
 
-          <CourseConsultCta courseTitle={course.shortTitle} />
-
-          <CoursePathNav
-            previous={pathNavigation.previous}
-            next={pathNavigation.next}
-            parallel={pathNavigation.parallel}
-          />
-
           <CourseDetailContent
             highlights={course.highlights ?? []}
             requirements={course.requirements ?? []}
@@ -235,6 +227,16 @@ export default async function CourseDetailPage({
             seoSections={course.seoSections ?? []}
             positioning={positioning}
             hasCaseStudies={(course.caseStudies ?? []).length > 0}
+            afterOverview={
+              <>
+                <CourseConsultCta courseTitle={course.shortTitle} />
+                <CoursePathNav
+                  previous={pathNavigation.previous}
+                  next={pathNavigation.next}
+                  parallel={pathNavigation.parallel}
+                />
+              </>
+            }
           />
 
           <CourseCaseStudies items={course.caseStudies ?? []} />
