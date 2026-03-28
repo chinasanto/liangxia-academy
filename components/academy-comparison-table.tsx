@@ -19,20 +19,53 @@ function getRoadmapLabel(slug: string) {
   return index >= 0 ? `主线第 ${index + 1} 步` : '补充模块'
 }
 
+function sortCoursesByRoadmap(courses: CourseCatalogEntry[]) {
+  const roadmap = getMainRoadmapSlugs()
+
+  return [...courses].sort((a, b) => {
+    const aIndex = roadmap.indexOf(a.slug)
+    const bIndex = roadmap.indexOf(b.slug)
+
+    if (aIndex >= 0 && bIndex >= 0) {
+      return aIndex - bIndex
+    }
+
+    if (aIndex >= 0) {
+      return -1
+    }
+
+    if (bIndex >= 0) {
+      return 1
+    }
+
+    if (a.slug === 'brain-quant') {
+      return -1
+    }
+
+    if (b.slug === 'brain-quant') {
+      return 1
+    }
+
+    return a.sortOrder - b.sortOrder
+  })
+}
+
 export function AcademyComparisonTable({
   courses,
 }: AcademyComparisonTableProps) {
+  const sortedCourses = sortCoursesByRoadmap(courses)
+
   return (
     <section className="mt-10 rounded-[28px] border border-white/[0.08] bg-background/72 p-6 sm:p-7">
       <div className="mb-6">
         <h3 className="text-2xl font-bold text-foreground">选课速览</h3>
         <p className="mt-2 text-sm leading-7 text-muted-foreground">
-          如果你还在犹豫先学哪门课，这里用更直观的方式把课程定位、适合阶段和推荐顺序放在一起看。
+          按主线学习顺序排好，先看主线，再看并行专项，会更容易判断先学哪门。
         </p>
       </div>
 
       <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-        {courses.map((course) => (
+        {sortedCourses.map((course) => (
           <article
             key={course.slug}
             className="rounded-[24px] border border-white/[0.08] bg-card/55 p-5"
