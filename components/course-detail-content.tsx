@@ -1,6 +1,5 @@
 'use client'
 
-import type { ReactNode } from 'react'
 import { CheckCircle2, MessageSquareText, PlayCircle } from 'lucide-react'
 
 import {
@@ -27,7 +26,6 @@ type CourseDetailContentProps = {
   seoSections: CourseSeoSection[]
   positioning: CoursePositioning
   hasCaseStudies?: boolean
-  afterOverview?: ReactNode
 }
 
 export function CourseDetailContent({
@@ -40,7 +38,6 @@ export function CourseDetailContent({
   seoSections,
   positioning,
   hasCaseStudies = false,
-  afterOverview,
 }: CourseDetailContentProps) {
   return (
     <div className="space-y-8">
@@ -116,8 +113,6 @@ export function CourseDetailContent({
           </div>
         </div>
       </section>
-
-      {afterOverview}
 
       <section
         id="course-insight"

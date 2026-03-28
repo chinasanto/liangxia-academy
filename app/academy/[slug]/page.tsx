@@ -227,19 +227,17 @@ export default async function CourseDetailPage({
             seoSections={course.seoSections ?? []}
             positioning={positioning}
             hasCaseStudies={(course.caseStudies ?? []).length > 0}
-            afterOverview={
-              <>
-                <CourseConsultCta courseTitle={course.shortTitle} />
-                <CoursePathNav
-                  previous={pathNavigation.previous}
-                  next={pathNavigation.next}
-                  parallel={pathNavigation.parallel}
-                />
-              </>
-            }
           />
 
           <CourseCaseStudies items={course.caseStudies ?? []} />
+
+          <CourseConsultCta courseTitle={course.shortTitle} />
+
+          <CoursePathNav
+            previous={pathNavigation.previous}
+            next={pathNavigation.next}
+            parallel={pathNavigation.parallel}
+          />
 
           <CourseRelatedLinks items={relatedCourses} />
 
