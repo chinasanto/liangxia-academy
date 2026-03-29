@@ -38,6 +38,7 @@ export async function POST() {
     revalidateTag('academy-insights', 'max')
     revalidatePath('/academy')
     revalidatePath('/academy/insights')
+    revalidatePath('/api/academy/insights')
 
     const status = await getDatabaseStatus()
 

@@ -41,6 +41,7 @@ export async function PATCH(
     revalidateTag('academy-insights', 'max')
     revalidatePath('/academy')
     revalidatePath('/academy/insights')
+    revalidatePath('/api/academy/insights')
     revalidatePath(`/academy/insights/${slug}`)
     return NextResponse.json({ insight })
   } catch (error) {
@@ -72,6 +73,7 @@ export async function DELETE(
   revalidateTag('academy-insights', 'max')
   revalidatePath('/academy')
   revalidatePath('/academy/insights')
+  revalidatePath('/api/academy/insights')
   revalidatePath(`/academy/insights/${slug}`)
 
   return NextResponse.json({ ok: true })

@@ -103,7 +103,7 @@ export function AcademyContentTabs({
 
       try {
         const response = await fetch('/api/academy/insights', {
-          cache: 'no-store',
+          cache: 'force-cache',
         })
 
         if (!response.ok) {

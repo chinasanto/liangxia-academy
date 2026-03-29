@@ -43,6 +43,7 @@ export async function POST(request: Request) {
     revalidateTag('academy-insights', 'max')
     revalidatePath('/academy')
     revalidatePath('/academy/insights')
+    revalidatePath('/api/academy/insights')
     revalidatePath(`/academy/insights/${payload.slug}`)
     return NextResponse.json({ insight })
   } catch (error) {
