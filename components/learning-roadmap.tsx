@@ -111,7 +111,7 @@ const roadmapSteps: RoadmapStep[] = [
 
 export function LearningRoadmap() {
   return (
-    <section className="rounded-[30px] border border-white/[0.08] bg-card/75 p-6 shadow-[0_18px_46px_rgba(16,32,46,0.08)] sm:p-8 lg:p-10 dark:bg-card/45 dark:shadow-none">
+    <section className="p-0 sm:rounded-[30px] sm:border sm:border-white/[0.08] sm:bg-card/75 sm:p-8 sm:shadow-[0_18px_46px_rgba(16,32,46,0.08)] lg:p-10 dark:sm:bg-card/45 dark:sm:shadow-none">
       <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div className="max-w-3xl">
           <h3 className="text-2xl font-bold text-foreground sm:text-3xl">
@@ -127,7 +127,7 @@ export function LearningRoadmap() {
       </div>
 
       <div className="space-y-4">
-        <div className="flex items-start gap-4 rounded-2xl border border-dashed border-slate-200 bg-white/88 px-4 py-4 shadow-sm dark:border-white/[0.1] dark:bg-background/50 dark:shadow-none">
+        <div className="flex items-start gap-4 border-b border-dashed border-slate-200 bg-transparent px-0 py-4 dark:border-white/[0.1] sm:rounded-2xl sm:border sm:bg-white/88 sm:px-4 sm:shadow-sm dark:sm:bg-background/50 dark:sm:shadow-none">
           <div className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-foreground dark:border-white/[0.12] dark:bg-background">
             <GraduationCap className="h-5 w-5" />
           </div>
@@ -151,7 +151,7 @@ export function LearningRoadmap() {
               </div>
 
               <div
-                className={`flex-1 rounded-[24px] border p-5 shadow-[0_12px_32px_rgba(16,32,46,0.06)] sm:p-6 dark:shadow-none ${step.ring} ${step.bg}`}
+                className={`flex-1 border-b p-0 pb-5 shadow-none sm:rounded-[24px] sm:border sm:p-6 sm:shadow-[0_12px_32px_rgba(16,32,46,0.06)] dark:sm:shadow-none ${step.ring} ${step.bg}`}
               >
                 <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
                   <div className="max-w-3xl">
@@ -205,7 +205,7 @@ export function LearningRoadmap() {
                   </div>
                 </div>
                 <div className="flex-1 pl-0 sm:pl-0">
-                  <div className="rounded-2xl border border-dashed border-slate-200 bg-white/82 px-4 py-3 text-sm text-muted-foreground shadow-sm dark:border-white/[0.08] dark:bg-background/35 dark:shadow-none">
+                  <div className="border-b border-dashed border-slate-200 bg-transparent px-0 py-3 text-sm text-muted-foreground dark:border-white/[0.08] sm:rounded-2xl sm:border sm:bg-white/82 sm:px-4 sm:shadow-sm dark:sm:bg-background/35 dark:sm:shadow-none">
                     {step.bridge}
                   </div>
                 </div>
@@ -214,7 +214,7 @@ export function LearningRoadmap() {
           </div>
         ))}
 
-        <div className="rounded-2xl border border-primary/15 bg-[linear-gradient(135deg,rgba(0,229,176,0.08),rgba(255,255,255,0.96))] px-4 py-4 dark:bg-primary/8">
+        <div className="border-b border-primary/15 bg-transparent px-0 py-4 dark:bg-transparent sm:rounded-2xl sm:border sm:bg-[linear-gradient(135deg,rgba(0,229,176,0.08),rgba(255,255,255,0.96))] sm:px-4 dark:sm:bg-primary/8">
           <div className="flex items-start gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground">
               <Target className="h-5 w-5" />
@@ -228,7 +228,7 @@ export function LearningRoadmap() {
           </div>
         </div>
 
-        <div className="rounded-2xl border border-white/[0.08] bg-white/85 px-4 py-4 shadow-sm dark:bg-background/45 dark:shadow-none">
+        <div className="border-b border-white/[0.08] bg-transparent px-0 py-4 shadow-none sm:rounded-2xl sm:border sm:bg-white/85 sm:px-4 sm:shadow-sm dark:sm:bg-background/45 dark:sm:shadow-none">
           <div className="text-sm font-semibold text-foreground">可并行专项</div>
           <div className="mt-1 text-sm leading-6 text-muted-foreground">
             WorldQuant Brain 实战与求职课更适合作为并行补充模块，

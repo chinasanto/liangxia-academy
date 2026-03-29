@@ -112,16 +112,38 @@ export function AcademyDiagnostic({
 }: AcademyDiagnosticProps) {
   const [query, setQuery] = useState('')
   const [stage, setStage] = useState('全部阶段')
+  const [submittedInput, setSubmittedInput] = useState<{
+    query: string
+    stage: string
+  } | null>(null)
+
+  const trimmedQuery = query.trim()
+  const hasPendingChanges = Boolean(
+    submittedInput &&
+      (submittedInput.query !== trimmedQuery || submittedInput.stage !== stage),
+  )
 
   const matchedRule = useMemo(() => {
-    const text = query.trim().toLowerCase()
-
-    if (!text) {
-      return diagnosticRules[0]
+    if (!submittedInput) {
+      return null
     }
 
+    const text = submittedInput.query.trim().toLowerCase()
+    const activeStage = submittedInput.stage
+
+    if (!text) {
+      return null
+    }
+
+    const stageMatchedRules = diagnosticRules.filter(
+      (rule) => activeStage === '全部阶段' || rule.suitableStages.includes(activeStage),
+    )
+
     const candidates = diagnosticRules
-      .filter((rule) => stage === '全部阶段' || rule.suitableStages.includes(stage))
+      .filter(
+        (rule) =>
+          activeStage === '全部阶段' || rule.suitableStages.includes(activeStage),
+      )
       .map((rule) => ({
         rule,
         score: rule.keywords.reduce((total, keyword) => {
@@ -130,28 +152,37 @@ export function AcademyDiagnostic({
       }))
       .sort((a, b) => b.score - a.score)
 
-    return candidates[0]?.score ? candidates[0].rule : diagnosticRules[0]
-  }, [query, stage])
+    return candidates[0]?.score
+      ? candidates[0].rule
+      : stageMatchedRules[0] ?? diagnosticRules[0]
+  }, [submittedInput])
 
-  const recommendedCourses = useMemo(
-    () =>
-      matchedRule.courseSlugs
-        .map((slug) => courses.find((course) => course.slug === slug))
-        .filter((course): course is CourseCatalogEntry => Boolean(course)),
-    [courses, matchedRule],
-  )
+  const visibleRule =
+    matchedRule && submittedInput && !hasPendingChanges ? matchedRule : null
 
-  const recommendedArticles = useMemo(
-    () =>
-      matchedRule.articleSlugs
-        .map((slug) => articles.find((article) => article.slug === slug))
-        .filter((article): article is InsightArticle => Boolean(article)),
-    [articles, matchedRule],
-  )
+  const recommendedCourses = useMemo(() => {
+    if (!visibleRule) {
+      return []
+    }
+
+    return visibleRule.courseSlugs
+      .map((slug) => courses.find((course) => course.slug === slug))
+      .filter((course): course is CourseCatalogEntry => Boolean(course))
+  }, [courses, visibleRule])
+
+  const recommendedArticles = useMemo(() => {
+    if (!visibleRule) {
+      return []
+    }
+
+    return visibleRule.articleSlugs
+      .map((slug) => articles.find((article) => article.slug === slug))
+      .filter((article): article is InsightArticle => Boolean(article))
+  }, [articles, visibleRule])
 
   return (
     <section className="space-y-8">
-      <section className="rounded-[28px] border border-white/[0.08] bg-card/55 p-6 sm:p-8">
+      <section className="p-0 sm:rounded-[28px] sm:border sm:border-white/[0.08] sm:bg-card/55 sm:p-8">
         <div className="mb-6 max-w-3xl">
           <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
             <Activity className="h-3.5 w-3.5" />
@@ -190,9 +221,30 @@ export function AcademyDiagnostic({
                 </button>
               ))}
             </div>
+
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div className="text-xs leading-6 text-muted-foreground">
+                {hasPendingChanges
+                  ? '你刚刚修改了输入内容，请重新点击诊断按钮后再查看新的结果。'
+                  : '诊断结果只会在你点击按钮后生成，不会随着输入实时变化。'}
+              </div>
+              <Button
+                type="button"
+                onClick={() =>
+                  setSubmittedInput({
+                    query: trimmedQuery,
+                    stage,
+                  })
+                }
+                disabled={trimmedQuery.length === 0}
+                className="rounded-full px-5 font-mono text-xs"
+              >
+                {submittedInput ? '重新诊断' : '开始诊断'}
+              </Button>
+            </div>
           </div>
 
-          <div className="rounded-[24px] border border-white/[0.08] bg-background/72 p-5">
+          <div className="border-t border-white/[0.08] pt-5 sm:rounded-[24px] sm:border sm:bg-background/72 sm:p-5">
             <div className="mb-3 text-sm font-semibold text-foreground">当前阶段</div>
             <select
               value={stage}
@@ -206,97 +258,124 @@ export function AcademyDiagnostic({
               ))}
             </select>
 
-            <div className="mt-5 rounded-[20px] bg-primary/8 p-4">
-              <div className="text-xs font-semibold tracking-[0.12em] text-primary">
-                诊断结果
+            {visibleRule ? (
+              <div className="mt-5 border-t border-primary/15 pt-4 sm:rounded-[20px] sm:bg-primary/8 sm:p-4 sm:border-none">
+                <div className="text-xs font-semibold tracking-[0.12em] text-primary">
+                  诊断结果
+                </div>
+                <div className="mt-2 text-lg font-semibold text-foreground">
+                  {visibleRule.title}
+                </div>
+                <p className="mt-3 text-sm leading-7 text-muted-foreground">
+                  {visibleRule.diagnosis}
+                </p>
+                <p className="mt-3 text-sm leading-7 text-foreground/85">
+                  {visibleRule.recommendation}
+                </p>
               </div>
-              <div className="mt-2 text-lg font-semibold text-foreground">
-                {matchedRule.title}
+            ) : (
+              <div className="mt-5 border-t border-dashed border-white/[0.08] pt-4 sm:rounded-[20px] sm:border sm:bg-card/35 sm:p-4">
+                <div className="text-xs font-semibold tracking-[0.12em] text-primary">
+                  等待诊断
+                </div>
+                <p className="mt-2 text-sm leading-7 text-muted-foreground">
+                  先描述你的问题，再点击“开始诊断”或“重新诊断”，这里才会展示对应分析。
+                </p>
               </div>
-              <p className="mt-3 text-sm leading-7 text-muted-foreground">
-                {matchedRule.diagnosis}
-              </p>
-              <p className="mt-3 text-sm leading-7 text-foreground/85">
-                {matchedRule.recommendation}
-              </p>
-            </div>
+            )}
           </div>
         </div>
       </section>
 
-      <section className="rounded-[28px] border border-white/[0.08] bg-card/55 p-6 sm:p-8">
-        <div className="mb-5 flex items-center gap-3">
-          <div className="rounded-2xl bg-primary/15 p-3 text-primary">
-            <ClipboardList className="h-5 w-5" />
-          </div>
-          <div>
-            <h3 className="text-xl font-semibold text-foreground">建议学习任务计划</h3>
-            <p className="text-sm text-muted-foreground">
-              按照“先补底层问题，再做针对训练”的思路推进，会更容易形成闭环。
-            </p>
-          </div>
-        </div>
-
-        <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="rounded-[24px] border border-white/[0.08] bg-background/72 p-5">
-            <div className="mb-4 text-base font-semibold text-foreground">推荐课程</div>
-            <div className="space-y-3">
-              {recommendedCourses.map((course) => (
-                <Link
-                  key={course.slug}
-                  href={`/academy/${course.slug}`}
-                  className="flex items-center justify-between gap-3 rounded-[18px] border border-white/[0.08] bg-card/60 px-4 py-3 transition hover:border-primary/30"
-                >
-                  <div>
-                    <div className="text-sm font-semibold text-foreground">{course.shortTitle}</div>
-                    <div className="mt-1 text-xs text-muted-foreground">
-                      {course.level} · {course.category}
-                    </div>
-                  </div>
-                  <ArrowRight className="h-4 w-4 text-primary" />
-                </Link>
-              ))}
+      {visibleRule ? (
+        <section className="p-0 sm:rounded-[28px] sm:border sm:border-white/[0.08] sm:bg-card/55 sm:p-8">
+          <div className="mb-5 flex items-center gap-3">
+            <div className="rounded-2xl bg-primary/15 p-3 text-primary">
+              <ClipboardList className="h-5 w-5" />
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold text-foreground">建议学习任务计划</h3>
+              <p className="text-sm text-muted-foreground">
+                按照“先补底层问题，再做针对训练”的思路推进，会更容易形成闭环。
+              </p>
             </div>
           </div>
 
-          <div className="space-y-5">
-            <div className="rounded-[24px] border border-white/[0.08] bg-background/72 p-5">
-              <div className="mb-4 text-base font-semibold text-foreground">优先任务</div>
-              <ul className="space-y-3">
-                {matchedRule.tasks.map((task, index) => (
-                  <li key={task} className="flex items-start gap-3 text-sm leading-7 text-foreground/88">
-                    <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/15 text-xs font-semibold text-primary">
-                      {index + 1}
-                    </span>
-                    <span>{task}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="rounded-[24px] border border-white/[0.08] bg-background/72 p-5">
-              <div className="mb-4 flex items-center gap-2 text-base font-semibold text-foreground">
-                <Sparkles className="h-4 w-4 text-primary" />
-                对应技巧文章
-              </div>
+          <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
+            <div className="border-b border-white/[0.08] bg-transparent px-0 pb-5 sm:rounded-[24px] sm:border sm:bg-background/72 sm:p-5">
+              <div className="mb-4 text-base font-semibold text-foreground">推荐课程</div>
               <div className="space-y-3">
-                {recommendedArticles.map((article) => (
+                {recommendedCourses.map((course) => (
                   <Link
-                    key={article.slug}
-                    href={`/academy/insights/${article.slug}`}
-                    className="block rounded-[18px] border border-white/[0.08] bg-card/60 px-4 py-3 transition hover:border-primary/30"
+                    key={course.slug}
+                    href={`/academy/${course.slug}`}
+                    className="flex items-center justify-between gap-3 border-b border-white/[0.08] bg-transparent px-0 py-3 transition last:border-b-0 hover:border-primary/30 sm:rounded-[18px] sm:border sm:bg-card/60 sm:px-4"
                   >
-                    <div className="text-sm font-semibold text-foreground">{article.title}</div>
-                    <div className="mt-1 text-xs text-muted-foreground">
-                      {article.category} · {article.readTime}
+                    <div>
+                      <div className="text-sm font-semibold text-foreground">{course.shortTitle}</div>
+                      <div className="mt-1 text-xs text-muted-foreground">
+                        {course.level} · {course.category}
+                      </div>
                     </div>
+                    <ArrowRight className="h-4 w-4 text-primary" />
                   </Link>
                 ))}
               </div>
             </div>
+
+            <div className="space-y-5">
+              <div className="border-b border-white/[0.08] bg-transparent px-0 pb-5 sm:rounded-[24px] sm:border sm:bg-background/72 sm:p-5">
+                <div className="mb-4 text-base font-semibold text-foreground">优先任务</div>
+                <ul className="space-y-3">
+                  {visibleRule.tasks.map((task, index) => (
+                    <li key={task} className="flex items-start gap-3 text-sm leading-7 text-foreground/88">
+                      <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/15 text-xs font-semibold text-primary">
+                        {index + 1}
+                      </span>
+                      <span>{task}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="bg-transparent px-0 pt-1 sm:rounded-[24px] sm:border sm:border-white/[0.08] sm:bg-background/72 sm:p-5">
+                <div className="mb-4 flex items-center gap-2 text-base font-semibold text-foreground">
+                  <Sparkles className="h-4 w-4 text-primary" />
+                  对应技巧文章
+                </div>
+                <div className="space-y-3">
+                  {recommendedArticles.map((article) => (
+                    <Link
+                      key={article.slug}
+                      href={`/academy/insights/${article.slug}`}
+                      className="block border-b border-white/[0.08] bg-transparent px-0 py-3 transition last:border-b-0 hover:border-primary/30 sm:rounded-[18px] sm:border sm:bg-card/60 sm:px-4"
+                    >
+                      <div className="text-sm font-semibold text-foreground">{article.title}</div>
+                      <div className="mt-1 text-xs text-muted-foreground">
+                        {article.category} · {article.readTime}
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      ) : (
+        <section className="rounded-[28px] border border-dashed border-white/[0.08] bg-card/35 p-6 sm:p-8">
+          <div className="flex items-center gap-3">
+            <div className="rounded-2xl bg-primary/15 p-3 text-primary">
+              <ClipboardList className="h-5 w-5" />
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold text-foreground">建议学习任务计划</h3>
+              <p className="text-sm text-muted-foreground">
+                点击诊断按钮后，这里才会生成推荐课程、优先任务和对应技巧文章。
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
     </section>
   )
 }
