@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import {
   Activity,
@@ -26,7 +26,6 @@ import type { InsightArticle } from '@/lib/insight-types'
 type AcademyContentTabsProps = {
   courses: CourseCatalogEntry[]
   featuredCount: number
-  allInsights: InsightArticle[]
   initialTab?: string
   initialFilters?: {
     level?: string
@@ -38,7 +37,6 @@ type AcademyContentTabsProps = {
 export function AcademyContentTabs({
   courses,
   featuredCount,
-  allInsights,
   initialTab,
   initialFilters,
 }: AcademyContentTabsProps) {
@@ -82,6 +80,60 @@ export function AcademyContentTabs({
       ? initialTab
       : 'home'
   const [currentTab, setCurrentTab] = useState(activeTab)
+  const [allInsights, setAllInsights] = useState<InsightArticle[]>([])
+  const [insightsLoading, setInsightsLoading] = useState(
+    activeTab === 'insights' || activeTab === 'diagnosis',
+  )
+  const [insightsError, setInsightsError] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (
+      (currentTab !== 'insights' && currentTab !== 'diagnosis') ||
+      allInsights.length > 0 ||
+      insightsLoading
+    ) {
+      return
+    }
+
+    let cancelled = false
+
+    async function loadInsights() {
+      setInsightsLoading(true)
+      setInsightsError(null)
+
+      try {
+        const response = await fetch('/api/academy/insights', {
+          cache: 'no-store',
+        })
+
+        if (!response.ok) {
+          throw new Error('加载文章失败')
+        }
+
+        const data = (await response.json()) as { insights: InsightArticle[] }
+
+        if (!cancelled) {
+          setAllInsights(data.insights)
+        }
+      } catch (error) {
+        if (!cancelled) {
+          setInsightsError(
+            error instanceof Error ? error.message : '加载文章失败',
+          )
+        }
+      } finally {
+        if (!cancelled) {
+          setInsightsLoading(false)
+        }
+      }
+    }
+
+    void loadInsights()
+
+    return () => {
+      cancelled = true
+    }
+  }, [allInsights.length, currentTab, insightsLoading])
 
   return (
     <Tabs value={currentTab} onValueChange={setCurrentTab} className="mb-10 sm:mb-12">
@@ -366,19 +418,39 @@ export function AcademyContentTabs({
               </div>
             </div>
 
-            <InsightsExplorer
-              articles={allInsights}
-              title="量化技巧"
-              description="支持按关键词、分类和标签筛选文章，更方便快速找到适合自己当前阶段的量化内容。"
-              showAllLink
-            />
+            {insightsLoading ? (
+              <div className="rounded-[28px] border border-white/[0.08] bg-background/72 p-8 text-sm text-muted-foreground">
+                正在加载文章内容...
+              </div>
+            ) : insightsError ? (
+              <div className="rounded-[28px] border border-red-500/20 bg-red-500/10 p-8 text-sm text-red-300">
+                {insightsError}
+              </div>
+            ) : (
+              <InsightsExplorer
+                articles={allInsights}
+                title="量化技巧"
+                description="支持按关键词、分类和标签筛选文章，更方便快速找到适合自己当前阶段的量化内容。"
+                showAllLink
+              />
+            )}
           </section>
         </TabsContent>
       ) : null}
 
       {currentTab === 'diagnosis' ? (
         <TabsContent value="diagnosis" forceMount className="mt-0">
-          <AcademyDiagnostic courses={courses} articles={allInsights} />
+          {insightsLoading ? (
+            <div className="rounded-[28px] border border-white/[0.08] bg-background/72 p-8 text-sm text-muted-foreground">
+              正在加载诊断相关文章...
+            </div>
+          ) : insightsError ? (
+            <div className="rounded-[28px] border border-red-500/20 bg-red-500/10 p-8 text-sm text-red-300">
+              {insightsError}
+            </div>
+          ) : (
+            <AcademyDiagnostic courses={courses} articles={allInsights} />
+          )}
         </TabsContent>
       ) : null}
     </Tabs>

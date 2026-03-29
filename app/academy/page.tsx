@@ -5,7 +5,6 @@ import { AcademyShellHeader } from '@/components/academy-shell-header'
 import { Footer } from '@/components/footer'
 import { JsonLd } from '@/components/json-ld'
 import { getPublishedCourses } from '@/lib/course-store'
-import { getAllInsights } from '@/lib/insight-store'
 import { buildAcademyMetadata } from '@/lib/seo'
 import { buildAcademyJsonLd } from '@/lib/structured-data'
 
@@ -23,10 +22,7 @@ export default async function AcademyPage({
   }>
 }) {
   const query = await searchParams
-  const [courses, allInsights] = await Promise.all([
-    getPublishedCourses(),
-    getAllInsights(),
-  ])
+  const courses = await getPublishedCourses()
   const featuredCount = courses.filter((course) => course.featured).length
 
   return (
@@ -39,7 +35,6 @@ export default async function AcademyPage({
           <AcademyContentTabs
             courses={courses}
             featuredCount={featuredCount}
-            allInsights={allInsights}
             initialFilters={query}
             initialTab={query.tab}
           />

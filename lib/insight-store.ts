@@ -10,6 +10,17 @@ function compareArticles(a: InsightArticle, b: InsightArticle) {
   return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
 }
 
+function toInsightSummary(article: InsightArticle): InsightArticle {
+  return {
+    ...article,
+    sections: article.sections.map((section) => ({
+      title: section.title,
+      paragraphs: [],
+      bullets: section.bullets ?? [],
+    })),
+  }
+}
+
 export async function getAllInsights(): Promise<InsightArticle[]> {
   try {
     const articles = await listDatabaseInsights()
@@ -21,6 +32,11 @@ export async function getAllInsights(): Promise<InsightArticle[]> {
   }
 
   return [...insightArticles].sort(compareArticles)
+}
+
+export async function getAllInsightSummaries(): Promise<InsightArticle[]> {
+  const articles = await getAllInsights()
+  return articles.map(toInsightSummary)
 }
 
 export async function getFeaturedInsights(limit = 3): Promise<InsightArticle[]> {
