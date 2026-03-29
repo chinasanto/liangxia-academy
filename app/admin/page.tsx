@@ -3,29 +3,10 @@
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useEffect, useMemo, useState, useTransition } from 'react'
-import {
-  Database,
-  ExternalLink,
-  LogOut,
-  RefreshCcw,
-  Save,
-  Settings2,
-  Sparkles,
-} from 'lucide-react'
+import { ExternalLink, LogOut, Save, Settings2, Sparkles } from 'lucide-react'
 
-import { AdminInsightsManager } from '@/components/admin-insights-manager'
 import { Button } from '@/components/ui/button'
 import type { CourseCatalogEntry, CourseUpdatePayload } from '@/lib/course-types'
-
-type DatabaseStatus = {
-  mode: 'file' | 'neon'
-  configured: boolean
-  reachable: boolean
-  bootstrapped: boolean
-  courseCount: number
-  insightCount: number
-  error?: string
-}
 
 function toPayload(course: CourseCatalogEntry): CourseUpdatePayload {
   return {
@@ -50,23 +31,7 @@ export default function AdminPage() {
   const [error, setError] = useState<string | null>(null)
   const [activeSlug, setActiveSlug] = useState<string | null>(null)
   const [notice, setNotice] = useState<string | null>(null)
-  const [databaseStatus, setDatabaseStatus] = useState<DatabaseStatus | null>(null)
-  const [syncingDatabase, setSyncingDatabase] = useState(false)
   const [isPending, startTransition] = useTransition()
-
-  async function refreshDatabaseStatus() {
-    try {
-      const response = await fetch('/api/admin/database')
-      if (!response.ok) {
-        return
-      }
-
-      const data = (await response.json()) as { status: DatabaseStatus }
-      setDatabaseStatus(data.status)
-    } catch {
-      // Ignore status fetch errors in the UI; course data can still work via file fallback.
-    }
-  }
 
   useEffect(() => {
     async function loadCourses() {
@@ -88,7 +53,6 @@ export default function AdminPage() {
     }
 
     void loadCourses()
-    void refreshDatabaseStatus()
   }, [])
 
   const summary = useMemo(() => {
@@ -157,35 +121,6 @@ export default function AdminPage() {
     router.refresh()
   }
 
-  async function handleSyncDatabase() {
-    setSyncingDatabase(true)
-    setError(null)
-    setNotice(null)
-
-    try {
-      const response = await fetch('/api/admin/database', {
-        method: 'POST',
-      })
-
-      if (!response.ok) {
-        const data = (await response.json()) as { error?: string }
-        throw new Error(data.error ?? '同步到 Neon 失败')
-      }
-
-      const data = (await response.json()) as {
-        status: DatabaseStatus
-        synced: { courses: number; insights: number }
-      }
-
-      setDatabaseStatus(data.status)
-      setNotice(`已同步到 Neon：${data.synced.courses} 门课程，${data.synced.insights} 篇文章`)
-    } catch (syncError) {
-      setError(syncError instanceof Error ? syncError.message : '同步到 Neon 失败')
-    } finally {
-      setSyncingDatabase(false)
-    }
-  }
-
   return (
     <main className="min-h-screen bg-background px-6 pb-20 pt-28 lg:px-12">
       <div className="mx-auto max-w-7xl">
@@ -199,8 +134,8 @@ export default function AdminPage() {
                 AI量化学院后台
               </h1>
               <p className="text-sm leading-7 text-muted-foreground sm:text-base">
-                这里可以直接管理课程标题、摘要、展示顺序和上架状态。现在支持接入 Neon 做数据库管理；
-                未配置数据库时，系统会自动回退到本地文件数据。
+                这里可以直接管理课程标题、摘要、展示顺序和上架状态。当前实现是本地文件型后台，
+                保存后会写回项目中的 JSON 数据文件，适合先把课程运营流程跑起来。
               </p>
             </div>
 
@@ -232,23 +167,6 @@ export default function AdminPage() {
             <Settings2 className="h-4 w-4" />
             {loading ? '正在加载课程...' : '后台已连接课程数据'}
           </div>
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-background/70 px-4 py-2 text-foreground">
-            <Database className="h-4 w-4 text-primary" />
-            {databaseStatus?.mode === 'neon'
-              ? `Neon 数据库 · 课程 ${databaseStatus.courseCount} · 文章 ${databaseStatus.insightCount}`
-              : databaseStatus?.configured
-                ? 'Neon 已配置，等待初始化数据'
-                : '当前使用本地文件模式'}
-          </div>
-          <Button
-            variant="outline"
-            className="font-mono text-xs"
-            onClick={() => void handleSyncDatabase()}
-            disabled={syncingDatabase}
-          >
-            <RefreshCcw className={`h-4 w-4 ${syncingDatabase ? 'animate-spin' : ''}`} />
-            {syncingDatabase ? '同步中...' : '同步到 Neon'}
-          </Button>
           <Button
             variant="outline"
             className="font-mono text-xs"
@@ -265,11 +183,6 @@ export default function AdminPage() {
           {error ? (
             <div className="rounded-full border border-red-500/20 bg-red-500/10 px-4 py-2 text-red-300">
               {error}
-            </div>
-          ) : null}
-          {databaseStatus?.error ? (
-            <div className="rounded-full border border-amber-500/20 bg-amber-500/10 px-4 py-2 text-amber-300">
-              Neon 状态：{databaseStatus.error}
             </div>
           ) : null}
           {isPending ? (
@@ -488,11 +401,6 @@ export default function AdminPage() {
             当前没有读取到课程数据。
           </div>
         ) : null}
-
-        <AdminInsightsManager
-          courses={courses}
-          onRefreshDatabaseStatus={refreshDatabaseStatus}
-        />
       </div>
     </main>
   )

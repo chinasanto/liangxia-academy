@@ -1,8 +1,4 @@
 import { insightArticles } from '@/data/insights'
-import {
-  getDatabaseInsightBySlug,
-  listDatabaseInsights,
-} from '@/lib/content-database'
 import type { CourseCatalogEntry } from '@/lib/course-types'
 import type { InsightArticle } from '@/lib/insight-types'
 
@@ -10,36 +6,18 @@ function compareArticles(a: InsightArticle, b: InsightArticle) {
   return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
 }
 
-export async function getAllInsights(): Promise<InsightArticle[]> {
-  try {
-    const articles = await listDatabaseInsights()
-    if (articles.length > 0) {
-      return [...articles].sort(compareArticles)
-    }
-  } catch {
-    // Fall back to local insight data when Neon is unavailable or not initialized.
-  }
-
+export async function getAllInsights() {
   return [...insightArticles].sort(compareArticles)
 }
 
-export async function getFeaturedInsights(limit = 3): Promise<InsightArticle[]> {
+export async function getFeaturedInsights(limit = 3) {
   return insightArticles
     .filter((article) => article.featured)
     .sort(compareArticles)
     .slice(0, limit)
 }
 
-export async function getInsightBySlug(slug: string): Promise<InsightArticle | null> {
-  try {
-    const article = await getDatabaseInsightBySlug(slug)
-    if (article) {
-      return article
-    }
-  } catch {
-    // Fall back to local insight data when Neon is unavailable or not initialized.
-  }
-
+export async function getInsightBySlug(slug: string) {
   return insightArticles.find((article) => article.slug === slug) ?? null
 }
 
