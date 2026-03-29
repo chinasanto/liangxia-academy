@@ -148,7 +148,7 @@ export default async function CourseDetailPage({
                   </p>
                 </div>
 
-                <div className="mt-8 flex flex-col items-start gap-4 rounded-[28px] border border-white/[0.08] bg-background/75 p-5 sm:flex-row sm:items-end sm:justify-between">
+                <div className="mt-8 hidden flex-col items-start gap-4 rounded-[28px] border border-white/[0.08] bg-background/75 p-5 sm:flex sm:flex-row sm:items-end sm:justify-between">
                   <div>
                     <div className="text-sm text-muted-foreground">课程价格</div>
                     <div className="font-mono text-3xl font-bold text-[#3da9ff]">
