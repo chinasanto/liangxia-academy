@@ -1,5 +1,4 @@
 import type { CourseCatalogEntry, CourseUpdatePayload } from '@/lib/course-types'
-import { unstable_cache } from 'next/cache'
 import {
   getDatabaseCourseBySlug,
   listDatabaseCourses,
@@ -12,32 +11,11 @@ import {
   updateLocalCourse,
 } from '@/lib/local-course-source'
 
-const getCachedPublishedCourses = unstable_cache(
-  async () => listDatabaseCourses({ includeDrafts: false }),
-  ['academy-courses-published'],
-  {
-    tags: ['academy-courses'],
-    revalidate: false,
-  },
-)
-
-const getCachedAllCourses = unstable_cache(
-  async () => listDatabaseCourses({ includeDrafts: true }),
-  ['academy-courses-all'],
-  {
-    tags: ['academy-courses'],
-    revalidate: false,
-  },
-)
-
 export async function getAllCourses(
   options?: { includeDrafts?: boolean },
 ): Promise<CourseCatalogEntry[]> {
   try {
-    const includeDrafts = options?.includeDrafts ?? false
-    const courses = includeDrafts
-      ? await getCachedAllCourses()
-      : await getCachedPublishedCourses()
+    const courses = await listDatabaseCourses(options)
     if (courses.length > 0) {
       return courses
     }

@@ -1,5 +1,4 @@
 import { insightArticles } from '@/data/insights'
-import { unstable_cache } from 'next/cache'
 import {
   getDatabaseInsightBySlug,
   listDatabaseInsights,
@@ -11,29 +10,9 @@ function compareArticles(a: InsightArticle, b: InsightArticle) {
   return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
 }
 
-const getCachedInsights = unstable_cache(
-  async () => listDatabaseInsights(),
-  ['academy-insights-all'],
-  {
-    tags: ['academy-insights'],
-    revalidate: false,
-  },
-)
-
-function toInsightSummary(article: InsightArticle): InsightArticle {
-  return {
-    ...article,
-    sections: article.sections.map((section) => ({
-      title: section.title,
-      paragraphs: [],
-      bullets: section.bullets ?? [],
-    })),
-  }
-}
-
 export async function getAllInsights(): Promise<InsightArticle[]> {
   try {
-    const articles = await getCachedInsights()
+    const articles = await listDatabaseInsights()
     if (articles.length > 0) {
       return [...articles].sort(compareArticles)
     }
@@ -42,11 +21,6 @@ export async function getAllInsights(): Promise<InsightArticle[]> {
   }
 
   return [...insightArticles].sort(compareArticles)
-}
-
-export async function getAllInsightSummaries(): Promise<InsightArticle[]> {
-  const articles = await getAllInsights()
-  return articles.map(toInsightSummary)
 }
 
 export async function getFeaturedInsights(limit = 3): Promise<InsightArticle[]> {
