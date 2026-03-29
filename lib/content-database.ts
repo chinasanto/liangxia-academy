@@ -541,6 +541,93 @@ export async function getDatabaseInsightBySlug(slug: string) {
   return row ? mapInsightRow(row) : null
 }
 
+export async function createDatabaseInsight(article: InsightArticle) {
+  if (!isNeonConfigured()) {
+    return null
+  }
+
+  await ensureContentTables()
+  const [row] = await executeNeonQuery<InsightRow>(
+    `
+      INSERT INTO academy_insights (
+        slug,
+        title,
+        excerpt,
+        description,
+        category,
+        tags,
+        published_at,
+        read_time,
+        featured,
+        related_course_slugs,
+        sections,
+        key_takeaways,
+        updated_at
+      )
+      VALUES (
+        $1, $2, $3, $4, $5, $6::jsonb, $7::date, $8, $9,
+        $10::jsonb, $11::jsonb, $12::jsonb, NOW()
+      )
+      RETURNING *
+    `,
+    toInsightParams(article),
+  )
+
+  return row ? mapInsightRow(row) : null
+}
+
+export async function updateDatabaseInsight(
+  slug: string,
+  article: InsightArticle,
+) {
+  if (!isNeonConfigured()) {
+    return null
+  }
+
+  await ensureContentTables()
+  const [row] = await executeNeonQuery<InsightRow>(
+    `
+      UPDATE academy_insights
+      SET
+        title = $2,
+        excerpt = $3,
+        description = $4,
+        category = $5,
+        tags = $6::jsonb,
+        published_at = $7::date,
+        read_time = $8,
+        featured = $9,
+        related_course_slugs = $10::jsonb,
+        sections = $11::jsonb,
+        key_takeaways = $12::jsonb,
+        updated_at = NOW()
+      WHERE slug = $1
+      RETURNING *
+    `,
+    [slug, ...toInsightParams(article).slice(1)],
+  )
+
+  return row ? mapInsightRow(row) : null
+}
+
+export async function deleteDatabaseInsight(slug: string) {
+  if (!isNeonConfigured()) {
+    return false
+  }
+
+  await ensureContentTables()
+  const rows = await executeNeonQuery<{ slug: string }>(
+    `
+      DELETE FROM academy_insights
+      WHERE slug = $1
+      RETURNING slug
+    `,
+    [slug],
+  )
+
+  return rows.length > 0
+}
+
 export async function upsertDatabaseInsights(articles: InsightArticle[]) {
   if (!isNeonConfigured()) {
     return 0

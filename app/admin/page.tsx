@@ -13,6 +13,7 @@ import {
   Sparkles,
 } from 'lucide-react'
 
+import { AdminInsightsManager } from '@/components/admin-insights-manager'
 import { Button } from '@/components/ui/button'
 import type { CourseCatalogEntry, CourseUpdatePayload } from '@/lib/course-types'
 
@@ -53,6 +54,20 @@ export default function AdminPage() {
   const [syncingDatabase, setSyncingDatabase] = useState(false)
   const [isPending, startTransition] = useTransition()
 
+  async function refreshDatabaseStatus() {
+    try {
+      const response = await fetch('/api/admin/database')
+      if (!response.ok) {
+        return
+      }
+
+      const data = (await response.json()) as { status: DatabaseStatus }
+      setDatabaseStatus(data.status)
+    } catch {
+      // Ignore status fetch errors in the UI; course data can still work via file fallback.
+    }
+  }
+
   useEffect(() => {
     async function loadCourses() {
       try {
@@ -73,24 +88,7 @@ export default function AdminPage() {
     }
 
     void loadCourses()
-  }, [])
-
-  useEffect(() => {
-    async function loadDatabaseStatus() {
-      try {
-        const response = await fetch('/api/admin/database')
-        if (!response.ok) {
-          return
-        }
-
-        const data = (await response.json()) as { status: DatabaseStatus }
-        setDatabaseStatus(data.status)
-      } catch {
-        // Ignore status fetch errors in the UI; course data can still work via file fallback.
-      }
-    }
-
-    void loadDatabaseStatus()
+    void refreshDatabaseStatus()
   }, [])
 
   const summary = useMemo(() => {
@@ -490,6 +488,11 @@ export default function AdminPage() {
             当前没有读取到课程数据。
           </div>
         ) : null}
+
+        <AdminInsightsManager
+          courses={courses}
+          onRefreshDatabaseStatus={refreshDatabaseStatus}
+        />
       </div>
     </main>
   )
