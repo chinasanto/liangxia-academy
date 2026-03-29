@@ -64,7 +64,7 @@ export default async function AcademyInsightDetailPage({
         <div className="mx-auto max-w-6xl">
           <AcademySubnav active="insights" className="mb-8" />
 
-          <section className="rounded-[30px] border border-white/[0.08] bg-card/50 p-5 sm:p-8 lg:p-12">
+          <section className="p-0 sm:rounded-[30px] sm:border sm:border-white/[0.08] sm:bg-card/50 sm:p-8 lg:p-12">
             <div className="mb-4 flex flex-wrap gap-2">
               <span className="rounded-full bg-primary/12 px-3 py-1 text-xs font-semibold text-primary">
                 {article.category}
@@ -102,7 +102,7 @@ export default async function AcademyInsightDetailPage({
             {article.sections.map((section) => (
               <section
                 key={section.title}
-                className="rounded-[28px] border border-white/[0.08] bg-card/45 p-5 sm:p-8 lg:p-10"
+                className="border-b border-white/[0.08] bg-transparent px-0 pb-8 last:border-b-0 sm:rounded-[28px] sm:border sm:bg-card/45 sm:p-8 lg:p-10"
               >
                 <h2 className="text-2xl font-bold text-foreground">
                   {section.title}
@@ -126,7 +126,7 @@ export default async function AcademyInsightDetailPage({
               </section>
             ))}
 
-            <section className="rounded-[28px] border border-primary/15 bg-primary/8 p-5 sm:p-8 lg:p-10">
+            <section className="border-b border-primary/15 bg-transparent px-0 pb-8 sm:rounded-[28px] sm:border sm:bg-primary/8 sm:p-8 lg:p-10">
               <h2 className="text-2xl font-bold text-foreground">关键结论</h2>
               <ul className="mt-4 space-y-3 text-sm leading-7 text-foreground/85">
                 {article.keyTakeaways.map((item) => (
@@ -138,7 +138,7 @@ export default async function AcademyInsightDetailPage({
               </ul>
             </section>
 
-            <section className="rounded-[28px] border border-white/[0.08] bg-card/45 p-5 sm:p-8 lg:p-10">
+            <section className="p-0 sm:rounded-[28px] sm:border sm:border-white/[0.08] sm:bg-card/45 sm:p-8 lg:p-10">
               <div className="mb-6">
                 <h2 className="text-2xl font-bold text-foreground">关联课程</h2>
                 <p className="mt-2 text-sm leading-7 text-muted-foreground">
@@ -154,7 +154,7 @@ export default async function AcademyInsightDetailPage({
             </section>
 
             {relatedArticles.length > 0 ? (
-              <section className="rounded-[28px] border border-white/[0.08] bg-card/45 p-5 sm:p-8 lg:p-10">
+              <section className="p-0 sm:rounded-[28px] sm:border sm:border-white/[0.08] sm:bg-card/45 sm:p-8 lg:p-10">
                 <div className="mb-6">
                   <h2 className="text-2xl font-bold text-foreground">继续阅读</h2>
                 </div>
@@ -163,7 +163,7 @@ export default async function AcademyInsightDetailPage({
                     <Link
                       key={item.slug}
                       href={`/academy/insights/${item.slug}`}
-                      className="rounded-[24px] border border-white/[0.08] bg-background/75 p-5 transition hover:border-primary/30"
+                      className="border-b border-white/[0.08] bg-transparent px-0 pb-5 transition last:border-b-0 last:pb-0 hover:border-primary/30 sm:rounded-[24px] sm:border sm:bg-background/75 sm:p-5"
                     >
                       <div className="text-sm font-semibold text-primary">
                         {item.category}

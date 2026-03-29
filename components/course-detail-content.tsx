@@ -176,7 +176,7 @@ export function CourseDetailContent({
                   {section.lessons.map((lesson) => (
                     <div
                       key={`${section.id}-${lesson.title}`}
-                      className="flex items-center justify-between gap-3 rounded-2xl bg-card/30 px-3 py-3 sm:border sm:border-white/[0.06] sm:bg-card/45 sm:px-4"
+                      className="flex items-center justify-between gap-3 border-b border-white/[0.08] bg-transparent px-0 py-3 last:border-b-0 sm:rounded-2xl sm:border sm:border-white/[0.06] sm:bg-card/45 sm:px-4"
                     >
                       <div className="flex min-w-0 items-center gap-3">
                         <PlayCircle className="h-4 w-4 shrink-0 text-[#c7d7ec]" />

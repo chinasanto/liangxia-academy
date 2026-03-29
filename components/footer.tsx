@@ -68,12 +68,12 @@ export function Footer() {
             </div>
 
             <div className="md:hidden">
-              <Accordion type="multiple" defaultValue={["服务", "资源", "公司"]} className="space-y-3">
+              <Accordion type="multiple" defaultValue={[]} className="space-y-1">
                 {Object.entries(footerLinks).map(([category, links]) => (
                   <AccordionItem
                     key={category}
                     value={category}
-                    className="overflow-hidden rounded-2xl border border-white/[0.08] bg-background/70 px-4"
+                    className="overflow-hidden border-b border-white/[0.08] bg-transparent px-0 last:border-b-0"
                   >
                     <AccordionTrigger className="py-4 text-sm font-semibold text-foreground no-underline hover:no-underline">
                       {category}

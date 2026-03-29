@@ -171,7 +171,7 @@ export default async function CourseDetailPage({
 
           <section
             id="course-overview"
-            className="mb-8 scroll-mt-24 rounded-[28px] border border-white/[0.08] bg-card/55 p-5 sm:p-8"
+            className="mb-8 scroll-mt-24 p-0 sm:rounded-[28px] sm:border sm:border-white/[0.08] sm:bg-card/55 sm:p-8"
           >
             <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
               <div>
@@ -226,7 +226,7 @@ export default async function CourseDetailPage({
                   ].map((item) => (
                     <div
                       key={item.label}
-                      className="rounded-[20px] border border-white/[0.08] bg-background/70 p-4"
+                      className="border-b border-white/[0.08] bg-transparent px-0 pb-4 last:border-b-0 sm:rounded-[20px] sm:border sm:bg-background/70 sm:p-4"
                     >
                       <div className="text-xs font-semibold tracking-[0.12em] text-primary">
                         {item.label}
@@ -254,7 +254,7 @@ export default async function CourseDetailPage({
                 </div>
               </div>
 
-              <div className="rounded-[24px] border border-white/[0.08] bg-background/75 p-5">
+              <div className="border-t border-white/[0.08] pt-6 sm:rounded-[24px] sm:border sm:bg-background/75 sm:p-5">
                 <div className="mb-4 flex items-center gap-2 text-lg font-semibold text-foreground">
                   <CheckCircle2 className="h-5 w-5 text-green-400" />
                   学习收获
@@ -288,7 +288,7 @@ export default async function CourseDetailPage({
                     {(course.audience ?? []).map((item) => (
                       <span
                         key={item}
-                        className="rounded-full bg-card px-3 py-1.5 text-sm text-muted-foreground"
+                        className="rounded-full bg-card/60 px-3 py-1.5 text-sm text-muted-foreground sm:bg-card"
                       >
                         {item}
                       </span>

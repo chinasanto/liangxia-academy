@@ -14,7 +14,7 @@ export function CourseCaseStudies({ items }: CourseCaseStudiesProps) {
   return (
     <section
       id="course-cases"
-      className="scroll-mt-24 rounded-[28px] border border-white/[0.08] bg-card/55 p-8"
+      className="scroll-mt-24 p-0 sm:rounded-[28px] sm:border sm:border-white/[0.08] sm:bg-card/55 sm:p-8"
     >
       <div className="mb-6">
         <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-primary/12 px-3 py-1 text-xs font-semibold text-primary">
@@ -31,7 +31,7 @@ export function CourseCaseStudies({ items }: CourseCaseStudiesProps) {
         {items.map((item) => (
           <article
             key={item.title}
-            className="rounded-[24px] border border-white/[0.08] bg-background/75 p-6"
+            className="border-b border-white/[0.08] bg-transparent px-0 pb-6 last:border-b-0 last:pb-0 sm:rounded-[24px] sm:border sm:bg-background/75 sm:p-6"
           >
             <h3 className="text-lg font-semibold text-foreground">{item.title}</h3>
             <div className="mt-4 space-y-4 text-sm leading-7 text-foreground/85">
