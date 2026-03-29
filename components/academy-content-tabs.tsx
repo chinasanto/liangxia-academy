@@ -440,17 +440,7 @@ export function AcademyContentTabs({
 
       {currentTab === 'diagnosis' ? (
         <TabsContent value="diagnosis" forceMount className="mt-0">
-          {insightsLoading ? (
-            <div className="rounded-[28px] border border-white/[0.08] bg-background/72 p-8 text-sm text-muted-foreground">
-              正在加载诊断相关文章...
-            </div>
-          ) : insightsError ? (
-            <div className="rounded-[28px] border border-red-500/20 bg-red-500/10 p-8 text-sm text-red-300">
-              {insightsError}
-            </div>
-          ) : (
-            <AcademyDiagnostic courses={courses} articles={allInsights} />
-          )}
+          <AcademyDiagnostic courses={courses} articles={allInsights} />
         </TabsContent>
       ) : null}
     </Tabs>
