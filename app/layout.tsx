@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Noto_Sans_SC, Noto_Serif_SC, Space_Mono } from 'next/font/google'
+import { BackToTop } from '@/components/back-to-top'
 import { ThemeProvider } from '@/components/theme-provider'
 import { WechatFloat } from '@/components/wechat-float'
 import { HOME_KEYWORDS, SITE_NAME, SITE_URL } from '@/lib/seo'
@@ -80,6 +81,7 @@ export default function RootLayout({
       <body className={`${notoSans.variable} ${notoSerif.variable} ${spaceMono.variable} font-sans antialiased grid-overlay`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
           {children}
+          <BackToTop />
           <WechatFloat />
         </ThemeProvider>
       </body>
