@@ -380,7 +380,7 @@ export function DbAdminArticlesPage() {
                     {!selected.isNew ? (
                       <div className="mt-2">
                         <Link
-                          href={`/academy/insights/${selected.slug}`}
+                          href={`/db-admin/preview/${selected.slug}`}
                           className="text-sm text-primary underline-offset-4 hover:underline"
                         >
                           前台预览
