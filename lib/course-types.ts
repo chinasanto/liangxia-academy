@@ -31,6 +31,7 @@ export type CourseCatalogEntry = {
   catalogSections?: CourseCatalogSection[]
   reviews?: CourseReview[]
   seoSections?: CourseSeoSection[]
+  caseStudies?: CourseCaseStudy[]
 }
 
 export type CourseUpdatePayload = Partial<

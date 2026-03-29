@@ -80,5 +80,5 @@ export function buildCoursePathNavigation(
 }
 
 export function getMainRoadmapSlugs() {
-  return [...mainRoadmapSlugs]
+  return [...mainRoadmapSlugs] as (typeof mainRoadmapSlugs)[number][]
 }

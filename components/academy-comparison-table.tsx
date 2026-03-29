@@ -10,7 +10,7 @@ type AcademyComparisonTableProps = {
 
 function getRoadmapLabel(slug: string) {
   const roadmap = getMainRoadmapSlugs()
-  const index = roadmap.indexOf(slug)
+  const index = roadmap.indexOf(slug as (typeof roadmap)[number])
 
   if (slug === 'brain-quant') {
     return '并行专项'
@@ -23,8 +23,8 @@ function sortCoursesByRoadmap(courses: CourseCatalogEntry[]) {
   const roadmap = getMainRoadmapSlugs()
 
   return [...courses].sort((a, b) => {
-    const aIndex = roadmap.indexOf(a.slug)
-    const bIndex = roadmap.indexOf(b.slug)
+    const aIndex = roadmap.indexOf(a.slug as (typeof roadmap)[number])
+    const bIndex = roadmap.indexOf(b.slug as (typeof roadmap)[number])
 
     if (aIndex >= 0 && bIndex >= 0) {
       return aIndex - bIndex
