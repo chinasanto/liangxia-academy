@@ -4,6 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { SiteLogo } from "@/components/site-logo"
 import { ThemeToggle } from "@/components/theme-toggle"
 
 const navLinks = [
@@ -20,7 +21,7 @@ export function Header() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 lg:px-12 h-16 bg-background/85 backdrop-blur-xl border-b border-white/[0.06]">
       <Link href="/" className="flex items-center gap-2.5 font-mono text-sm font-bold text-primary tracking-wider">
-        <span className="text-xl">🦞</span>
+        <SiteLogo className="h-8 w-8 shrink-0" />
         <span>量虾星球</span>
         <span className="text-muted-foreground mx-0.5">/</span>
         <span>QClaw</span>

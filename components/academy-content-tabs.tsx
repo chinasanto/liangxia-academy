@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import {
+  Activity,
   BookText,
   GraduationCap,
   House,
@@ -13,6 +14,7 @@ import {
 } from 'lucide-react'
 
 import { AcademyComparisonTable } from '@/components/academy-comparison-table'
+import { AcademyDiagnostic } from '@/components/academy-diagnostic'
 import { CourseCard } from '@/components/course-card'
 import { InsightsExplorer } from '@/components/insights-explorer'
 import { LearningRoadmap } from '@/components/learning-roadmap'
@@ -76,7 +78,9 @@ export function AcademyContentTabs({
   })
 
   const activeTab =
-    initialTab === 'roadmap' || initialTab === 'insights' ? initialTab : 'home'
+    initialTab === 'roadmap' || initialTab === 'insights' || initialTab === 'diagnosis'
+      ? initialTab
+      : 'home'
 
   return (
     <Tabs defaultValue={activeTab} className="mb-10 sm:mb-12">
@@ -85,7 +89,7 @@ export function AcademyContentTabs({
           <h2 className="text-2xl font-bold text-foreground">AI量化学院</h2>
         </div>
 
-        <TabsList className="grid h-auto w-full grid-cols-3 gap-0.5 overflow-hidden rounded-[22px] border border-white/[0.08] bg-card/60 p-1 sm:inline-flex sm:w-auto sm:gap-1 sm:rounded-full">
+        <TabsList className="grid h-auto w-full grid-cols-4 gap-0.5 overflow-hidden rounded-[22px] border border-white/[0.08] bg-card/60 p-1 sm:inline-flex sm:w-auto sm:gap-1 sm:rounded-full">
           <TabsTrigger
             value="home"
             className="min-w-0 rounded-[18px] px-1.5 py-2 text-[10px] leading-tight whitespace-normal data-[state=active]:bg-primary data-[state=active]:text-primary-foreground sm:rounded-full sm:px-4 sm:text-sm sm:whitespace-nowrap"
@@ -106,6 +110,13 @@ export function AcademyContentTabs({
           >
             <BookText className="h-4 w-4" />
             文章技巧
+          </TabsTrigger>
+          <TabsTrigger
+            value="diagnosis"
+            className="min-w-0 rounded-[18px] px-1.5 py-2 text-[10px] leading-tight whitespace-normal data-[state=active]:bg-primary data-[state=active]:text-primary-foreground sm:rounded-full sm:px-4 sm:text-sm sm:whitespace-nowrap"
+          >
+            <Activity className="h-4 w-4" />
+            问题诊断
           </TabsTrigger>
         </TabsList>
       </div>
@@ -356,6 +367,10 @@ export function AcademyContentTabs({
             showAllLink
           />
         </section>
+      </TabsContent>
+
+      <TabsContent value="diagnosis" className="mt-0">
+        <AcademyDiagnostic courses={courses} articles={allInsights} />
       </TabsContent>
     </Tabs>
   )

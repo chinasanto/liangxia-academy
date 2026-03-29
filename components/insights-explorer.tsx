@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import { Search, Sparkles } from 'lucide-react'
 
@@ -30,7 +30,9 @@ export function InsightsExplorer({
 }: InsightsExplorerProps) {
   const [search, setSearch] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('全部')
-  const [categoriesExpanded, setCategoriesExpanded] = useState(false)
+  const [page, setPage] = useState(1)
+
+  const PAGE_SIZE = 12
 
   const categories = useMemo(() => {
     const counts = new Map<string, number>()
@@ -47,23 +49,30 @@ export function InsightsExplorer({
     ]
   }, [articles])
 
-  const visibleCategories = useMemo(() => {
-    const collapsedCount = 8
-
-    if (categoriesExpanded || categories.length <= collapsedCount) {
-      return categories
-    }
-
-    const nextCategories = categories.slice(0, collapsedCount)
-
-    if (selectedCategory !== '全部' && !nextCategories.includes(selectedCategory)) {
-      return [...nextCategories, selectedCategory]
-    }
-
-    return nextCategories
-  }, [categories, categoriesExpanded, selectedCategory])
-
   const normalizedSearch = normalizeText(search)
+
+  const suggestionPool = useMemo(() => {
+    return Array.from(
+      new Set(
+        articles.flatMap((article) => [
+          article.title,
+          ...article.tags,
+          ...article.keyTakeaways,
+        ]),
+      ),
+    )
+  }, [articles])
+
+  const suggestions = useMemo(() => {
+    if (normalizedSearch.length === 0) {
+      return []
+    }
+
+    return suggestionPool
+      .filter((item) => item.toLowerCase().includes(normalizedSearch))
+      .filter((item) => item.toLowerCase() !== normalizedSearch)
+      .slice(0, 6)
+  }, [normalizedSearch, suggestionPool])
 
   const filteredArticles = useMemo(() => {
     return articles.filter((article) => {
@@ -88,6 +97,17 @@ export function InsightsExplorer({
     })
   }, [articles, normalizedSearch, selectedCategory])
 
+  useEffect(() => {
+    setPage(1)
+  }, [search, selectedCategory])
+
+  const totalPages = Math.max(1, Math.ceil(filteredArticles.length / PAGE_SIZE))
+  const currentPage = Math.min(page, totalPages)
+  const paginatedArticles = filteredArticles.slice(
+    (currentPage - 1) * PAGE_SIZE,
+    currentPage * PAGE_SIZE,
+  )
+
   return (
     <section className={cn('p-0 sm:rounded-[28px] sm:border sm:border-white/[0.08] sm:bg-card/45 sm:p-8', className)}>
       <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
@@ -104,7 +124,7 @@ export function InsightsExplorer({
 
         <div className="flex flex-wrap items-center gap-3">
           <span className="rounded-full bg-primary/12 px-3 py-1.5 text-sm font-semibold text-primary">
-            当前展示 {filteredArticles.length} / {articles.length} 篇
+            当前展示 {paginatedArticles.length} / {filteredArticles.length} 篇
           </span>
           {showAllLink ? (
             <Link
@@ -130,6 +150,21 @@ export function InsightsExplorer({
               placeholder="搜索标题、关键词、问题或方法"
               className="border-white/[0.08] bg-card pl-10 text-foreground"
             />
+            {suggestions.length > 0 ? (
+              <div className="absolute left-0 right-0 top-[calc(100%+0.5rem)] z-20 overflow-hidden rounded-[18px] border border-white/[0.08] bg-background shadow-[0_20px_50px_rgba(16,32,46,0.12)]">
+                {suggestions.map((item) => (
+                  <button
+                    key={item}
+                    type="button"
+                    onClick={() => setSearch(item)}
+                    className="flex w-full items-center justify-between gap-3 border-b border-white/[0.06] px-4 py-3 text-left text-sm text-foreground/88 transition hover:bg-card last:border-b-0"
+                  >
+                    <span className="line-clamp-1">{item}</span>
+                    <span className="shrink-0 text-xs text-primary">建议</span>
+                  </button>
+                ))}
+              </div>
+            ) : null}
           </div>
         </div>
 
@@ -137,47 +172,23 @@ export function InsightsExplorer({
           <div className="mb-3 block text-xs font-semibold tracking-[0.12em] text-muted-foreground">
             文章分类
           </div>
-          <div className="flex flex-wrap items-center gap-2">
-            {visibleCategories.map((category) => (
-              <button
-                key={category}
-                type="button"
-                onClick={() => setSelectedCategory(category)}
-                className={cn(
-                  'rounded-full px-3 py-2 text-xs font-semibold transition',
-                  selectedCategory === category
-                    ? 'bg-primary text-primary-foreground'
-                    : 'bg-card text-muted-foreground hover:text-foreground',
-                )}
-              >
+          <select
+            value={selectedCategory}
+            onChange={(event) => setSelectedCategory(event.target.value)}
+            className="h-11 w-full rounded-xl border border-white/[0.08] bg-card px-4 text-sm text-foreground outline-none transition focus:border-primary/40"
+          >
+            {categories.map((category) => (
+              <option key={category} value={category}>
                 {category}
-              </button>
+              </option>
             ))}
-            {categories.length > visibleCategories.length ? (
-              <button
-                type="button"
-                onClick={() => setCategoriesExpanded(true)}
-                className="rounded-full bg-card/60 px-3 py-2 text-xs font-medium text-muted-foreground transition hover:text-foreground sm:border sm:border-white/[0.08] sm:bg-card"
-              >
-                ...
-              </button>
-            ) : null}
-            {categoriesExpanded && categories.length > 8 ? (
-              <button
-                type="button"
-                onClick={() => setCategoriesExpanded(false)}
-                className="rounded-full border border-primary/20 bg-primary/10 px-3 py-2 text-xs font-medium text-primary transition hover:opacity-85"
-              >
-                收起
-              </button>
-            ) : null}
-          </div>
+          </select>
         </div>
       </div>
 
       {filteredArticles.length > 0 ? (
         <div className="grid gap-5 lg:grid-cols-3">
-          {filteredArticles.map((article) => (
+          {paginatedArticles.map((article) => (
             <InsightCard key={article.slug} article={article} />
           ))}
         </div>
@@ -186,6 +197,32 @@ export function InsightsExplorer({
           当前筛选条件下没有匹配文章，可以切回“全部”或换一个关键词试试。
         </div>
       )}
+
+      {totalPages > 1 ? (
+        <div className="mt-8 flex flex-col gap-3 border-t border-white/[0.08] pt-5 sm:flex-row sm:items-center sm:justify-between">
+          <div className="text-sm text-muted-foreground">
+            第 {currentPage} / {totalPages} 页
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={() => setPage((value) => Math.max(1, value - 1))}
+              disabled={currentPage === 1}
+              className="rounded-full border border-white/[0.08] px-4 py-2 text-sm font-medium text-foreground transition disabled:cursor-not-allowed disabled:opacity-45 hover:border-primary/30"
+            >
+              上一页
+            </button>
+            <button
+              type="button"
+              onClick={() => setPage((value) => Math.min(totalPages, value + 1))}
+              disabled={currentPage === totalPages}
+              className="rounded-full border border-white/[0.08] px-4 py-2 text-sm font-medium text-foreground transition disabled:cursor-not-allowed disabled:opacity-45 hover:border-primary/30"
+            >
+              下一页
+            </button>
+          </div>
+        </div>
+      ) : null}
     </section>
   )
 }

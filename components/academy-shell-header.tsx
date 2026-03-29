@@ -1,6 +1,7 @@
 import Link from 'next/link'
-import { BookOpenText, ChevronLeft } from 'lucide-react'
+import { ChevronLeft } from 'lucide-react'
 
+import { SiteLogo } from '@/components/site-logo'
 import { ThemeToggle } from '@/components/theme-toggle'
 
 type AcademyShellHeaderProps = {
@@ -25,7 +26,7 @@ export function AcademyShellHeader({
           </Link>
           <div className="hidden h-6 w-px bg-border sm:block" />
           <div className="hidden items-center gap-2 sm:flex">
-            <BookOpenText className="h-5 w-5 text-primary" />
+            <SiteLogo className="h-7 w-7 shrink-0" />
             <span className="font-mono text-sm font-bold tracking-wider text-primary">
               AI量化学院
             </span>

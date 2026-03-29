@@ -59,7 +59,7 @@ function buildOrganizationJsonLd() {
     url: SITE_URL,
     logo: {
       '@type': 'ImageObject',
-      url: absoluteUrl('/apple-icon.png'),
+      url: absoluteUrl('/brand/aiquant-logo.jpg'),
     },
     description:
       'AI量化学院提供 AI量化基础课、因子工程、WorldQuant Brain、量化全流程与 AI 编程提效课程。',

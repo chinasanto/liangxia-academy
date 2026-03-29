@@ -1,10 +1,10 @@
 import Link from 'next/link'
-import { BookText, House, Map } from 'lucide-react'
+import { Activity, BookText, House, Map } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
 
 type AcademySubnavProps = {
-  active: 'home' | 'roadmap' | 'insights'
+  active: 'home' | 'roadmap' | 'insights' | 'diagnosis'
   className?: string
 }
 
@@ -12,6 +12,7 @@ const items = [
   { key: 'home', label: '主页', href: '/academy', icon: House },
   { key: 'roadmap', label: '学习路径', href: '/academy?tab=roadmap', icon: Map },
   { key: 'insights', label: '文章技巧', href: '/academy?tab=insights', icon: BookText },
+  { key: 'diagnosis', label: '问题诊断', href: '/academy?tab=diagnosis', icon: Activity },
 ] as const
 
 export function AcademySubnav({
@@ -20,7 +21,7 @@ export function AcademySubnav({
 }: AcademySubnavProps) {
   return (
     <div className={cn('flex justify-start', className)}>
-      <div className="grid w-full grid-cols-3 gap-0.5 overflow-hidden rounded-[22px] border border-white/[0.08] bg-card/60 p-1 sm:inline-flex sm:w-auto sm:max-w-fit sm:gap-1 sm:rounded-full">
+      <div className="grid w-full grid-cols-4 gap-0.5 overflow-hidden rounded-[22px] border border-white/[0.08] bg-card/60 p-1 sm:inline-flex sm:w-auto sm:max-w-fit sm:gap-1 sm:rounded-full">
         {items.map((item) => {
           const isActive = item.key === active
 

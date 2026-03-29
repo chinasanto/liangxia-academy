@@ -1,7 +1,8 @@
 "use client"
 
 import Link from "next/link"
-import { Shell, Github, Twitter, MessageCircle } from "lucide-react"
+import { Github, Twitter, MessageCircle } from "lucide-react"
+import { SiteLogo } from "@/components/site-logo"
 
 const footerLinks = {
   服务: [
@@ -41,10 +42,7 @@ export function Footer() {
             {/* Brand */}
             <div className="lg:col-span-2">
               <div className="flex items-center gap-2 mb-4">
-                <div className="relative">
-                  <Shell className="h-8 w-8 text-primary" />
-                  <div className="absolute inset-0 blur-md bg-primary/30 rounded-full" />
-                </div>
+                <SiteLogo className="h-9 w-9" />
                 <span className="text-xl font-bold neon-text">QClaw</span>
               </div>
               <div className="flex items-center gap-4">
