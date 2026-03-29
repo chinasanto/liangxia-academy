@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { revalidatePath, revalidateTag } from 'next/cache'
 
 import { hasAdminSession } from '@/lib/admin-auth'
 import { adminInsightSchema } from '@/lib/admin-insight-schema'
@@ -37,6 +38,10 @@ export async function PATCH(
       slug,
     })
     const insight = await updateDatabaseInsight(slug, payload)
+    revalidateTag('academy-insights', 'max')
+    revalidatePath('/academy')
+    revalidatePath('/academy/insights')
+    revalidatePath(`/academy/insights/${slug}`)
     return NextResponse.json({ insight })
   } catch (error) {
     const message =
@@ -63,6 +68,11 @@ export async function DELETE(
   if (!ok) {
     return NextResponse.json({ error: '文章不存在' }, { status: 404 })
   }
+
+  revalidateTag('academy-insights', 'max')
+  revalidatePath('/academy')
+  revalidatePath('/academy/insights')
+  revalidatePath(`/academy/insights/${slug}`)
 
   return NextResponse.json({ ok: true })
 }

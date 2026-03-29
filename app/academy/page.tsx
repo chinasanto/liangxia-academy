@@ -8,7 +8,6 @@ import { getPublishedCourses } from '@/lib/course-store'
 import { buildAcademyMetadata } from '@/lib/seo'
 import { buildAcademyJsonLd } from '@/lib/structured-data'
 
-export const dynamic = 'force-dynamic'
 export const metadata: Metadata = buildAcademyMetadata()
 
 export default async function AcademyPage({

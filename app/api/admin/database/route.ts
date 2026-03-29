@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { revalidatePath, revalidateTag } from 'next/cache'
 
 import { insightArticles } from '@/data/insights'
 import {
@@ -32,6 +33,11 @@ export async function POST() {
       upsertDatabaseCourses(courses),
       upsertDatabaseInsights(insightArticles),
     ])
+
+    revalidateTag('academy-courses', 'max')
+    revalidateTag('academy-insights', 'max')
+    revalidatePath('/academy')
+    revalidatePath('/academy/insights')
 
     const status = await getDatabaseStatus()
 

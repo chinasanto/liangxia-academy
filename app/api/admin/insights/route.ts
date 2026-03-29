@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { revalidatePath, revalidateTag } from 'next/cache'
 
 import { hasAdminSession } from '@/lib/admin-auth'
 import { adminInsightSchema } from '@/lib/admin-insight-schema'
@@ -39,6 +40,10 @@ export async function POST(request: Request) {
     }
 
     const insight = await createDatabaseInsight(payload)
+    revalidateTag('academy-insights', 'max')
+    revalidatePath('/academy')
+    revalidatePath('/academy/insights')
+    revalidatePath(`/academy/insights/${payload.slug}`)
     return NextResponse.json({ insight })
   } catch (error) {
     const message =

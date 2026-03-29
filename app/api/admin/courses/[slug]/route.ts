@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { revalidatePath, revalidateTag } from 'next/cache'
 import { z } from 'zod'
 
 import { hasAdminSession } from '@/lib/admin-auth'
@@ -41,6 +42,10 @@ export async function PATCH(
     const body = await request.json()
     const payload = updateSchema.parse(body)
     const updatedCourse = await updateCourse(slug, payload)
+
+    revalidateTag('academy-courses', 'max')
+    revalidatePath('/academy')
+    revalidatePath(`/academy/${slug}`)
 
     return NextResponse.json({ course: updatedCourse })
   } catch {
