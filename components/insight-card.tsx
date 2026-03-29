@@ -9,7 +9,7 @@ type InsightCardProps = {
 
 export function InsightCard({ article }: InsightCardProps) {
   return (
-    <article className="rounded-[24px] border border-white/[0.08] bg-background/75 p-5 transition hover:border-primary/30">
+    <article className="border-b border-white/[0.08] bg-transparent px-0 pb-5 transition last:border-b-0 sm:rounded-[24px] sm:border sm:bg-background/75 sm:p-5 sm:hover:border-primary/30">
       <div className="mb-3 flex flex-wrap gap-2">
         <span className="rounded-full bg-primary/15 px-3 py-1 text-xs font-semibold text-primary">
           {article.category}
@@ -17,7 +17,7 @@ export function InsightCard({ article }: InsightCardProps) {
         {article.tags.slice(0, 2).map((tag) => (
           <span
             key={tag}
-            className="rounded-full bg-card px-3 py-1 text-xs text-muted-foreground"
+            className="rounded-full bg-card/60 px-3 py-1 text-xs text-muted-foreground sm:bg-card"
           >
             {tag}
           </span>

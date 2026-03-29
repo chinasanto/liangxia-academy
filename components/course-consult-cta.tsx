@@ -24,14 +24,14 @@ export function CourseConsultCta({ courseTitle }: CourseConsultCtaProps) {
   }
 
   return (
-    <section className="mb-8 rounded-[28px] border border-primary/20 bg-[linear-gradient(135deg,rgba(0,229,176,0.12),rgba(6,18,17,0.92))] p-6">
+    <section className="mb-8 border-b border-primary/15 pb-6 sm:rounded-[28px] sm:border sm:border-primary/20 sm:bg-[linear-gradient(135deg,rgba(0,229,176,0.12),rgba(6,18,17,0.92))] sm:p-6">
       <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
         <div className="max-w-3xl">
           <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-primary/15 px-3 py-1 text-xs font-semibold text-primary">
             <MessageCircleMore className="h-3.5 w-3.5" />
             课程咨询
           </div>
-          <h2 className="text-2xl font-bold text-foreground">
+          <h2 className="text-xl font-bold text-foreground sm:text-2xl">
             想进一步了解《{courseTitle}》的学习安排？
           </h2>
           <p className="mt-2 text-sm leading-7 text-muted-foreground">

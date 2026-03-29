@@ -89,7 +89,7 @@ export function InsightsExplorer({
   }, [articles, normalizedSearch, selectedCategory])
 
   return (
-    <section className={cn('rounded-[28px] border border-white/[0.08] bg-card/45 p-6 sm:p-8', className)}>
+    <section className={cn('p-0 sm:rounded-[28px] sm:border sm:border-white/[0.08] sm:bg-card/45 sm:p-8', className)}>
       <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div className="max-w-3xl">
           <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
@@ -109,7 +109,7 @@ export function InsightsExplorer({
           {showAllLink ? (
             <Link
               href="/academy/insights"
-              className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] px-4 py-2 text-sm font-semibold text-primary transition hover:border-primary/30 hover:bg-background/60"
+              className="inline-flex items-center gap-2 rounded-full px-0 py-1 text-sm font-semibold text-primary transition hover:opacity-85 sm:border sm:border-white/[0.08] sm:px-4 sm:py-2 sm:hover:border-primary/30 sm:hover:bg-background/60"
             >
               查看独立文章页
             </Link>
@@ -117,7 +117,7 @@ export function InsightsExplorer({
         </div>
       </div>
 
-      <div className="mb-6 rounded-[24px] border border-white/[0.08] bg-background/70 p-5">
+      <div className="mb-6 border-b border-white/[0.08] pb-5 sm:rounded-[24px] sm:border sm:bg-background/70 sm:p-5">
         <div>
           <label className="mb-2 block text-xs font-semibold tracking-[0.12em] text-muted-foreground">
             搜索文章
@@ -157,7 +157,7 @@ export function InsightsExplorer({
               <button
                 type="button"
                 onClick={() => setCategoriesExpanded(true)}
-                className="rounded-full border border-white/[0.08] bg-card px-3 py-2 text-xs font-medium text-muted-foreground transition hover:text-foreground"
+                className="rounded-full bg-card/60 px-3 py-2 text-xs font-medium text-muted-foreground transition hover:text-foreground sm:border sm:border-white/[0.08] sm:bg-card"
               >
                 ...
               </button>
@@ -182,7 +182,7 @@ export function InsightsExplorer({
           ))}
         </div>
       ) : (
-        <div className="rounded-[22px] border border-dashed border-white/[0.08] bg-background/60 p-6 text-sm text-muted-foreground">
+        <div className="border-t border-dashed border-white/[0.08] pt-6 text-sm text-muted-foreground sm:rounded-[22px] sm:border sm:bg-background/60 sm:p-6">
           当前筛选条件下没有匹配文章，可以切回“全部”或换一个关键词试试。
         </div>
       )}

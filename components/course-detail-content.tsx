@@ -35,7 +35,7 @@ export function CourseDetailContent({
 }: CourseDetailContentProps) {
   return (
     <div className="space-y-8">
-      <section className="rounded-[28px] border border-white/[0.08] bg-card/55 p-4">
+      <section className="p-0 sm:rounded-[28px] sm:border sm:border-white/[0.08] sm:bg-card/55 sm:p-4">
         <div className="flex flex-wrap gap-2">
           {[
             { href: '#course-overview', label: '课程介绍' },
@@ -61,7 +61,7 @@ export function CourseDetailContent({
 
       <section
         id="course-insight"
-        className="scroll-mt-24 rounded-[28px] border border-white/[0.08] bg-card/55 p-5 sm:p-8"
+        className="scroll-mt-24 p-0 sm:rounded-[28px] sm:border sm:border-white/[0.08] sm:bg-card/55 sm:p-8"
       >
         <div className="mb-6">
           <h2 className="text-2xl font-bold text-foreground">课程解读</h2>
@@ -74,7 +74,7 @@ export function CourseDetailContent({
           {seoSections.map((section) => (
             <article
               key={section.title}
-              className="rounded-[24px] border border-white/[0.08] bg-background/75 p-6"
+              className="border-b border-white/[0.08] bg-transparent px-0 pb-6 last:border-b-0 sm:rounded-[24px] sm:border sm:bg-background/75 sm:p-6"
             >
               <h3 className="mb-4 text-lg font-semibold text-foreground">
                 {section.title}
@@ -91,7 +91,7 @@ export function CourseDetailContent({
 
       <section
         id="course-fit"
-        className="scroll-mt-24 rounded-[28px] border border-white/[0.08] bg-card/55 p-5 sm:p-8"
+        className="scroll-mt-24 p-0 sm:rounded-[28px] sm:border sm:border-white/[0.08] sm:bg-card/55 sm:p-8"
       >
         <div className="mb-6">
           <h2 className="text-2xl font-bold text-foreground">学习定位</h2>
@@ -120,7 +120,7 @@ export function CourseDetailContent({
           ].map((group) => (
             <article
               key={group.title}
-              className="rounded-[24px] border border-white/[0.08] bg-background/75 p-6"
+              className="border-b border-white/[0.08] bg-transparent px-0 pb-6 last:border-b-0 sm:rounded-[24px] sm:border sm:bg-background/75 sm:p-6"
             >
               <div
                 className={`mb-4 inline-flex rounded-full px-3 py-1 text-sm font-semibold ${group.tone}`}
@@ -142,7 +142,7 @@ export function CourseDetailContent({
 
       <section
         id="course-catalog"
-        className="scroll-mt-24 rounded-[28px] border border-white/[0.08] bg-card/55 p-5 sm:p-8"
+        className="scroll-mt-24 p-0 sm:rounded-[28px] sm:border sm:border-white/[0.08] sm:bg-card/55 sm:p-8"
       >
         <div className="mb-6">
           <h2 className="text-2xl font-bold text-foreground">课程目录</h2>
@@ -156,7 +156,7 @@ export function CourseDetailContent({
             <AccordionItem
               key={section.id}
               value={section.id}
-              className="mb-4 overflow-hidden rounded-[24px] border border-white/[0.08] bg-background/70 px-5 last:mb-0"
+              className="mb-4 overflow-hidden border-b border-white/[0.08] bg-transparent px-0 last:mb-0 last:border-b-0 sm:rounded-[24px] sm:border sm:bg-background/70 sm:px-5"
             >
               <AccordionTrigger className="py-5 no-underline hover:no-underline">
                 <div className="flex items-start gap-4">
@@ -176,7 +176,7 @@ export function CourseDetailContent({
                   {section.lessons.map((lesson) => (
                     <div
                       key={`${section.id}-${lesson.title}`}
-                      className="flex items-center justify-between gap-3 rounded-2xl border border-white/[0.06] bg-card/45 px-3 py-3 sm:px-4"
+                      className="flex items-center justify-between gap-3 rounded-2xl bg-card/30 px-3 py-3 sm:border sm:border-white/[0.06] sm:bg-card/45 sm:px-4"
                     >
                       <div className="flex min-w-0 items-center gap-3">
                         <PlayCircle className="h-4 w-4 shrink-0 text-[#c7d7ec]" />
@@ -203,7 +203,7 @@ export function CourseDetailContent({
 
       <section
         id="course-reviews"
-        className="scroll-mt-24 rounded-[28px] border border-white/[0.08] bg-card/55 p-5 sm:p-8"
+        className="scroll-mt-24 p-0 sm:rounded-[28px] sm:border sm:border-white/[0.08] sm:bg-card/55 sm:p-8"
       >
         <div className="mb-6">
           <h2 className="text-2xl font-bold text-foreground">学员评价</h2>
@@ -216,7 +216,7 @@ export function CourseDetailContent({
           {reviews.map((review) => (
             <article
               key={`${review.name}-${review.role}`}
-              className="rounded-[24px] border border-white/[0.08] bg-background/75 p-5"
+              className="border-b border-white/[0.08] bg-transparent px-0 pb-5 last:border-b-0 sm:rounded-[24px] sm:border sm:bg-background/75 sm:p-5"
             >
               <div className="mb-4 flex items-center gap-3">
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/15 text-lg font-semibold text-primary">
@@ -238,7 +238,7 @@ export function CourseDetailContent({
 
       <section
         id="course-faq"
-        className="scroll-mt-24 rounded-[28px] border border-white/[0.08] bg-card/55 p-5 sm:p-8"
+        className="scroll-mt-24 p-0 sm:rounded-[28px] sm:border sm:border-white/[0.08] sm:bg-card/55 sm:p-8"
       >
         <div className="mb-6">
           <h2 className="text-2xl font-bold text-foreground">常见问题</h2>
@@ -252,7 +252,7 @@ export function CourseDetailContent({
             <AccordionItem
               key={faq.question}
               value={faq.question}
-              className="mb-4 overflow-hidden rounded-[24px] border border-white/[0.08] bg-background/70 px-5 last:mb-0"
+              className="mb-4 overflow-hidden border-b border-white/[0.08] bg-transparent px-0 last:mb-0 last:border-b-0 sm:rounded-[24px] sm:border sm:bg-background/70 sm:px-5"
             >
               <AccordionTrigger className="py-5 text-base text-foreground no-underline hover:no-underline">
                 {faq.question}

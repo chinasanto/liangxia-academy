@@ -24,7 +24,7 @@ export default async function AcademyInsightsPage() {
         <div className="mx-auto max-w-7xl">
           <AcademySubnav active="insights" className="mb-8" />
 
-          <section className="mb-10 rounded-[30px] border border-white/[0.08] bg-card/45 p-8 sm:p-10">
+          <section className="mb-8 p-0 sm:mb-10 sm:rounded-[30px] sm:border sm:border-white/[0.08] sm:bg-card/45 sm:p-10">
             <div className="max-w-4xl">
               <div className="mb-4 inline-flex rounded-full bg-primary/12 px-4 py-1.5 text-xs font-semibold text-primary">
                 AI量化学院 · 量化技巧

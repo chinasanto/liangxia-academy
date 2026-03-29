@@ -15,7 +15,7 @@ export function CourseRelatedLinks({ items }: CourseRelatedLinksProps) {
   }
 
   return (
-    <section className="mt-8 rounded-[28px] border border-white/[0.08] bg-card/55 p-8">
+    <section className="mt-8 p-0 sm:rounded-[28px] sm:border sm:border-white/[0.08] sm:bg-card/55 sm:p-8">
       <div className="mb-6 flex items-start gap-3">
         <div className="rounded-2xl bg-primary/15 p-3 text-primary">
           <Sparkles className="h-5 w-5" />
@@ -32,7 +32,7 @@ export function CourseRelatedLinks({ items }: CourseRelatedLinksProps) {
         {items.map((item) => (
           <article
             key={item.course.slug}
-            className="overflow-hidden rounded-[24px] border border-white/[0.08] bg-background/75"
+            className="overflow-hidden border-b border-white/[0.08] bg-transparent last:border-b-0 sm:rounded-[24px] sm:border sm:bg-background/75"
           >
             <div className="relative aspect-[4/3]">
               <Image
@@ -48,7 +48,7 @@ export function CourseRelatedLinks({ items }: CourseRelatedLinksProps) {
               </div>
             </div>
 
-            <div className="space-y-4 p-5">
+            <div className="space-y-4 px-0 py-5 sm:p-5">
               <div>
                 <h3 className="text-lg font-semibold text-foreground">
                   {item.course.shortTitle}

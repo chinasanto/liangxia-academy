@@ -22,7 +22,7 @@ export function InsightsSection({
   }
 
   return (
-    <section className={className ?? 'rounded-[28px] border border-white/[0.08] bg-card/45 p-6 sm:p-8'}>
+    <section className={className ?? 'p-0 sm:rounded-[28px] sm:border sm:border-white/[0.08] sm:bg-card/45 sm:p-8'}>
       <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div className="max-w-3xl">
           <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
@@ -37,7 +37,7 @@ export function InsightsSection({
 
         <Link
           href="/academy/insights"
-          className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] px-4 py-2 text-sm font-semibold text-primary transition hover:border-primary/30 hover:bg-background/60"
+          className="inline-flex items-center gap-2 rounded-full px-0 py-1 text-sm font-semibold text-primary transition hover:opacity-85 sm:border sm:border-white/[0.08] sm:px-4 sm:py-2 sm:hover:border-primary/30 sm:hover:bg-background/60"
         >
           查看全部文章
           <ArrowRight className="h-4 w-4" />

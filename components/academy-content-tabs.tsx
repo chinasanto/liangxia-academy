@@ -85,24 +85,24 @@ export function AcademyContentTabs({
           <h2 className="text-2xl font-bold text-foreground">AI量化学院</h2>
         </div>
 
-        <TabsList className="grid h-auto w-full grid-cols-3 rounded-[22px] border border-white/[0.08] bg-card/60 p-1 sm:inline-flex sm:w-auto sm:rounded-full">
+        <TabsList className="grid h-auto w-full grid-cols-3 gap-0.5 overflow-hidden rounded-[22px] border border-white/[0.08] bg-card/60 p-1 sm:inline-flex sm:w-auto sm:gap-1 sm:rounded-full">
           <TabsTrigger
             value="home"
-            className="min-w-0 rounded-[18px] px-2 py-2 text-[11px] leading-tight whitespace-normal data-[state=active]:bg-primary data-[state=active]:text-primary-foreground sm:rounded-full sm:px-4 sm:text-sm sm:whitespace-nowrap"
+            className="min-w-0 rounded-[18px] px-1.5 py-2 text-[10px] leading-tight whitespace-normal data-[state=active]:bg-primary data-[state=active]:text-primary-foreground sm:rounded-full sm:px-4 sm:text-sm sm:whitespace-nowrap"
           >
             <House className="h-4 w-4" />
             主页
           </TabsTrigger>
           <TabsTrigger
             value="roadmap"
-            className="min-w-0 rounded-[18px] px-2 py-2 text-[11px] leading-tight whitespace-normal data-[state=active]:bg-primary data-[state=active]:text-primary-foreground sm:rounded-full sm:px-4 sm:text-sm sm:whitespace-nowrap"
+            className="min-w-0 rounded-[18px] px-1.5 py-2 text-[10px] leading-tight whitespace-normal data-[state=active]:bg-primary data-[state=active]:text-primary-foreground sm:rounded-full sm:px-4 sm:text-sm sm:whitespace-nowrap"
           >
             <Map className="h-4 w-4" />
             学习路径
           </TabsTrigger>
           <TabsTrigger
             value="insights"
-            className="min-w-0 rounded-[18px] px-2 py-2 text-[11px] leading-tight whitespace-normal data-[state=active]:bg-primary data-[state=active]:text-primary-foreground sm:rounded-full sm:px-4 sm:text-sm sm:whitespace-nowrap"
+            className="min-w-0 rounded-[18px] px-1.5 py-2 text-[10px] leading-tight whitespace-normal data-[state=active]:bg-primary data-[state=active]:text-primary-foreground sm:rounded-full sm:px-4 sm:text-sm sm:whitespace-nowrap"
           >
             <BookText className="h-4 w-4" />
             文章技巧

@@ -23,7 +23,7 @@ export function CoursePathNav({
   }
 
   return (
-    <section className="mb-8 rounded-[28px] border border-white/[0.08] bg-card/55 p-5">
+    <section className="mb-8 p-0 sm:rounded-[28px] sm:border sm:border-white/[0.08] sm:bg-card/55 sm:p-5">
       <div className="mb-4 flex items-center gap-3">
         <div className="rounded-2xl bg-primary/15 p-3 text-primary">
           <Compass className="h-5 w-5" />
@@ -41,7 +41,7 @@ export function CoursePathNav({
           <Link
             key={`${item.label}-${item.course.slug}`}
             href={`/academy/${item.course.slug}`}
-            className="group rounded-[22px] border border-white/[0.08] bg-background/75 p-5 transition hover:border-primary/30 hover:bg-background/90"
+            className="group border-b border-white/[0.08] bg-transparent px-0 pb-5 transition last:border-b-0 sm:rounded-[22px] sm:border sm:bg-background/75 sm:p-5 sm:hover:border-primary/30 sm:hover:bg-background/90"
           >
             <div className="mb-3 flex items-center justify-between gap-3">
               <span className="rounded-full bg-primary/15 px-3 py-1 text-xs font-semibold text-primary">
