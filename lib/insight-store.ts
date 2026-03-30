@@ -7,6 +7,10 @@ function compareArticles(a: InsightArticle, b: InsightArticle) {
   return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
 }
 
+function isAutoDraftSlug(slug: string) {
+  return /^article-\d{8}-\d+$/.test(slug)
+}
+
 function mergeInsights(staticInsights: InsightArticle[], dbInsights: InsightArticle[]) {
   const merged = new Map<string, InsightArticle>()
 
@@ -23,7 +27,9 @@ function mergeInsights(staticInsights: InsightArticle[], dbInsights: InsightArti
 
 async function getMergedInsights() {
   try {
-    const dbInsights = await listDbInsights({ publishedOnly: true })
+    const dbInsights = (await listDbInsights({ publishedOnly: true })).filter(
+      (article) => !isAutoDraftSlug(article.slug),
+    )
     return mergeInsights(insightArticles, dbInsights)
   } catch {
     return [...insightArticles].sort(compareArticles)
@@ -43,6 +49,10 @@ export async function getFeaturedInsights(limit = 3) {
 }
 
 export async function getInsightBySlug(slug: string) {
+  if (isAutoDraftSlug(slug)) {
+    return insightArticles.find((article) => article.slug === slug) ?? null
+  }
+
   try {
     const dbArticle = await getDbInsightBySlug(slug, { publishedOnly: true })
     if (dbArticle) {
