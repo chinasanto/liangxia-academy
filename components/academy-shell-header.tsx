@@ -7,14 +7,20 @@ import { ThemeToggle } from '@/components/theme-toggle'
 type AcademyShellHeaderProps = {
   backHref?: string
   backLabel?: string
+  hideOnMobile?: boolean
 }
 
 export function AcademyShellHeader({
   backHref = '/',
   backLabel = '返回首页',
+  hideOnMobile = false,
 }: AcademyShellHeaderProps) {
   return (
-    <header className="sticky top-0 z-50 border-b border-white/[0.06] bg-background/95 backdrop-blur-xl">
+    <header
+      className={`sticky top-0 z-50 border-b border-white/[0.06] bg-background/95 backdrop-blur-xl ${
+        hideOnMobile ? 'hidden sm:block' : ''
+      }`}
+    >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <div className="flex min-w-0 items-center gap-3 sm:gap-4">
           <Link

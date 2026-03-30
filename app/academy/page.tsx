@@ -32,7 +32,7 @@ export default async function AcademyPage({
   return (
     <main className="min-h-screen bg-background">
       <JsonLd data={buildAcademyJsonLd(courses)} />
-      <AcademyShellHeader />
+      <AcademyShellHeader hideOnMobile />
 
       <div className="px-6 pb-20 pt-8 lg:px-12">
         <div className="mx-auto max-w-7xl">

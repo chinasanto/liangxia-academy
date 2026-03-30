@@ -18,6 +18,7 @@ import { AcademyDiagnostic } from '@/components/academy-diagnostic'
 import { CourseCard } from '@/components/course-card'
 import { InsightsExplorer } from '@/components/insights-explorer'
 import { LearningRoadmap } from '@/components/learning-roadmap'
+import { ThemeToggle } from '@/components/theme-toggle'
 import { Input } from '@/components/ui/input'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import type { CourseCatalogEntry } from '@/lib/course-types'
@@ -85,8 +86,9 @@ export function AcademyContentTabs({
   return (
     <Tabs defaultValue={activeTab} className="mb-10 sm:mb-12">
       <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-        <div>
+        <div className="flex items-center justify-between gap-3">
           <h2 className="text-2xl font-bold text-foreground">AI量化学院</h2>
+          <ThemeToggle compact className="shrink-0 sm:hidden" />
         </div>
 
         <TabsList className="grid h-auto w-full grid-cols-4 gap-0.5 overflow-hidden rounded-[22px] border border-white/[0.08] bg-card/60 p-1 sm:inline-flex sm:w-auto sm:gap-1 sm:rounded-full">
