@@ -8,9 +8,10 @@ import { AcademyShellHeader } from '@/components/academy-shell-header'
 import { CourseCard } from '@/components/course-card'
 import { Footer } from '@/components/footer'
 import { JsonLd } from '@/components/json-ld'
+import { ShareActions } from '@/components/share-actions'
 import { getAllCourses } from '@/lib/course-store'
 import { getAllInsights, getInsightBySlug } from '@/lib/insight-store'
-import { buildInsightMetadata } from '@/lib/seo'
+import { absoluteUrl, buildInsightMetadata } from '@/lib/seo'
 import { buildInsightArticleJsonLd } from '@/lib/structured-data'
 
 export const dynamic = 'force-dynamic'
@@ -95,6 +96,15 @@ export default async function AcademyInsightDetailPage({
                 <Clock3 className="h-4 w-4" />
                 {article.readTime}
               </span>
+            </div>
+
+            <div className="mt-6">
+              <ShareActions
+                title={article.title}
+                description={article.description}
+                url={absoluteUrl(`/academy/insights/${article.slug}`)}
+                label="分享文章"
+              />
             </div>
           </section>
 

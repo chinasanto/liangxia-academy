@@ -19,6 +19,7 @@ import { CourseRelatedInsights } from '@/components/course-related-insights'
 import { CourseRelatedLinks } from '@/components/course-related-links'
 import { Footer } from '@/components/footer'
 import { JsonLd } from '@/components/json-ld'
+import { ShareActions } from '@/components/share-actions'
 import { Button } from '@/components/ui/button'
 import { buildCoursePathNavigation } from '@/lib/academy-roadmap'
 import { hasAdminSession } from '@/lib/admin-auth'
@@ -27,7 +28,7 @@ import { buildCoursePositioning } from '@/lib/course-positioning'
 import { buildCourseRecommendations } from '@/lib/course-recommendations'
 import { getAllCourses, getCourseBySlug } from '@/lib/course-store'
 import { getInsightsForCourse } from '@/lib/insight-store'
-import { buildCourseMetadata } from '@/lib/seo'
+import { absoluteUrl, buildCourseMetadata } from '@/lib/seo'
 import { buildCourseDetailJsonLd } from '@/lib/structured-data'
 
 type CourseDetailPageProps = {
@@ -146,6 +147,15 @@ export default async function CourseDetailPage({
                   <p className="text-sm leading-7 text-foreground/85">
                     {course.summary}
                   </p>
+
+                  <div className="mt-6">
+                    <ShareActions
+                      title={course.title}
+                      description={course.subtitle}
+                      url={absoluteUrl(`/academy/${course.slug}`)}
+                      label="分享课程"
+                    />
+                  </div>
                 </div>
 
                 <div className="mt-8 hidden flex-col items-start gap-4 rounded-[28px] border border-white/[0.08] bg-background/75 p-5 sm:flex sm:flex-row sm:items-end sm:justify-between">
