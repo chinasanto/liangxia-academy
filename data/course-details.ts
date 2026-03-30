@@ -11,7 +11,7 @@ const zouTeacher: CourseInstructor = {
   description:
     '聚焦 AI 量化交易、因子工程、WorldQuant Brain 与生产级策略闭环，强调课程内容可落地、可复用、可持续升级。',
   students: '5600+',
-  courseCount: '6门课',
+  courseCount: '10门课',
   rating: '4.9',
 }
 
@@ -28,6 +28,24 @@ function makeSection(
     lessons: lessons.map((lesson, index) => ({
       title: lesson,
       duration: ['35:00', '40:00', '45:00'][index] ?? '38:00',
+      preview: index === 0,
+    })),
+  }
+}
+
+function makePublicLectureSection(
+  id: string,
+  title: string,
+  lessons: string[],
+): CourseCatalogSection {
+  return {
+    id,
+    title,
+    lessonCount: `${lessons.length}部分`,
+    totalHours: '公开课回放',
+    lessons: lessons.map((lesson, index) => ({
+      title: lesson,
+      duration: ['08:00', '12:00', '10:00', '09:00'][index] ?? '08:00',
       preview: index === 0,
     })),
   }
@@ -617,6 +635,354 @@ export const courseDetailsBySlug: Record<string, CourseDetailConfig> = {
         name: '苏同学',
         role: '策略研究助理',
         comment: '研报转策略和向量化改写这两部分非常实用，能明显缩短从想法到回测的时间。',
+      },
+    ],
+  },
+  'public-lecture-ai-quant-full-process': {
+    coverImage: '/course-covers/public-lecture-1.svg',
+    coverAlt: 'AI量化交易全流程公开课封面',
+    originalPrice: '',
+    rating: '免费回放',
+    reviewCount: '',
+    studentCount: '',
+    duration: '公开课回放',
+    lessonCount: '14个专题',
+    seoTitle: '免费公开课：AI量化交易全流程 | 数据、特征、建模与回测评估',
+    seoDescription:
+      'AI量化交易全流程免费公开课，系统梳理金融时间序列、数据预处理、EDA、OHLCV 与技术指标特征、模型训练、多空对冲、性能评估与回测陷阱。',
+    instructor: zouTeacher,
+    isFreeCourse: true,
+    accessMode: '腾讯会议录播',
+    accessUrl: 'https://meeting.tencent.com/crm/KWbd5L6E8f',
+    accessLabel: '申请观看权限',
+    accessNote:
+      '这是一门免费公开课回放，点击上方按钮即可跳转腾讯会议页面申请录播观看权限。适合先用一节课快速判断自己是否要系统进入 AI量化学院正式课程。',
+    highlights: [
+      '一节公开课覆盖 AI量化研究从数据到策略评估的主干链路',
+      '把金融时间序列、EDA、特征工程、模型训练和多空对冲串成完整认知地图',
+      '特别适合还没有完整量化框架、想先建立全流程视角的人',
+      '公开课结尾会进一步引出因子规模化、生命周期与 AI量化全流程进阶方向',
+    ],
+    requirements: [
+      '零基础也可以听懂大框架，不要求先有量化实战经验',
+      '如果具备基础 Python 和数据分析认知，理解会更深入',
+      '适合先通过一场公开课判断自己是否要继续系统学习',
+    ],
+    audience: [
+      '刚接触 AI量化的人',
+      '想快速建立完整课程地图的人',
+      '对数据、特征、建模和回测关系还不清楚的学习者',
+      '准备进入正式课程前先做试听判断的人',
+    ],
+    catalogSections: [
+      makePublicLectureSection('pl1-1', '第1部分：课程定位与量化时间序列认知', [
+        '课程介绍与 AI量化全流程框架',
+        '金融时间序列的核心特性与研究难点',
+        '为什么量化研究要先理解数据结构再谈模型',
+      ]),
+      makePublicLectureSection('pl1-2', '第2部分：数据输入、预处理与 EDA', [
+        '数据输入、清洗与缺失值处理',
+        '探索性数据分析如何发现数据问题',
+        '从行情数据体检进入后续特征工程',
+      ]),
+      makePublicLectureSection('pl1-3', '第3部分：OHLCV 与技术指标特征工程', [
+        '简单 OHLCV 特征如何构建',
+        '技术指标类特征如何组织成研究输入',
+        '特征不是越多越好，而是要服务于预测目标',
+      ]),
+      makePublicLectureSection('pl1-4', '第4部分：模型训练、对冲策略与绩效评估', [
+        '模型选择与训练基本逻辑',
+        '多空对冲和市场中性原理',
+        '绩效展示、回测陷阱识别与后续进阶方向',
+      ]),
+    ],
+    seoSections: [
+      makeSeoSection('这门公开课解决什么问题', [
+        '很多人第一次接触 AI 量化时，会在数据、特征、模型、策略和回测这些模块之间来回切换，但始终没有一张完整地图。这门免费公开课的价值，就是先把整条链路拉直，让学习者知道全流程到底由哪些环节组成，以及这些环节之间如何衔接。',
+        '公开课会依次讲到金融时间序列特性、数据输入与预处理、EDA、OHLCV 特征、技术指标特征、模型训练、多空对冲、绩效评估与回测陷阱。对初学者来说，这比一开始就学某个单点技巧更有帮助。'
+      ]),
+      makeSeoSection('为什么适合作为正式课程前的试听入口', [
+        '如果你还不确定自己应该先学基础课、因子工程还是全流程高级班，这门公开课会是非常合适的试听入口。它不会替代系统课程，但能帮助你先看清整张知识图谱，再决定后续正式课程的学习顺序。',
+        '对于搜索“AI量化公开课”“量化交易入门公开课”“免费量化课程”的用户，这门公开课页面会更直接回应他们最关心的问题：这节课能否帮我快速建立全局认知。'
+      ]),
+    ],
+    caseStudies: [
+      {
+        title: '先用公开课建立全流程地图，再决定后续正式学习路径',
+        scenario:
+          '很多学习者一开始知道一些指标和回测术语，但并不清楚数据、特征、建模、策略评估之间的真实关系。',
+        approach:
+          '公开课按照时间序列、数据预处理、EDA、特征工程、模型训练、对冲策略和回测评估逐步展开。',
+        outcome:
+          '学习者能够先建立一张完整认知地图，再更清楚地判断后续该进入基础体系、因子工程还是正式全流程课程。',
+      },
+    ],
+    reviews: [
+      {
+        name: '试听学员',
+        role: '量化入门阶段',
+        comment: '这一节公开课最有价值的是把整个量化研究链路串起来了，终于知道后面系统课程为什么要按那个顺序学。',
+      },
+    ],
+  },
+  'public-lecture-profitable-alpha-factor': {
+    coverImage: '/course-covers/public-lecture-2.svg',
+    coverAlt: '持续赚钱的因子公开课封面',
+    originalPrice: '',
+    rating: '免费回放',
+    reviewCount: '',
+    studentCount: '',
+    duration: '公开课回放',
+    lessonCount: '13个专题',
+    seoTitle: '免费公开课：构建持续赚钱的 ALPHA / 因子 | 生命周期管理与因子架构',
+    seoDescription:
+      '围绕因子失效、生命周期管理、三大要素、范式思想、UISO 8层架构、批流一体化部署与核心数据对比，帮助学习者理解因子如何从研究产物升级为可运营资产。',
+    instructor: zouTeacher,
+    isFreeCourse: true,
+    accessMode: '腾讯会议录播',
+    accessUrl: 'https://meeting.tencent.com/crm/NAXRD4we57',
+    accessLabel: '申请观看权限',
+    accessNote:
+      '这门免费公开课更偏因子运营与生命周期管理，适合已经学过一点因子、但还不清楚为什么很多因子“做出来后并不能持续赚钱”的学习者。',
+    highlights: [
+      '聚焦因子为什么会失效，以及如何把因子从研究结果升级为可运营资产',
+      '用核心数据对比解释生命周期管理的实际收益',
+      '覆盖三大因子质量要素、范式思想、UISO 8层架构与批流一体化部署',
+      '适合作为因子工程与高级评估课程之间的试听连接点',
+    ],
+    requirements: [
+      '适合已经听说过因子研究或回测的人，不要求非常深的统计背景',
+      '如果已经做过一些简单指标和因子，会更容易理解“失效”与“管理”这两个关键词',
+      '愿意从“做因子”进一步走向“管因子”的学习者会收获更大',
+    ],
+    audience: [
+      '想知道因子为什么会失效的人',
+      '准备系统学习因子生命周期管理的人',
+      '想理解因子工厂与运营机制的人',
+      '对持续赚钱的 Alpha 体系感兴趣的学习者',
+    ],
+    catalogSections: [
+      makePublicLectureSection('pl2-1', '第1部分：价值认知与问题诊断', [
+        '生命周期管理前后核心价值对比',
+        '传统因子方法的困境与失效原因',
+        '为什么只会做因子，不等于能持续赚钱',
+      ]),
+      makePublicLectureSection('pl2-2', '第2部分：方法论与范式升级', [
+        '思路的转变：从单次回测到长期运营',
+        '因子库质量的三大要素',
+        '因子构建范式思想如何改变研究方式',
+      ]),
+      makePublicLectureSection('pl2-3', '第3部分：架构与部署实现', [
+        'UISO 8层架构的核心逻辑',
+        '批流一体化部署如何提高供给效率',
+        '科学生命周期管理的三大机制',
+      ]),
+      makePublicLectureSection('pl2-4', '第4部分：数据对比与完整总结', [
+        '核心数据对比和方法对比分析',
+        '完整逻辑总结与三个关键要素',
+        '如何从公开课继续衔接到正式课程体系',
+      ]),
+    ],
+    seoSections: [
+      makeSeoSection('这门公开课为什么值得看', [
+        '“构建持续赚钱的因子”这个主题，核心不在于再教几个新指标，而是帮助学习者看懂因子失效、生命周期管理和系统化架构之间的关系。很多人会做因子，但并不知道如何让因子长期稳定产生价值，这正是这门公开课最重要的切入口。',
+        '公开课通过传统方法困境、失效原因、三大要素、范式升级、UISO 8层架构、批流一体化部署和核心数据对比，把因子从“研究结果”提升到“可运营资产”这个层次来讲。'
+      ]),
+      makeSeoSection('适合哪些准备进入因子工程主线的人', [
+        '如果你已经知道什么是因子，却还说不清为什么因子会失效、为什么需要生命周期管理、为什么需要平台化架构，这门公开课会非常适合作为试听入口。它能帮助你先建立经营因子、而不是只生产因子的视角。',
+        '对于搜索“持续赚钱的因子”“因子生命周期管理”“Alpha 公开课”的用户，这门课的页面内容会更准确地承接这类需求。'
+      ]),
+    ],
+    caseStudies: [
+      {
+        title: '先理解因子为什么死，再谈因子如何活得更久',
+        scenario:
+          '学习者已经会做一些因子，但很难解释为什么样本外衰退严重，也不清楚怎样把管理机制接进研究流程。',
+        approach:
+          '公开课先用管理前后数据对比建立问题感，再讲方法论、架构和部署机制。',
+        outcome:
+          '学习者能从“做因子”转向“管因子”的视角，更容易衔接后续正式因子工程与高级评估课程。',
+      },
+    ],
+    reviews: [
+      {
+        name: '试听学员',
+        role: '因子研究进阶',
+        comment: '这节公开课最大的启发是明白了为什么很多好看的因子最后都活不久，也第一次理解生命周期管理的重要性。',
+      },
+    ],
+  },
+  'public-lecture-enterprise-factor-evaluation': {
+    coverImage: '/course-covers/public-lecture-3.svg',
+    coverAlt: '企业级因子工程体系公开课封面',
+    originalPrice: '',
+    rating: '免费回放',
+    reviewCount: '',
+    studentCount: '',
+    duration: '公开课回放',
+    lessonCount: '11个专题',
+    seoTitle: '免费公开课：构建企业级因子工程体系与评价标准 | Gate、平台化生产、Bootstrap/PBO',
+    seoDescription:
+      '聚焦企业级因子工程体系的关键模块，覆盖因子准入 Gate、平台化生产、白箱化特征生成、Bootstrap、CSCV/PBO 与退化治理等核心内容。',
+    instructor: zouTeacher,
+    isFreeCourse: true,
+    accessMode: '腾讯会议录播',
+    accessUrl: 'https://meeting.tencent.com/crm/2V3B7qJQ9d',
+    accessLabel: '申请观看权限',
+    accessNote:
+      '这门免费公开课更偏企业级因子工厂与评估体系，适合已经不满足于单因子回测、希望理解组织级研发框架的人。',
+    highlights: [
+      '围绕企业级因子工程体系讲清准入、生产、评估与退化治理',
+      '从 Gate 准入、因子基数与运营机制一路讲到 Bootstrap 与 PBO',
+      '强调白箱化特征生成和简单因子更稳健的工程思维',
+      '适合作为正式高级评估课程的公开试听前置内容',
+    ],
+    requirements: [
+      '建议具备基础因子、回测或策略研究经验',
+      '如果已经接触过平台化生产、过拟合或准入机制，会更容易吸收',
+      '适合关注团队级因子工厂建设的人',
+    ],
+    audience: [
+      '因子工厂建设者',
+      '高级量化研究员',
+      '关注过拟合评估和准入制度的人',
+      '希望理解企业级研发框架的团队成员',
+    ],
+    catalogSections: [
+      makePublicLectureSection('pl3-1', '第1部分：企业级体系的基础设施', [
+        '因子准入 Gate 为什么是第一道门',
+        '因子基数、容错、轮换和监控机制',
+        '平台化生产为什么是团队级因子研究的必经之路',
+      ]),
+      makePublicLectureSection('pl3-2', '第2部分：方法论与白箱化特征生成', [
+        '复杂模型 vs 简单因子的稳健性对比',
+        '为什么我们的路线是白箱化特征生成',
+        '把企业级工程要求融进因子设计思维',
+      ]),
+      makePublicLectureSection('pl3-3', '第3部分：统计评估与退化治理', [
+        'Bootstrap 如何把单次表现升级为分布判断',
+        'CSCV / PBO 如何衡量过拟合概率',
+        '周期性低谷和结构性死亡如何区分',
+      ]),
+      makePublicLectureSection('pl3-4', '第4部分：体系落地与交流', [
+        '企业级因子工程的完整闭环回顾',
+        '如何从公开课继续走向正式体系搭建',
+        '联系与资料获取方式',
+      ]),
+    ],
+    seoSections: [
+      makeSeoSection('为什么这门公开课更偏企业级视角', [
+        '这门公开课并不是在教你再多做几个因子，而是在讲“企业级因子工程体系”应该由哪些模块构成。准入 Gate、平台化生产、白箱化特征生成、Bootstrap、PBO 和退化治理，本质上都在回答同一个问题：团队怎样才能长期稳定地生产并筛选高质量因子。',
+        '对于已经知道单因子回测是什么的人来说，这种视角会明显比单点技巧更有价值。因为它让你开始思考的不再是“某个因子好不好”，而是“整套生产与评估体系该怎么搭”。'
+      ]),
+      makeSeoSection('适合哪些想理解因子工厂和评价标准的人', [
+        '如果你对因子工厂、企业级准入机制、Bootstrap、PBO 或者白箱化特征生成这些关键词感兴趣，这门公开课会是一个非常合适的试听入口。它不会一次把所有细节讲到最深，但会帮你先看清组织级研发的主骨架。',
+        '对于搜索“企业级因子工程”“因子 Gate 准入”“PBO 公开课”的用户来说，这门课页面会更直接说明这门课真正的定位。'
+      ]),
+    ],
+    caseStudies: [
+      {
+        title: '从单因子回测思维切到企业级因子工厂思维',
+        scenario:
+          '研究者知道一些因子和回测方法，但很难把准入、生产、评估和退化治理放进同一张系统图里。',
+        approach:
+          '公开课用基础设施、白箱生成、统计评估和退化治理四条线搭出企业级骨架。',
+        outcome:
+          '学习者能更早理解正式高级课程中的企业级视角，不再把高级评估误解成只是“多学几个统计指标”。',
+      },
+    ],
+    reviews: [
+      {
+        name: '试听学员',
+        role: '高级因子研究',
+        comment: '这门公开课最大的价值是把 Gate、工厂、PBO 和退化治理放进同一套视角里，终于看懂高级评估课在解决什么问题。',
+      },
+    ],
+  },
+  'public-lecture-ai-rebuilds-indicators': {
+    coverImage: '/course-covers/public-lecture-4.svg',
+    coverAlt: 'AI重构技术指标公开课封面',
+    originalPrice: '',
+    rating: '免费回放',
+    reviewCount: '',
+    studentCount: '',
+    duration: '公开课回放',
+    lessonCount: '14个专题',
+    seoTitle: '免费公开课：AI如何重构技术指标 | 从 SMA、EMA 到 Attention 与白箱因子工厂',
+    seoDescription:
+      '聚焦技术指标背后的权重机制，讲解从 SMA、EMA、LSTM 到 Attention 的演化，并说明 AI 如何进入白箱因子工厂与系统化生产。',
+    instructor: zouTeacher,
+    isFreeCourse: true,
+    accessMode: '腾讯会议录播',
+    accessUrl: 'https://meeting.tencent.com/crm/NxzgJXYP7c',
+    accessLabel: '申请观看权限',
+    accessNote:
+      '这门免费公开课适合对技术指标、深度学习结构和 AI 因子工厂范式感兴趣的人，尤其适合想看懂“AI为什么能重构技术指标”这个问题的学习者。',
+    highlights: [
+      '用公开课形式把 SMA、EMA、LSTM、Attention 放到同一条权重演化主线上',
+      '解释技术指标如何从固定规则走向内容驱动权重机制',
+      '把 CNN、Attention 和白箱因子化连接到因子工厂体系',
+      '适合作为 AI 因子工程和大模型提效课程之前的启发型试听',
+    ],
+    requirements: [
+      '适合已经接触过技术指标或基础机器学习的人',
+      '不要求深度学习专家背景，但愿意理解权重机制会更容易吸收',
+      '想知道 AI 如何真正进入因子工厂的人会收获更大',
+    ],
+    audience: [
+      '技术指标研究者',
+      '对 Attention 与因子工厂感兴趣的人',
+      '想理解 AI 如何升级传统指标的人',
+      '准备进入 AI 因子工程主线的学习者',
+    ],
+    catalogSections: [
+      makePublicLectureSection('pl4-1', '第1部分：AI与技术指标的关系重估', [
+        'AI 到底在做什么',
+        '因子生产的四种范式',
+        'AI 为什么可以重构甚至超越传统技术指标',
+      ]),
+      makePublicLectureSection('pl4-2', '第2部分：从 SMA、EMA 到 Attention 的权重演化', [
+        'SMA 是最简单的固定权重卷积核',
+        'EMA 到 LSTM：从固定衰减到动态衰减',
+        'Attention：让内容决定权重',
+      ]),
+      makePublicLectureSection('pl4-3', '第3部分：AI如何进入因子工厂', [
+        '权重生成机制的四级进化阶梯',
+        'AI 如何进入因子工厂并形成白箱案例',
+        '超级工厂与真实 OOS 结果说明了什么',
+      ]),
+      makePublicLectureSection('pl4-4', '第4部分：从因子到系统的升级', [
+        'White-box Factorization 的效率跃迁',
+        '体系终点不是单个因子，而是完整系统',
+        '完整课程将如何把公开课思想继续往前推进',
+      ]),
+    ],
+    seoSections: [
+      makeSeoSection('这门公开课为什么会对技术指标学习者很有冲击', [
+        '很多人学技术指标时，是把 SMA、EMA、MACD、RSI 当作一套固定工具箱来看待的。但这门公开课会把它们重新解释成“权重机制”的不同表达，从而把技术指标和 CNN、LSTM、Attention 放到同一条演化路径里看。这种视角会让学习者第一次真正理解：AI 不是凭空替代技术指标，而是在重构权重生成方式。',
+        '公开课会从 SMA、EMA、Attention 一路讲到白箱因子化和因子工厂，帮助学习者建立从传统指标到 AI 因子工程的过渡桥梁。'
+      ]),
+      makeSeoSection('适合哪些想看懂 AI 因子工厂范式的人', [
+        '如果你已经接触过技术指标，或者知道一些 CNN、LSTM、Attention 的概念，但还不能把它们和量化因子工程联系起来，这门公开课会非常适合作为试听入口。它更像一节“认知升级课”，帮助你换一种方式看待技术指标、权重机制和因子工厂。',
+        '对于搜索“AI重构技术指标”“Attention 量化”“白箱因子工厂公开课”的用户，这门页面内容会更准确地承接这些问题。'
+      ]),
+    ],
+    caseStudies: [
+      {
+        title: '把技术指标学习从公式记忆升级为权重机制理解',
+        scenario:
+          '很多学习者会背 SMA、EMA、MACD 的公式，但很难理解它们和 AI 模型之间到底有什么本质关系。',
+        approach:
+          '公开课用 SMA→EMA→LSTM→Attention 的主线，把传统指标和 AI 权重机制连成一条演化链。',
+        outcome:
+          '学习者更容易理解为什么 AI 能进入因子工厂，也更容易接受后续白箱因子化与系统化生产的正式课程内容。',
+      },
+    ],
+    reviews: [
+      {
+        name: '试听学员',
+        role: '技术指标进阶',
+        comment: '这门公开课把技术指标和 Attention 连到一起讲，真的很有启发，第一次觉得 AI 和传统指标不是两套完全分裂的东西。',
       },
     ],
   },

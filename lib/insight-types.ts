@@ -1,7 +1,14 @@
+export type InsightVisual = {
+  title: string
+  caption?: string
+  svg: string
+}
+
 export type InsightSection = {
   title: string
   paragraphs: string[]
   bullets?: string[]
+  visual?: InsightVisual
 }
 
 export type InsightArticle = {

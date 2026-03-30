@@ -160,5 +160,129 @@
       "PDF转策略逻辑",
       "量化研发协作"
     ]
+  },
+  {
+    "slug": "public-lecture-ai-quant-full-process",
+    "sourceFile": "public-lecture-ai-quant-full-process.html",
+    "title": "AI量化系列公开课(1)：AI量化交易全流程",
+    "shortTitle": "公开课：AI量化交易全流程",
+    "subtitle": "从数据、特征、建模到策略评估的一次完整公开课梳理",
+    "summary": "适合想快速建立 AI 量化全流程认知的人，通过一节公开课理解数据处理、特征工程、模型训练、对冲策略与回测陷阱。",
+    "category": "公开课",
+    "level": "免费",
+    "badge": "腾讯会议录播",
+    "price": "免费",
+    "published": true,
+    "featured": false,
+    "sortOrder": 101,
+    "stats": [
+      "🎥 免费回放",
+      "📊 全流程认知",
+      "🧪 回测避坑",
+      "📈 对冲策略"
+    ],
+    "tags": [
+      "AI量化公开课",
+      "时间序列",
+      "EDA分析",
+      "回测陷阱"
+    ],
+    "isFreeCourse": true,
+    "accessMode": "腾讯会议录播",
+    "accessLabel": "申请观看权限",
+    "accessUrl": "https://meeting.tencent.com/crm/KWbd5L6E8f"
+  },
+  {
+    "slug": "public-lecture-profitable-alpha-factor",
+    "sourceFile": "public-lecture-profitable-alpha-factor.html",
+    "title": "AI量化系列公开课(2)：构建持续赚钱的 ALPHA / 因子",
+    "shortTitle": "公开课：持续赚钱的因子",
+    "subtitle": "从失效诊断到生命周期管理，理解因子如何持续赚钱",
+    "summary": "围绕因子为什么会失效、什么是可运营因子库、如何做生命周期管理与批流一体化部署，帮助学习者建立因子运营思维。",
+    "category": "公开课",
+    "level": "免费",
+    "badge": "腾讯会议录播",
+    "price": "免费",
+    "published": true,
+    "featured": false,
+    "sortOrder": 102,
+    "stats": [
+      "🎥 免费回放",
+      "♻️ 生命周期管理",
+      "🏗️ UISO架构",
+      "📉 核心数据对比"
+    ],
+    "tags": [
+      "因子生命周期",
+      "持续赚钱的Alpha",
+      "UISO架构",
+      "批流一体"
+    ],
+    "isFreeCourse": true,
+    "accessMode": "腾讯会议录播",
+    "accessLabel": "申请观看权限",
+    "accessUrl": "https://meeting.tencent.com/crm/NAXRD4we57"
+  },
+  {
+    "slug": "public-lecture-enterprise-factor-evaluation",
+    "sourceFile": "public-lecture-enterprise-factor-evaluation.html",
+    "title": "AI量化系列公开课(3)：构建企业级因子工程体系与评价标准",
+    "shortTitle": "公开课：企业级因子工程体系",
+    "subtitle": "从准入 Gate、平台化生产到 Bootstrap / PBO 的企业级评价框架",
+    "summary": "适合希望理解企业级因子工厂与评估体系的人，聚焦因子准入、平台化生产、白箱化特征生成与过拟合概率评估。",
+    "category": "公开课",
+    "level": "免费",
+    "badge": "腾讯会议录播",
+    "price": "免费",
+    "published": true,
+    "featured": false,
+    "sortOrder": 103,
+    "stats": [
+      "🎥 免费回放",
+      "🚪 准入Gate",
+      "🧮 Bootstrap/PBO",
+      "🏭 平台化生产"
+    ],
+    "tags": [
+      "企业级因子工程",
+      "Gate准入",
+      "Bootstrap",
+      "PBO"
+    ],
+    "isFreeCourse": true,
+    "accessMode": "腾讯会议录播",
+    "accessLabel": "申请观看权限",
+    "accessUrl": "https://meeting.tencent.com/crm/2V3B7qJQ9d"
+  },
+  {
+    "slug": "public-lecture-ai-rebuilds-indicators",
+    "sourceFile": "public-lecture-ai-rebuilds-indicators.html",
+    "title": "AI量化系列公开课(4)：AI如何重构技术指标",
+    "shortTitle": "公开课：AI重构技术指标",
+    "subtitle": "从 SMA、EMA 到 Attention，理解 AI 如何升级因子工厂范式",
+    "summary": "聚焦技术指标背后的权重机制，从卷积、LSTM 到 Attention，帮助学习者看懂 AI 为什么能重构传统技术指标与因子生产方式。",
+    "category": "公开课",
+    "level": "免费",
+    "badge": "腾讯会议录播",
+    "price": "免费",
+    "published": true,
+    "featured": false,
+    "sortOrder": 104,
+    "stats": [
+      "🎥 免费回放",
+      "🧠 Attention",
+      "🧩 白箱因子化",
+      "🏭 因子工厂升级"
+    ],
+    "tags": [
+      "技术指标重构",
+      "Attention",
+      "白箱因子化",
+      "AI因子工厂"
+    ],
+    "isFreeCourse": true,
+    "accessMode": "腾讯会议录播",
+    "accessLabel": "申请观看权限",
+    "accessUrl": "https://meeting.tencent.com/crm/NxzgJXYP7c"
   }
 ]

@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { BookOpen, Clock3, Star, Users } from 'lucide-react'
+import { BookOpen, Clock3, ExternalLink, Star, Users } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import type { CourseCatalogEntry } from '@/lib/course-types'
@@ -10,6 +10,8 @@ type CourseCardProps = {
 }
 
 export function CourseCard({ course }: CourseCardProps) {
+  const isFreeCourse = course.isFreeCourse
+
   return (
     <article className="group overflow-hidden rounded-[26px] border border-white/[0.08] bg-card/85 shadow-[0_18px_50px_rgba(3,10,18,0.12)] transition duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[0_22px_60px_rgba(3,10,18,0.16)] dark:bg-card/65 dark:shadow-[0_18px_50px_rgba(3,10,18,0.28)]">
       <div className="relative aspect-[4/3] overflow-hidden border-b border-white/[0.08] bg-muted/40">
@@ -27,6 +29,11 @@ export function CourseCard({ course }: CourseCardProps) {
           <span className="rounded-full border border-white/50 bg-background/92 px-3 py-1 text-[11px] font-medium text-foreground shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-background/80">
             {course.badge}
           </span>
+          {isFreeCourse ? (
+            <span className="rounded-full bg-emerald-500/90 px-3 py-1 text-[11px] font-semibold text-white">
+              免费公开课
+            </span>
+          ) : null}
         </div>
       </div>
 
@@ -45,11 +52,11 @@ export function CourseCard({ course }: CourseCardProps) {
         <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
           <span className="inline-flex items-center gap-1.5">
             <Star className="h-4 w-4 fill-amber-300 text-amber-300" />
-            {course.rating}
+            {isFreeCourse ? '免费回放' : course.rating}
           </span>
           <span className="inline-flex items-center gap-1.5">
             <Users className="h-4 w-4 text-primary" />
-            {course.studentCount}人
+            {isFreeCourse ? (course.accessMode ?? '腾讯会议录播') : `${course.studentCount}人`}
           </span>
           <span className="inline-flex items-center gap-1.5">
             <Clock3 className="h-4 w-4 text-primary" />
@@ -63,9 +70,14 @@ export function CourseCard({ course }: CourseCardProps) {
 
         <div className="flex items-end justify-between gap-4">
           <div>
-            <div className="font-mono text-2xl font-bold text-[#3da9ff]">
+            <div className={`font-mono text-2xl font-bold ${isFreeCourse ? 'text-emerald-500' : 'text-[#3da9ff]'}`}>
               {course.price}
             </div>
+            {isFreeCourse && course.accessMode ? (
+              <div className="text-sm text-muted-foreground">
+                {course.accessMode}
+              </div>
+            ) : null}
             {course.originalPrice ? (
               <div className="text-sm text-muted-foreground line-through">
                 {course.originalPrice}
@@ -74,7 +86,10 @@ export function CourseCard({ course }: CourseCardProps) {
           </div>
 
           <Button asChild size="sm" className="rounded-full px-4 font-mono text-xs">
-            <Link href={`/academy/${course.slug}`}>查看详情</Link>
+            <Link href={`/academy/${course.slug}`}>
+              {isFreeCourse ? '查看回放' : '查看详情'}
+              {isFreeCourse ? <ExternalLink className="h-3.5 w-3.5" /> : null}
+            </Link>
           </Button>
         </div>
       </div>

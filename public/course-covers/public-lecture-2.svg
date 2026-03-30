@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+  <rect width="1200" height="900" fill="#f4f5ff"/>
+  <rect x="56" y="56" width="1088" height="788" rx="48" fill="#ffffff"/>
+  <rect x="110" y="110" width="980" height="250" rx="34" fill="#4f46e5"/>
+  <text x="150" y="180" fill="#c7d2fe" font-size="28" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">AI量化系列公开课</text>
+  <text x="150" y="250" fill="#ffffff" font-size="60" font-weight="700" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">构建持续赚钱的因子</text>
+  <text x="150" y="308" fill="#e0e7ff" font-size="28" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">失效诊断 · 生命周期管理 · UISO架构</text>
+  <rect x="150" y="420" width="300" height="110" rx="28" fill="#eef2ff"/>
+  <text x="184" y="478" fill="#0f172a" font-size="34" font-weight="700" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">Alpha运营思维</text>
+  <text x="184" y="514" fill="#64748b" font-size="20" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">从生产走向管理</text>
+  <rect x="490" y="420" width="260" height="110" rx="28" fill="#eff6ff"/>
+  <text x="524" y="478" fill="#0f172a" font-size="34" font-weight="700" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">免费公开课</text>
+  <text x="524" y="514" fill="#64748b" font-size="20" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">腾讯会议录播</text>
+  <rect x="790" y="420" width="250" height="110" rx="28" fill="#ecfdf5"/>
+  <text x="824" y="478" fill="#0f172a" font-size="34" font-weight="700" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">方法升级</text>
+  <text x="824" y="514" fill="#64748b" font-size="20" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">持续赚钱的前提</text>
+  <text x="150" y="652" fill="#0f172a" font-size="30" font-weight="700" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">适合谁</text>
+  <text x="150" y="702" fill="#475569" font-size="24" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">已经做过因子，但还不清楚为什么因子无法长期赚钱的人</text>
+</svg>

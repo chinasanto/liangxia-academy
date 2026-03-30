@@ -7,6 +7,7 @@ import { AcademySubnav } from '@/components/academy-subnav'
 import { AcademyShellHeader } from '@/components/academy-shell-header'
 import { CourseCard } from '@/components/course-card'
 import { Footer } from '@/components/footer'
+import { InsightVisual } from '@/components/insight-visual'
 import { JsonLd } from '@/components/json-ld'
 import { ShareActions } from '@/components/share-actions'
 import { getAllCourses } from '@/lib/course-store'
@@ -103,6 +104,7 @@ export default async function AcademyInsightDetailPage({
                 title={article.title}
                 description={article.description}
                 url={absoluteUrl(`/academy/insights/${article.slug}`)}
+                qrUrl={absoluteUrl(`/i/${article.slug}`)}
                 label="分享文章"
               />
             </div>
@@ -122,6 +124,8 @@ export default async function AcademyInsightDetailPage({
                     <p key={paragraph}>{paragraph}</p>
                   ))}
                 </div>
+
+                {section.visual ? <InsightVisual visual={section.visual} /> : null}
 
                 {section.bullets && section.bullets.length > 0 ? (
                   <ul className="mt-5 space-y-3 text-sm leading-7 text-muted-foreground">

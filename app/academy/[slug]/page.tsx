@@ -6,6 +6,7 @@ import {
   BookOpen,
   CheckCircle2,
   Clock3,
+  ExternalLink,
   Star,
   Users,
 } from 'lucide-react'
@@ -79,6 +80,7 @@ export default async function CourseDetailPage({
   const relatedCourses = buildCourseRecommendations(course, allCourses)
   const pathNavigation = buildCoursePathNavigation(course, allCourses)
   const relatedInsights = await getInsightsForCourse(course, 2)
+  const isFreeCourse = course.isFreeCourse
 
   return (
     <main className="min-h-screen bg-background">
@@ -111,6 +113,11 @@ export default async function CourseDetailPage({
                     <span className="rounded-full bg-amber-500/15 px-3 py-1 text-[11px] font-mono text-amber-300">
                       {course.badge}
                     </span>
+                    {isFreeCourse ? (
+                      <span className="rounded-full bg-emerald-500/15 px-3 py-1 text-[11px] font-mono text-emerald-500">
+                        免费公开课
+                      </span>
+                    ) : null}
                     {preview && !course.published ? (
                       <span className="rounded-full bg-red-500/15 px-3 py-1 text-[11px] font-mono text-red-300">
                         草稿预览
@@ -128,11 +135,11 @@ export default async function CourseDetailPage({
                   <div className="mb-6 flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
                     <span className="inline-flex items-center gap-1.5">
                       <Star className="h-4 w-4 fill-amber-300 text-amber-300" />
-                      {course.rating} ({course.reviewCount}评价)
+                      {isFreeCourse ? '免费回放' : `${course.rating} (${course.reviewCount}评价)`}
                     </span>
                     <span className="inline-flex items-center gap-1.5">
                       <Users className="h-4 w-4 text-primary" />
-                      {course.studentCount}人学习
+                      {isFreeCourse ? (course.accessMode ?? '腾讯会议录播') : `${course.studentCount}人学习`}
                     </span>
                     <span className="inline-flex items-center gap-1.5">
                       <Clock3 className="h-4 w-4 text-primary" />
@@ -153,17 +160,36 @@ export default async function CourseDetailPage({
                       title={course.title}
                       description={course.subtitle}
                       url={absoluteUrl(`/academy/${course.slug}`)}
+                      qrUrl={absoluteUrl(`/c/${course.slug}`)}
                       label="分享课程"
                     />
                   </div>
+
+                  {course.accessUrl ? (
+                    <div className="mt-4 sm:hidden">
+                      <Button asChild className="w-full rounded-full px-5 font-mono text-xs">
+                        <Link href={course.accessUrl} target="_blank" rel="noreferrer">
+                          {course.accessLabel ?? '申请观看权限'}
+                          <ExternalLink className="h-4 w-4" />
+                        </Link>
+                      </Button>
+                    </div>
+                  ) : null}
                 </div>
 
                 <div className="mt-8 hidden flex-col items-start gap-4 rounded-[28px] border border-white/[0.08] bg-background/75 p-5 sm:flex sm:flex-row sm:items-end sm:justify-between">
                   <div>
-                    <div className="text-sm text-muted-foreground">课程价格</div>
-                    <div className="font-mono text-3xl font-bold text-[#3da9ff]">
+                    <div className="text-sm text-muted-foreground">
+                      {isFreeCourse ? '课程权益' : '课程价格'}
+                    </div>
+                    <div className={`font-mono text-3xl font-bold ${isFreeCourse ? 'text-emerald-500' : 'text-[#3da9ff]'}`}>
                       {course.price}
                     </div>
+                    {isFreeCourse && course.accessMode ? (
+                      <div className="mt-1 text-sm text-muted-foreground">
+                        {course.accessMode}
+                      </div>
+                    ) : null}
                     {course.originalPrice ? (
                       <div className="mt-1 text-sm text-muted-foreground line-through">
                         {course.originalPrice}
@@ -171,9 +197,19 @@ export default async function CourseDetailPage({
                     ) : null}
                   </div>
 
-                  <Button asChild className="w-full rounded-full px-5 font-mono text-xs sm:w-auto">
-                    <Link href="/academy">返回课程总览</Link>
-                  </Button>
+                  <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+                    {course.accessUrl ? (
+                      <Button asChild className="w-full rounded-full px-5 font-mono text-xs sm:w-auto">
+                        <Link href={course.accessUrl} target="_blank" rel="noreferrer">
+                          {course.accessLabel ?? '申请观看权限'}
+                          <ExternalLink className="h-4 w-4" />
+                        </Link>
+                      </Button>
+                    ) : null}
+                    <Button asChild variant="outline" className="w-full rounded-full px-5 font-mono text-xs sm:w-auto">
+                      <Link href="/academy">返回课程总览</Link>
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -215,6 +251,12 @@ export default async function CourseDetailPage({
                 <p className="text-sm leading-7 text-foreground/85">
                   {course.instructor?.description}
                 </p>
+
+                {course.accessNote ? (
+                  <div className="mt-5 rounded-[20px] border border-emerald-200/80 bg-emerald-50 px-4 py-3 text-sm leading-7 text-emerald-900">
+                    {course.accessNote}
+                  </div>
+                ) : null}
 
                 <div className="mt-6 grid gap-3 sm:grid-cols-3">
                   {[

@@ -32,6 +32,11 @@ export type CourseCatalogEntry = {
   reviews?: CourseReview[]
   seoSections?: CourseSeoSection[]
   caseStudies?: CourseCaseStudy[]
+  isFreeCourse?: boolean
+  accessMode?: string
+  accessUrl?: string
+  accessLabel?: string
+  accessNote?: string
 }
 
 export type CourseUpdatePayload = Partial<
@@ -128,4 +133,9 @@ export type CourseDetailConfig = {
   seoDescription?: string
   seoSections?: CourseSeoSection[]
   caseStudies?: CourseCaseStudy[]
+  isFreeCourse?: boolean
+  accessMode?: string
+  accessUrl?: string
+  accessLabel?: string
+  accessNote?: string
 }

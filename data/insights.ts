@@ -1,9 +1,19 @@
 import type { InsightArticle } from '@/lib/insight-types'
 import { expansionInsightArticles } from '@/data/insights-expansion'
 import { expansionInsightBatchTwoArticles } from '@/data/insights-batch-2'
+import { courseOverviewInsightArticles } from '@/data/insights-course-overview'
 import { moduleOneInsightArticles } from '@/data/insights-module1'
+import { publicLectureInsightArticles } from '@/data/insights-public-lectures'
+import {
+  createComparisonVisual,
+  createGridStepsVisual,
+  createLayersVisual,
+  createMetricCardsVisual,
+} from '@/lib/insight-visuals'
 
 export const insightArticles: InsightArticle[] = [
+  ...courseOverviewInsightArticles,
+  ...publicLectureInsightArticles,
   ...moduleOneInsightArticles,
   ...expansionInsightBatchTwoArticles,
   ...expansionInsightArticles,
@@ -40,6 +50,26 @@ export const insightArticles: InsightArticle[] = [
           '因子交易本质上赚的是定价偏差和风格溢价的钱。它通常适合股票、多资产配置和中周期选股体系。CTA 策略赚的是趋势和行为惯性的钱，更常见于商品、期货、数字资产等方向。套利策略赚的是价差回归和结构性错配的钱，但对交易细节和执行系统要求很高。机器学习量化则试图从更复杂的数据中提取预测结构，适合已经有研究底座、希望进一步提升策略表达能力的人。',
           '这四类方法没有谁天然更高级，只有谁更适合你的目标。如果你想建立完整研究体系，因子工程通常是最稳的起点；如果你想更快感受到“策略规则如何驱动收益”，CTA 会更直观；如果你有很强的工程和执行能力，套利会更有发挥空间；如果你已经掌握基础研究框架，机器学习量化能帮助你提升策略的表达上限。',
         ],
+        visual: createComparisonVisual({
+          title: '四类主流量化方式对比',
+          subtitle: '看清盈利逻辑、适合人群和主要门槛，比直接学工具更重要。',
+          columns: ['因子', 'CTA', '套利', '机器学习'],
+          rows: [
+            {
+              label: '赚什么钱',
+              values: ['定价偏差', '趋势惯性', '价差回归', '复杂预测结构'],
+            },
+            {
+              label: '更适合谁',
+              values: ['想系统做研究', '喜欢规则和风控', '偏执行型选手', '已有底座想升级'],
+            },
+            {
+              label: '主要难点',
+              values: ['因子治理', '仓位纪律', '执行与容量', '数据与泛化'],
+            },
+          ],
+          caption: '这类文章最适合用矩阵图来看，因为核心不是概念定义，而是帮助学习者快速判断自己更适合哪条路。',
+        }),
         bullets: [
           '因子交易：研究周期长，适合系统化积累',
           'CTA 策略：逻辑清晰，适合理解趋势和风控',
@@ -88,6 +118,19 @@ export const insightArticles: InsightArticle[] = [
           '第一步是定义研究对象，你研究的是股票、CTA、期货还是数字资产。第二步是搭数据底座，弄清楚哪些字段可靠、哪些数据需要清洗。第三步是提出假设，明确你相信什么市场现象。第四步是把假设变成因子、规则或特征。第五步是做严谨验证，而不是只看回测收益。第六步才是组合、风控和部署。',
           '很多人失败，不是在第五步和第六步，而是在第二步和第三步就没有做好。数据不干净，假设不清楚，后面再漂亮的模型也只会把噪声包装得更复杂。',
         ],
+        visual: createGridStepsVisual({
+          title: '完整量化策略最少要走过的六步',
+          subtitle: '做不出策略，往往不是少了模型，而是这六步没有真正串起来。',
+          steps: [
+            { title: '研究对象', note: '先明确市场、频率和目标。' },
+            { title: '数据底座', note: '字段可靠、口径一致、可清洗。', accent: '#12B5B0' },
+            { title: '研究假设', note: '先定义相信什么现象。', accent: '#F5A524' },
+            { title: '信号表达', note: '把假设变成因子、规则或特征。' },
+            { title: '严谨验证', note: '样本外、稳健性、概率评估。', accent: '#E65B87' },
+            { title: '组合部署', note: '风控、执行和上线闭环。', accent: '#12B5B0' },
+          ],
+          caption: '这类“方法路径型”文章，用流程图比纯文字更容易让读者立刻发现自己卡在第几步。',
+        }),
         bullets: [
           '先选市场与目标，再决定方法',
           '先做数据与假设，再做模型',
@@ -135,6 +178,26 @@ export const insightArticles: InsightArticle[] = [
           '如果你喜欢系统化研究、重视可解释性，希望长期沉淀一套自己的信号工厂，那么因子交易通常更适合你。如果你希望更快看到规则如何变成收益，并且愿意反复打磨趋势、止损和仓位，那么 CTA 会更直观。如果你已经有一定量化底子，希望大幅提高研发效率，或者想把研报理解、因子代码、策略原型和部署协作串起来，那么 AI量化更有吸引力。',
           '一个很重要的判断标准是：你现在处在“建立底座”阶段，还是“提高产能”阶段。前者优先基础课和因子工程，后者再进 AI 提效和实盘闭环，会更顺。',
         ],
+        visual: createComparisonVisual({
+          title: '因子交易、CTA、AI量化怎么选',
+          subtitle: '先看自己当前最缺的是研究底座、规则系统，还是研发产能。',
+          columns: ['因子交易', 'CTA', 'AI量化'],
+          rows: [
+            {
+              label: '最适合阶段',
+              values: ['打研究底座', '理解规则执行', '已有底座再提效'],
+            },
+            {
+              label: '你会重点做',
+              values: ['特征与因子体系', '趋势和仓位决策', '模型、协作与自动化'],
+            },
+            {
+              label: '更强调什么',
+              values: ['可解释和沉淀', '纪律和风控', '效率和工程闭环'],
+            },
+          ],
+          caption: '路线选择类文章很适合用对比表，让读者少在概念层打转，直接做阶段判断。',
+        }),
         bullets: [
           '偏研究框架：优先因子交易',
           '偏规则系统与风控：优先 CTA',
@@ -296,6 +359,18 @@ export const insightArticles: InsightArticle[] = [
           '第二阶段适合进入因子工程，重点学习如何从投资直觉走向可进化的因子体系。第三阶段进入科学评估，重点看概率评估、生命周期管理和更高阶的验证方法。第四阶段进入全流程实战，把模型调优、增量学习、自动化部署和风控系统串起来。',
           '这几个阶段是很多人最容易跳步的地方。其实越往后越依赖前面的研究纪律，如果没有前面的因子框架和评估方法，后面的部署常常只是把一个不稳定策略更快上线。',
         ],
+        visual: createGridStepsVisual({
+          title: '量化学习主干路线图',
+          subtitle: '先搭底座，再做因子，再做评估，再走向实盘，最后再分叉专项方向。',
+          steps: [
+            { title: '基础认知', note: '数据、因子、回测、执行共同语言。' },
+            { title: '因子工程', note: '做出可解释、可扩展的因子体系。', accent: '#12B5B0' },
+            { title: '科学评估', note: '从看曲线升级到看概率。', accent: '#F5A524' },
+            { title: '全流程闭环', note: '部署、风控、自动化联动。', accent: '#E65B87' },
+            { title: '专项分叉', note: 'WorldQuant 或 AI 提效方向。', accent: '#12B5B0' },
+          ],
+          caption: '学习路径类文章比起堆课程名，更适合用阶段图，读者一眼就能看到“先后顺序”和“专项分叉点”。',
+        }),
       },
       {
         title: '第五阶段以后：根据目标分叉到专项平台和 AI 提效',
@@ -343,6 +418,18 @@ export const insightArticles: InsightArticle[] = [
           '比较实用的做法是把因子拆成若干层级节点，例如原始字段层、中间特征层、标准化层、组合层和最终信号层。每个节点都应该有稳定 ID、输入依赖、处理逻辑摘要和版本信息。',
           '当你把这些节点组织成 DAG 以后，就可以从“公式文本”升级到“可执行依赖图”。这不仅方便研究，还能直接服务于调度系统，让生产环境根据依赖关系决定需要重算的最小节点集合。',
         ],
+        visual: createLayersVisual({
+          title: '因子血缘建模的五层结构',
+          subtitle: '把公式拆成分层节点后，研究、排障和调度才能共用同一张图。',
+          layers: [
+            { title: '原始字段层', note: '行情、财务、成交量与基础标签。', accent: '#12B5B0' },
+            { title: '中间特征层', note: '滚动统计、窗口聚合与派生特征。', accent: '#1677FF' },
+            { title: '标准化层', note: '去极值、行业中性、标准分数。', accent: '#F5A524' },
+            { title: '组合层', note: '多特征聚合、打分和版本说明。', accent: '#E65B87' },
+            { title: '最终信号层', note: '可部署的交易信号与下游任务。', accent: '#1677FF' },
+          ],
+          caption: '血缘设计类文章适合用分层图表达，因为核心是让读者理解“节点层级”和“上下游关系”。',
+        }),
         bullets: [
           '节点层级化：原始字段 → 中间特征 → 标准化 → 组合 → 信号',
           '每个节点保留版本、参数、数据窗口和来源说明',
@@ -390,6 +477,17 @@ export const insightArticles: InsightArticle[] = [
           '第一是依赖图清晰，你要知道某个信号依赖了哪些基础节点。第二是缓存与快照策略明确，避免相同中间结果重复落盘和重复加载。第三是增量事件触发机制明确，例如新数据到来、参数变化、代码版本变更分别触发哪些更新路径。',
           '只有把这三个前提同时做好，最小重算才不是口号，而能真正稳定运行在日常生产任务里。',
         ],
+        visual: createGridStepsVisual({
+          title: '最小重算不是一句口号，而是三件事同时成立',
+          subtitle: '依赖图决定范围，缓存负责复用，事件触发负责把变化精准映射到任务。',
+          steps: [
+            { title: '变化发生', note: '新数据、参数调整或代码变更。', accent: '#F5A524' },
+            { title: '定位依赖', note: '找到受影响的最小闭包。', accent: '#1677FF' },
+            { title: '命中缓存', note: '能复用的中间结果不再重跑。', accent: '#12B5B0' },
+            { title: '精准更新', note: '只更新真正受影响的节点。', accent: '#E65B87' },
+          ],
+          caption: '工程效率类文章更适合用“事件到更新”的图解，把抽象概念落成一条可执行链路。',
+        }),
         bullets: [
           '依赖图负责决定重算范围',
           '缓存负责复用已有结果',
@@ -518,6 +616,17 @@ export const insightArticles: InsightArticle[] = [
           'Bootstrap、CSCV、PBO 这类方法的价值，在于帮助研究者从单次回测成绩转向分布视角。你不再只问“这次赚了多少”，而是问“这类因子在不同样本切分与扰动下是否仍有较高成功概率”。',
           '一旦评估逻辑切到概率层，因子准入就会更稳，也更适合进入团队级工厂与策略组合。',
         ],
+        visual: createMetricCardsVisual({
+          title: '判断因子是否过拟合，至少要看这四组信号',
+          subtitle: '不要只盯收益曲线，而要把统计评估、样本外验证和生命周期一起看。',
+          cards: [
+            { title: 'Bootstrap', value: '稳不稳', note: '看扰动后的分布是否仍集中。', accent: '#1677FF' },
+            { title: 'PBO', value: '假不假', note: '看回测是否更像过拟合产物。', accent: '#E65B87' },
+            { title: '样本外', value: '能不能泛化', note: '看未知阶段是否还能成立。', accent: '#12B5B0' },
+            { title: '生命周期', value: '会不会衰退', note: '看上线后是否仍可持续。', accent: '#F5A524' },
+          ],
+          caption: '过拟合评估类文章适合用指标卡片，把“看什么”直接结构化给读者，而不是埋在长段落里。',
+        }),
       },
       {
         title: '为什么未来验证与生命周期管理也很重要',
