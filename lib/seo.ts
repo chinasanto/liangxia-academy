@@ -5,6 +5,9 @@ import type { InsightArticle } from '@/lib/insight-types'
 
 export const SITE_NAME = 'AI量化学院'
 export const SITE_URL = 'https://www.aiquantclaw.com'
+export const DEFAULT_SHARE_IMAGE = absoluteUrl('/brand/aiquant-logo.jpg')
+export const ACADEMY_SHARE_IMAGE = absoluteUrl('/course-covers/ai-quant-basic.jpg')
+export const INSIGHTS_SHARE_IMAGE = absoluteUrl('/course-covers/factor-engineering.jpg')
 
 export const HOME_KEYWORDS = [
   'AI量化学院',
@@ -54,7 +57,7 @@ export function absoluteUrl(path = '/') {
 }
 
 export function buildHomeMetadata(): Metadata {
-  const title = 'AI量化学院 | AI量化课程、因子工程、WorldQuant Brain 与量化编程'
+  const title = 'AI量化学院 | AI量化课程平台'
   const description =
     'AI量化学院提供 AI量化基础课、因子工程、全流程高级班、WorldQuant Brain 与 AI大模型辅助量化编程课程，适合从入门到系统进阶的量化学习者。'
 
@@ -66,17 +69,24 @@ export function buildHomeMetadata(): Metadata {
       canonical: '/',
     },
     openGraph: {
-      title,
+      title: 'AI量化学院 | AI量化课程平台',
       description,
       url: absoluteUrl('/'),
       siteName: SITE_NAME,
       locale: 'zh_CN',
       type: 'website',
+      images: [
+        {
+          url: ACADEMY_SHARE_IMAGE,
+          alt: 'AI量化学院课程平台分享封面',
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
-      title,
+      title: 'AI量化学院 | AI量化课程平台',
       description,
+      images: [ACADEMY_SHARE_IMAGE],
     },
   }
 }
@@ -94,17 +104,24 @@ export function buildAcademyMetadata(): Metadata {
       canonical: '/academy',
     },
     openGraph: {
-      title,
+      title: 'AI量化学院 | 课程目录',
       description,
       url: absoluteUrl('/academy'),
       siteName: SITE_NAME,
       locale: 'zh_CN',
       type: 'website',
+      images: [
+        {
+          url: ACADEMY_SHARE_IMAGE,
+          alt: 'AI量化学院课程目录分享封面',
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
-      title,
+      title: 'AI量化学院 | 课程目录',
       description,
+      images: [ACADEMY_SHARE_IMAGE],
     },
   }
 }
@@ -122,17 +139,24 @@ export function buildInsightsMetadata(): Metadata {
       canonical: '/academy/insights',
     },
     openGraph: {
-      title,
+      title: 'AI量化学院 | 量化技巧文章',
       description,
       url: absoluteUrl('/academy/insights'),
       siteName: SITE_NAME,
       locale: 'zh_CN',
       type: 'website',
+      images: [
+        {
+          url: INSIGHTS_SHARE_IMAGE,
+          alt: 'AI量化学院量化技巧分享封面',
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
-      title,
+      title: 'AI量化学院 | 量化技巧文章',
       description,
+      images: [INSIGHTS_SHARE_IMAGE],
     },
   }
 }
@@ -140,6 +164,7 @@ export function buildInsightsMetadata(): Metadata {
 export function buildInsightMetadata(article: InsightArticle): Metadata {
   const title = `${article.title} | 量化技巧 | AI量化学院`
   const description = article.description
+  const socialDescription = article.excerpt || article.description
 
   return {
     title,
@@ -149,17 +174,24 @@ export function buildInsightMetadata(article: InsightArticle): Metadata {
       canonical: `/academy/insights/${article.slug}`,
     },
     openGraph: {
-      title,
-      description,
+      title: article.title,
+      description: socialDescription,
       url: absoluteUrl(`/academy/insights/${article.slug}`),
       siteName: SITE_NAME,
       locale: 'zh_CN',
       type: 'article',
+      images: [
+        {
+          url: INSIGHTS_SHARE_IMAGE,
+          alt: article.title,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
-      title,
-      description,
+      title: article.title,
+      description: socialDescription,
+      images: [INSIGHTS_SHARE_IMAGE],
     },
   }
 }
@@ -170,6 +202,10 @@ export function buildCourseMetadata(course: CourseCatalogEntry): Metadata {
   const description =
     course.seoDescription ??
     `${course.shortTitle}：${course.subtitle}。${course.summary} 课程时长${course.duration ?? ''}，共${course.lessonCount ?? ''}，由${course.instructor?.name ?? 'AI量化讲师'}授课。`
+  const socialTitle = course.isFreeCourse
+    ? `${course.shortTitle}｜免费公开课`
+    : `${course.shortTitle}｜AI量化学院`
+  const socialDescription = course.summary
   const keywords = dedupeKeywords([
     course.shortTitle,
     course.title,
@@ -190,8 +226,8 @@ export function buildCourseMetadata(course: CourseCatalogEntry): Metadata {
       canonical: `/academy/${course.slug}`,
     },
     openGraph: {
-      title,
-      description,
+      title: socialTitle,
+      description: socialDescription,
       url: absoluteUrl(`/academy/${course.slug}`),
       siteName: SITE_NAME,
       locale: 'zh_CN',
@@ -209,8 +245,8 @@ export function buildCourseMetadata(course: CourseCatalogEntry): Metadata {
     },
     twitter: {
       card: 'summary_large_image',
-      title,
-      description,
+      title: socialTitle,
+      description: socialDescription,
       images: course.coverImage
         ? [
             course.coverImage.startsWith('http')

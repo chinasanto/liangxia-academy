@@ -144,5 +144,5 @@ export function buildCourseRecommendations(
     )
     .filter((item): item is CourseRecommendation => item !== null)
 
-  return mapped.filter((item) => item.course.slug !== currentCourse.slug).slice(0, 3)
+  return mapped.filter((item) => item.course.slug !== currentCourse.slug).slice(0, 2)
 }

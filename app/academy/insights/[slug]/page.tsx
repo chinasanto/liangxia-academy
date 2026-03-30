@@ -52,7 +52,7 @@ export default async function AcademyInsightDetailPage({
 
   const relatedCourses = courses.filter((course) =>
     article.relatedCourseSlugs.includes(course.slug),
-  )
+  ).slice(0, 2)
   const relatedArticles = articles
     .filter((item) => item.slug !== article.slug && item.category === article.category)
     .slice(0, 3)
