@@ -1,8 +1,10 @@
 import type { InsightArticle } from '@/lib/insight-types'
 import { expansionInsightArticles } from '@/data/insights-expansion'
 import { expansionInsightBatchTwoArticles } from '@/data/insights-batch-2'
+import { moduleOneInsightArticles } from '@/data/insights-module1'
 
 export const insightArticles: InsightArticle[] = [
+  ...moduleOneInsightArticles,
   ...expansionInsightBatchTwoArticles,
   ...expansionInsightArticles,
   {
