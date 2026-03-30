@@ -63,7 +63,7 @@ export default async function AcademyInsightDetailPage({
       <AcademyShellHeader backHref="/academy/insights" backLabel="返回量化技巧" />
 
       <div className="px-6 pb-20 pt-8 lg:px-12">
-        <div className="mx-auto max-w-6xl">
+        <div className="mx-auto max-w-7xl">
           <AcademySubnav active="insights" className="mb-8" />
 
           <section className="p-0 sm:rounded-[30px] sm:border sm:border-white/[0.08] sm:bg-card/50 sm:p-8 lg:p-12">
