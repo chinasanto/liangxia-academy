@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import {
   Activity,
@@ -50,6 +50,7 @@ export function AcademyContentTabs({
   const [selectedCategory, setSelectedCategory] = useState(
     initialFilters?.category ?? '全部',
   )
+  const [showAllCourses, setShowAllCourses] = useState(false)
 
   const levels = ['全部', ...Array.from(new Set(courses.map((course) => course.level)))]
   const categories = [
@@ -77,6 +78,24 @@ export function AcademyContentTabs({
 
     return matchLevel && matchCategory && matchSearch
   })
+
+  useEffect(() => {
+    setShowAllCourses(false)
+  }, [search, selectedLevel, selectedCategory])
+
+  const previewMultiple = 3
+  const previewCount =
+    filteredCourses.length <= previewMultiple
+      ? filteredCourses.length
+      : Math.floor(filteredCourses.length / previewMultiple) * previewMultiple
+  const hasHiddenCourses =
+    !showAllCourses &&
+    filteredCourses.length > previewMultiple &&
+    filteredCourses.length !== previewCount
+  const visibleCourses = hasHiddenCourses
+    ? filteredCourses.slice(0, previewCount)
+    : filteredCourses
+  const hiddenCourseCount = filteredCourses.length - visibleCourses.length
 
   const activeTab =
     initialTab === 'roadmap' || initialTab === 'insights' || initialTab === 'diagnosis'
@@ -322,10 +341,25 @@ export function AcademyContentTabs({
             </div>
 
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
-              {filteredCourses.map((course) => (
+              {visibleCourses.map((course) => (
                 <CourseCard key={course.slug} course={course} />
               ))}
             </div>
+
+            {hasHiddenCourses ? (
+              <button
+                type="button"
+                onClick={() => setShowAllCourses(true)}
+                className="mt-5 flex w-full items-center justify-center rounded-[24px] border border-dashed border-primary/20 bg-background/65 px-6 py-5 text-center transition hover:border-primary/40 hover:bg-primary/6"
+              >
+                <span className="flex flex-col items-center gap-2">
+                  <span className="font-mono text-3xl leading-none text-primary">...</span>
+                  <span className="text-sm font-semibold text-foreground">
+                    还有 {hiddenCourseCount} 门课程，点击展开
+                  </span>
+                </span>
+              </button>
+            ) : null}
 
             {filteredCourses.length === 0 ? (
               <div className="mt-5 rounded-[22px] border border-dashed border-white/[0.08] bg-background/60 p-6 text-sm text-muted-foreground">
