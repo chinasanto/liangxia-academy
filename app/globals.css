@@ -152,10 +152,10 @@
 
 .light .grid-overlay::before {
   background-image:
-    linear-gradient(rgba(16, 32, 46, 0.018) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(16, 32, 46, 0.018) 1px, transparent 1px);
-  background-size: 112px 112px;
-  opacity: 0.42;
+    linear-gradient(rgba(16, 32, 46, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16, 32, 46, 0.028) 1px, transparent 1px);
+  background-size: 84px 84px;
+  opacity: 0.68;
 }
 
 .light [class*='border-white/['] {
