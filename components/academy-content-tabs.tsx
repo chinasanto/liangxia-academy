@@ -124,7 +124,7 @@ export function AcademyContentTabs({
       </div>
 
       <TabsContent value="home" className="mt-0">
-        <section className="bg-[radial-gradient(circle_at_top,rgba(0,229,176,0.14),transparent_45%)] py-2 sm:py-3">
+        <section className="rounded-[32px] bg-[radial-gradient(circle_at_top,rgba(0,229,176,0.14),transparent_45%)] px-5 py-5 sm:px-8 sm:py-8 lg:px-10 lg:py-9">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-3xl">
               <h1 className="mb-4 font-serif text-[1.8rem] font-black leading-[1.06] text-foreground sm:text-4xl lg:text-5xl">
