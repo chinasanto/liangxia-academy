@@ -3,15 +3,15 @@ import type { InsightArticle, InsightSection } from '@/lib/insight-types'
 import { dbAdminQuery, isDbAdminDatabaseConfigured } from '@/lib/db-admin-neon'
 
 type InsightRow = {
-  slug: string
-  title: string
-  excerpt: string
-  description: string
-  category: string
+  slug: unknown
+  title: unknown
+  excerpt: unknown
+  description: unknown
+  category: unknown
   tags: unknown
-  published_at: string
-  read_time: string
-  featured: boolean
+  published_at: unknown
+  read_time: unknown
+  featured: unknown
   related_course_slugs: unknown
   sections: unknown
   key_takeaways: unknown
@@ -35,17 +35,33 @@ function parseJsonValue<T>(value: unknown, fallback: T): T {
   return value as T
 }
 
+function normalizeTextValue(value: unknown, fallback = '') {
+  if (typeof value === 'string') {
+    return value
+  }
+
+  if (value instanceof Date) {
+    return value.toISOString().slice(0, 10)
+  }
+
+  if (value == null) {
+    return fallback
+  }
+
+  return String(value)
+}
+
 function mapInsightRow(row: InsightRow): InsightArticle {
   return {
-    slug: row.slug,
-    title: row.title,
-    excerpt: row.excerpt,
-    description: row.description,
-    category: row.category,
+    slug: normalizeTextValue(row.slug),
+    title: normalizeTextValue(row.title),
+    excerpt: normalizeTextValue(row.excerpt),
+    description: normalizeTextValue(row.description),
+    category: normalizeTextValue(row.category),
     tags: parseJsonValue(row.tags, [] as string[]),
-    publishedAt: row.published_at,
-    readTime: row.read_time,
-    featured: row.featured,
+    publishedAt: normalizeTextValue(row.published_at),
+    readTime: normalizeTextValue(row.read_time),
+    featured: Boolean(row.featured),
     relatedCourseSlugs: parseJsonValue(row.related_course_slugs, [] as string[]),
     sections: parseJsonValue(row.sections, [] as InsightSection[]),
     keyTakeaways: parseJsonValue(row.key_takeaways, [] as string[]),
