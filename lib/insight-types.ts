@@ -14,6 +14,7 @@ export type InsightArticle = {
   publishedAt: string
   readTime: string
   featured?: boolean
+  published?: boolean
   relatedCourseSlugs: string[]
   sections: InsightSection[]
   keyTakeaways: string[]

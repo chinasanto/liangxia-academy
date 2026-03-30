@@ -54,6 +54,7 @@ function createDraft(): InsightForm {
     publishedAt: today,
     readTime: '6分钟',
     featured: false,
+    published: false,
     relatedCourseSlugs: [],
     sections: [
       {
@@ -88,6 +89,7 @@ function toPayload(form: InsightForm): InsightArticle {
     publishedAt: form.publishedAt.trim(),
     readTime: form.readTime.trim(),
     featured: form.featured ?? false,
+    published: form.published ?? false,
     relatedCourseSlugs: normalizeList(form.relatedCourseSlugsText),
     sections,
     keyTakeaways: normalizeList(form.keyTakeawaysText),
@@ -359,7 +361,7 @@ export function DbAdminArticlesPage() {
                     {article.title || article.slug}
                   </div>
                   <div className="mt-2 text-xs text-muted-foreground">
-                    {article.category} · {article.publishedAt}
+                    {article.category} · {article.publishedAt} · {article.published === false ? '草稿' : '已发布'}
                   </div>
                 </button>
               ))}
@@ -430,6 +432,10 @@ export function DbAdminArticlesPage() {
                   <label className="inline-flex items-center gap-3 pt-8 text-sm text-foreground">
                     <input type="checkbox" checked={selected.featured ?? false} onChange={(e) => updateField(selected.slug, 'featured', e.target.checked)} className="h-4 w-4 rounded border-white/[0.12] bg-background" />
                     设为精选
+                  </label>
+                  <label className="inline-flex items-center gap-3 pt-8 text-sm text-foreground">
+                    <input type="checkbox" checked={selected.published ?? false} onChange={(e) => updateField(selected.slug, 'published', e.target.checked)} className="h-4 w-4 rounded border-white/[0.12] bg-background" />
+                    发布到前台
                   </label>
                 </div>
 

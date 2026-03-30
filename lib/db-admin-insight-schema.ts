@@ -23,6 +23,7 @@ export const dbAdminInsightSchema = z
     publishedAt: z.string().min(1).max(40),
     readTime: z.string().min(1).max(20),
     featured: z.boolean().optional(),
+    published: z.boolean().optional(),
     relatedCourseSlugs: z.array(z.string().min(1)).default([]),
     sections: z.array(dbAdminInsightSectionSchema).min(1),
     keyTakeaways: z.array(z.string().min(1)).min(1),

@@ -12,6 +12,7 @@ type InsightRow = {
   published_at: unknown
   read_time: unknown
   featured: unknown
+  published: unknown
   related_course_slugs: unknown
   sections: unknown
   key_takeaways: unknown
@@ -62,6 +63,7 @@ function mapInsightRow(row: InsightRow): InsightArticle {
     publishedAt: normalizeTextValue(row.published_at),
     readTime: normalizeTextValue(row.read_time),
     featured: Boolean(row.featured),
+    published: row.published == null ? true : Boolean(row.published),
     relatedCourseSlugs: parseJsonValue(row.related_course_slugs, [] as string[]),
     sections: parseJsonValue(row.sections, [] as InsightSection[]),
     keyTakeaways: parseJsonValue(row.key_takeaways, [] as string[]),
@@ -79,6 +81,7 @@ function toParams(article: InsightArticle) {
     article.publishedAt,
     article.readTime,
     article.featured ?? false,
+    article.published ?? true,
     JSON.stringify(article.relatedCourseSlugs),
     JSON.stringify(article.sections),
     JSON.stringify(article.keyTakeaways),
@@ -101,11 +104,17 @@ export async function ensureDbAdminInsightTable() {
       published_at TEXT NOT NULL,
       read_time TEXT NOT NULL,
       featured BOOLEAN NOT NULL DEFAULT FALSE,
+      published BOOLEAN NOT NULL DEFAULT TRUE,
       related_course_slugs JSONB NOT NULL DEFAULT '[]'::jsonb,
       sections JSONB NOT NULL DEFAULT '[]'::jsonb,
       key_takeaways JSONB NOT NULL DEFAULT '[]'::jsonb,
       updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     )
+  `)
+
+  await dbAdminQuery(`
+    ALTER TABLE academy_insights
+    ADD COLUMN IF NOT EXISTS published BOOLEAN NOT NULL DEFAULT TRUE
   `)
 
   schemaReady = true
@@ -130,16 +139,18 @@ export async function getDbAdminInsightStatus() {
   }
 }
 
-export async function listDbInsights() {
+export async function listDbInsights(options?: { publishedOnly?: boolean }) {
   if (!isDbAdminDatabaseConfigured()) {
     return []
   }
 
   await ensureDbAdminInsightTable()
+  const publishedOnly = options?.publishedOnly ?? false
   const rows = await dbAdminQuery<InsightRow>(
     `
       SELECT *
       FROM academy_insights
+      ${publishedOnly ? 'WHERE published = TRUE' : ''}
       ORDER BY published_at DESC, title ASC
     `,
   )
@@ -147,17 +158,22 @@ export async function listDbInsights() {
   return rows.map(mapInsightRow)
 }
 
-export async function getDbInsightBySlug(slug: string) {
+export async function getDbInsightBySlug(
+  slug: string,
+  options?: { publishedOnly?: boolean },
+) {
   if (!isDbAdminDatabaseConfigured()) {
     return null
   }
 
   await ensureDbAdminInsightTable()
+  const publishedOnly = options?.publishedOnly ?? false
   const [row] = await dbAdminQuery<InsightRow>(
     `
       SELECT *
       FROM academy_insights
       WHERE slug = $1
+      ${publishedOnly ? 'AND published = TRUE' : ''}
       LIMIT 1
     `,
     [slug],
@@ -184,6 +200,7 @@ export async function createDbInsight(article: InsightArticle) {
         published_at,
         read_time,
         featured,
+        published,
         related_course_slugs,
         sections,
         key_takeaways,
@@ -191,7 +208,7 @@ export async function createDbInsight(article: InsightArticle) {
       )
       VALUES (
         $1, $2, $3, $4, $5, $6::jsonb, $7, $8, $9,
-        $10::jsonb, $11::jsonb, $12::jsonb, NOW()
+        $10, $11::jsonb, $12::jsonb, $13::jsonb, NOW()
       )
       RETURNING *
     `,
@@ -219,9 +236,10 @@ export async function updateDbInsight(slug: string, article: InsightArticle) {
         published_at = $7,
         read_time = $8,
         featured = $9,
-        related_course_slugs = $10::jsonb,
-        sections = $11::jsonb,
-        key_takeaways = $12::jsonb,
+        published = $10,
+        related_course_slugs = $11::jsonb,
+        sections = $12::jsonb,
+        key_takeaways = $13::jsonb,
         updated_at = NOW()
       WHERE slug = $1
       RETURNING *
@@ -270,6 +288,7 @@ export async function bootstrapDbInsights() {
           published_at,
           read_time,
           featured,
+          published,
           related_course_slugs,
           sections,
           key_takeaways,
@@ -277,7 +296,7 @@ export async function bootstrapDbInsights() {
         )
         VALUES (
           $1, $2, $3, $4, $5, $6::jsonb, $7, $8, $9,
-          $10::jsonb, $11::jsonb, $12::jsonb, NOW()
+          $10, $11::jsonb, $12::jsonb, $13::jsonb, NOW()
         )
         ON CONFLICT (slug) DO UPDATE SET
           title = EXCLUDED.title,
@@ -288,6 +307,7 @@ export async function bootstrapDbInsights() {
           published_at = EXCLUDED.published_at,
           read_time = EXCLUDED.read_time,
           featured = EXCLUDED.featured,
+          published = EXCLUDED.published,
           related_course_slugs = EXCLUDED.related_course_slugs,
           sections = EXCLUDED.sections,
           key_takeaways = EXCLUDED.key_takeaways,
